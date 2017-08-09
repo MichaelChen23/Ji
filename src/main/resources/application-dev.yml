@@ -1,0 +1,74 @@
+########################################################
+### 开发环境配置
+########################################################
+# springboot配置
+spring:
+    # 多环境配置
+    profiles: dev
+    # Mysql DataSource
+    datasource:
+        # 主数据源，默认的
+        main: master
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://127.0.0.1:3306/gm_db?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=round&allowMultiQueries=true&autoReconnect=true
+        username: root
+        password: 123456
+        driverClassName: com.mysql.jdbc.Driver
+        # Keep the connection alive if idle for a long time (needed in production)
+        testWhileIdle: true
+        validationQuery: SELECT 1
+        # 初始化大小，最小，最大
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        #配置一个连接在池中最小生存的时间，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，‘wall‘用于防火墙
+        filters: stat,wall,slf4j
+        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        # 合并多个DruidDataSource的监控数据
+        useGlobalDataSourceStat: true
+    mvc:
+        view:
+            prefix: /view/
+            suffix: .jsp
+
+########################################################
+### mybatis 配置
+########################################################
+mybatis:
+      type-aliases-package: com.mc.ji.model
+      mapper-locations: classpath:mapper/*.xml
+
+mapper:
+      mappers: com.mc.ji.common.JiMapper
+      not-empty: false
+      identity: MYSQL
+
+pagehelper:
+      helperDialect: mysql
+      reasonable: true
+      supportMethodsArguments: true
+      params: count=countSql
+
+########################################################
+### server 配置
+########################################################
+server:
+      port: 8080
+      context-path: /
+
+########################################################
+### log 配置
+########################################################
+logging:
+      level:
+      tk.mybatis: TRACE
