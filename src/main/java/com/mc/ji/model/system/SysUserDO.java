@@ -1,6 +1,6 @@
 package com.mc.ji.model.system;
 
-import com.mc.ji.common.BaseDO;
+import com.mc.ji.common.base.BaseDO;
 
 import java.util.Date;
 import javax.persistence.*;

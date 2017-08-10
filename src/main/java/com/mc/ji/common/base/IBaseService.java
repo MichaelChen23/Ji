@@ -1,4 +1,4 @@
-package com.mc.ji.common;
+package com.mc.ji.common.base;
 
 import java.util.List;
 

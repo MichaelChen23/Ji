@@ -1,4 +1,4 @@
-package com.mc.ji.common;
+package com.mc.ji.common.base;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

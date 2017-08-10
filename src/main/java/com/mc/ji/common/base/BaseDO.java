@@ -1,4 +1,6 @@
-package com.mc.ji.common;
+package com.mc.ji.common.base;
+
+import com.mc.ji.common.Constant;
 
 import javax.persistence.Transient;
 

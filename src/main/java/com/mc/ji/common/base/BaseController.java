@@ -1,4 +1,4 @@
-package com.mc.ji.common;
+package com.mc.ji.common.base;
 
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;

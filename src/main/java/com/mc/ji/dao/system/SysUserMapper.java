@@ -1,6 +1,6 @@
 package com.mc.ji.dao.system;
 
-import com.mc.ji.common.JiMapper;
+import com.mc.ji.common.base.JiMapper;
 import com.mc.ji.model.system.SysUserDO;
 
 /**

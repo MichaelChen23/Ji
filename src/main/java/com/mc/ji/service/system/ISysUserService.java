@@ -1,6 +1,6 @@
 package com.mc.ji.service.system;
 
-import com.mc.ji.common.IBaseService;
+import com.mc.ji.common.base.IBaseService;
 import com.mc.ji.model.system.SysUserDO;
 
 /**

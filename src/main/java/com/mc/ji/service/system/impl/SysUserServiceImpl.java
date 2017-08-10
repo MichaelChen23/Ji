@@ -1,6 +1,6 @@
 package com.mc.ji.service.system.impl;
 
-import com.mc.ji.common.BaseServiceImpl;
+import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.dao.system.SysUserMapper;
 import org.springframework.stereotype.Service;
 

@@ -52,7 +52,7 @@ mybatis:
       mapper-locations: classpath:mapper/*.xml
 
 mapper:
-      mappers: com.mc.ji.common.JiMapper
+      mappers: com.mc.ji.common.base.JiMapper
       not-empty: false
       identity: MYSQL
 
