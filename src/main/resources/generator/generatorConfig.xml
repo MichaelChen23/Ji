@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <!-- 操作手册：1.edit-config-->
     <!--<properties resource="generator.properties"/>-->
 
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
@@ -15,19 +16,19 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/gm_db?characterEncoding=utf-8"
-                        userId="root"
-                        password="123456">
+                        connectionURL="jdbc:mysql://192.168.30.26:3306/gd_dev?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=round&amp;allowMultiQueries=true&amp;autoReconnect=true"
+                        userId="iperp_m2"
+                        password="QbdxeI8MUyOsfcIv0xNNvGIC">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="com.mc.ji.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.mc.ji.model.system" targetProject="src/main/java"/>
 
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mapper.system" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="com.mc.ji.dao" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.mc.ji.dao.system" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="gm_user" domainObjectName="UserDO" mapperName="UserMapper">
+        <table tableName="ji_sys_user" domainObjectName="SysUserDO" mapperName="SysUserMapper">
             <!--mysql 配置-->
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--oracle 配置-->

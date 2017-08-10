@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `gm_user`;
-CREATE TABLE `gm_user` (
+DROP TABLE IF EXISTS `ji_sys_user`;
+CREATE TABLE `ji_sys_user` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(28) NOT NULL,
   `password` varchar(255) NOT NULL,

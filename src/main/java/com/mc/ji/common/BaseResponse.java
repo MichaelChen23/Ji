@@ -30,6 +30,18 @@ public class BaseResponse<T> implements Serializable {
 		this.result = result;
 	}
 
+	public BaseResponse(T result) {
+		super();
+		if (result != null) {
+			this.code = Constant.SUCCESS_CODE;
+			this.msg = Constant.SUCCESS_MSG;
+		} else {
+			this.code = Constant.FAIL_CODE;
+			this.msg = Constant.FAIL_MSG;
+		}
+		this.result = result;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -52,6 +64,10 @@ public class BaseResponse<T> implements Serializable {
 
 	public void setResult(T result) {
 		this.result = result;
+	}
+
+	public static BaseResponse<Boolean> getRespByResultBool(Boolean result) {
+		return result ? new BaseResponse<Boolean>(Constant.SUCCESS_CODE, Constant.SUCCESS_MSG, result) : new BaseResponse<Boolean>(Constant.FAIL_CODE, Constant.FAIL_MSG, result);
 	}
 
 }
