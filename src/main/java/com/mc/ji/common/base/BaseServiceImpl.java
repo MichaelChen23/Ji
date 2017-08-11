@@ -2,6 +2,7 @@ package com.mc.ji.common.base;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -47,4 +48,12 @@ public class BaseServiceImpl<T extends JiMapper> implements IBaseService {
     public Integer getCount(BaseDO DO) {
         return mapper.selectCount(DO);
     }
+
+    @Override
+    public List searchListByKV(BaseDO DO) {
+        Example example = new Example(DO.getClass());
+        example.createCriteria().andLike(""+DO.getSearchKey(),"%"+DO.getSearchValue()+"%");
+        return mapper.selectByExample(example);
+    }
+
 }

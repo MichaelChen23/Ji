@@ -21,4 +21,5 @@ public interface IBaseService<T extends BaseDO> {
 
     Integer getCount(T DO);
 
+    List<T> searchListByKV(T DO);
 }

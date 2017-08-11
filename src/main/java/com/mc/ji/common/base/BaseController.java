@@ -87,4 +87,21 @@ public class BaseController<T extends IBaseService, M extends BaseDO> {
             return null;
         }
     }
+
+    /**
+     * 根据输入字段和值，进行模糊查询
+     * @param DO
+     * @return
+     * searchKey-查询的字段，searchValue-查询字段的值
+     */
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public PageInfo<M> searchUserList(@RequestBody M DO) {
+        try {
+            List<M> list = serviceImpl.searchListByKV(DO);
+            return new PageInfo<M>(list);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 }

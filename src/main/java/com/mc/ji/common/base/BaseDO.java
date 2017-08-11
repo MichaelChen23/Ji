@@ -17,6 +17,14 @@ public class BaseDO {
     @Transient
     private Integer rows = Constant.DEFAULT_ROWS;
 
+    //searchKey-查询的字段
+    @Transient
+    private String searchKey;
+
+    //searchValue-查询字段的值
+    @Transient
+    private String searchValue;
+
     public Integer getPage() {
         return page;
     }
@@ -31,5 +39,21 @@ public class BaseDO {
 
     public void setRows(Integer rows) {
         this.rows = rows;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
+    }
+
+    public String getSearchValue() {
+        return searchValue;
+    }
+
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
     }
 }
