@@ -18,7 +18,7 @@ public class BaseServiceImpl<T extends JiMapper> implements IBaseService {
 
     @Override
     public Boolean saveByObj(BaseDO DO) {
-        return mapper.insert(DO) != 0;
+        return mapper.insertSelective(DO) != 0;
     }
 
     @Override

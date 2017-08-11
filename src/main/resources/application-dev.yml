@@ -54,7 +54,8 @@ mybatis:
 mapper:
       mappers: com.mc.ji.common.base.JiMapper
       not-empty: false
-      identity: MYSQL
+      identity: select uuid()
+      order: before
 
 pagehelper:
       helperDialect: mysql
