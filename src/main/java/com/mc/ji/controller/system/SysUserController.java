@@ -2,7 +2,7 @@ package com.mc.ji.controller.system;
 
 import com.mc.ji.common.base.BaseController;
 import com.mc.ji.model.system.SysUserDO;
-import com.mc.ji.service.system.ISysUserService;
+import com.mc.ji.service.system.impl.SysUserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sys-user")
-public class SysUserController extends BaseController<ISysUserService, SysUserDO> {
+public class SysUserController extends BaseController<SysUserServiceImpl, SysUserDO> {
 }
