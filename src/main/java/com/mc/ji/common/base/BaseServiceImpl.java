@@ -11,33 +11,33 @@ import java.util.List;
  * @author mc
  * @date 2017-8-8
  */
-public class BaseServiceImpl<T extends JiMapper> implements IBaseService {
+public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements IBaseService<T> {
 
     @Autowired
-    private T mapper;
+    private M mapper;
 
     @Override
-    public Boolean saveByObj(BaseDO DO) {
+    public Boolean saveByObj(T DO) {
         return mapper.insertSelective(DO) != 0;
     }
 
     @Override
-    public Boolean removeByObj(BaseDO DO) {
+    public Boolean removeByObj(T DO) {
         return mapper.delete(DO) != 0;
     }
 
     @Override
-    public Boolean updateByObj(BaseDO DO) {
+    public Boolean updateByObj(T DO) {
         return mapper.updateByPrimaryKey(DO) != 0;
     }
 
     @Override
-    public BaseDO getOneByObj(BaseDO DO) {
-        return (BaseDO) mapper.selectOne(DO);
+    public T getOneByObj(T DO) {
+        return mapper.selectOne(DO);
     }
 
     @Override
-    public List getListByObj(BaseDO DO) {
+    public List<T> getListByObj(T DO) {
         if (DO.getPage() != null && DO.getRows() != null) {
             PageHelper.startPage(DO.getPage(), DO.getRows());
         }
@@ -45,15 +45,14 @@ public class BaseServiceImpl<T extends JiMapper> implements IBaseService {
     }
 
     @Override
-    public Integer getCount(BaseDO DO) {
+    public Integer getCount(T DO) {
         return mapper.selectCount(DO);
     }
 
     @Override
-    public List searchListByKV(BaseDO DO) {
+    public List<T> searchListByKV(T DO) {
         Example example = new Example(DO.getClass());
         example.createCriteria().andLike(""+DO.getSearchKey(),"%"+DO.getSearchValue()+"%");
         return mapper.selectByExample(example);
     }
-
 }

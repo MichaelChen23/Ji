@@ -2,6 +2,8 @@ package com.mc.ji.service.system.impl;
 
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.dao.system.RoleMapper;
+import com.mc.ji.model.system.RoleDO;
+import com.mc.ji.service.system.IRoleService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,5 +12,5 @@ import org.springframework.stereotype.Service;
  * @date 2017-8-11
  */
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<RoleMapper> {
+public class RoleServiceImpl extends BaseServiceImpl<RoleMapper, RoleDO> implements IRoleService {
 }

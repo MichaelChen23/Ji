@@ -2,6 +2,8 @@ package com.mc.ji.service.system.impl;
 
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.dao.system.SysUserMapper;
+import com.mc.ji.model.system.SysUserDO;
+import com.mc.ji.service.system.ISysUserService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,5 +12,5 @@ import org.springframework.stereotype.Service;
  * @date 2017-8-8
  */
 @Service
-public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper>{
+public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserDO> implements ISysUserService {
 }
