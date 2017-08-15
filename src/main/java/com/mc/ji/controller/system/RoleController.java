@@ -1,8 +1,8 @@
 package com.mc.ji.controller.system;
 
 import com.mc.ji.common.base.BaseController;
-import com.mc.ji.common.base.IBaseService;
 import com.mc.ji.model.system.RoleDO;
+import com.mc.ji.service.system.IRoleService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/role")
-public class RoleController extends BaseController<IBaseService<RoleDO>, RoleDO> {
+public class RoleController extends BaseController<IRoleService, RoleDO> {
 }

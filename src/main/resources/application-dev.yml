@@ -49,7 +49,7 @@ spring:
 ########################################################
 mybatis:
       type-aliases-package: com.mc.ji.model
-      mapper-locations: classpath:mapper/*.xml
+      mapper-locations: classpath*:mapper/*/*.xml
 
 mapper:
       mappers: com.mc.ji.common.base.JiMapper
@@ -75,4 +75,4 @@ server:
 ########################################################
 logging:
       level:
-      tk.mybatis: TRACE
+        tk.mybatis: debug

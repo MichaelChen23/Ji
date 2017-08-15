@@ -16,6 +16,10 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
     @Autowired
     private M mapper;
 
+    public M getMapper() {
+        return mapper;
+    }
+
     @Override
     public Boolean saveByObj(T DO) {
         return mapper.insertSelective(DO) != 0;
@@ -51,8 +55,12 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
 
     @Override
     public List<T> searchListByKV(T DO) {
+        if (DO.getPage() != null && DO.getRows() != null) {
+            PageHelper.startPage(DO.getPage(), DO.getRows());
+        }
         Example example = new Example(DO.getClass());
         example.createCriteria().andLike(""+DO.getSearchKey(),"%"+DO.getSearchValue()+"%");
         return mapper.selectByExample(example);
     }
+
 }

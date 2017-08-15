@@ -27,7 +27,7 @@ public class SysUserDO extends BaseDO {
     private String email;
 
     @Column(name = "role_id")
-    private Integer roleId;
+    private String roleId;
 
     private String status;
 
@@ -133,14 +133,14 @@ public class SysUserDO extends BaseDO {
     /**
      * @return role_id
      */
-    public Integer getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
     /**
      * @param roleId
      */
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

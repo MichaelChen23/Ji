@@ -22,6 +22,10 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
     @Autowired
     private M serviceImpl;
 
+    public M getServiceImpl() {
+        return serviceImpl;
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public BaseResponse<Boolean> saveUser(@RequestBody T DO) {
         try {
@@ -104,4 +108,5 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             return null;
         }
     }
+
 }
