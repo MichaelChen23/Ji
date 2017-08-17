@@ -47,5 +47,4 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
             return null;
         }
     }
-
 }
