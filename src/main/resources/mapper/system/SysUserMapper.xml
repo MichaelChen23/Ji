@@ -38,7 +38,7 @@
 
   <sql id="selectSysUserVoALL">
     SELECT u.id, u.username, u.password, u.name, u.phone, u.email, r.name AS role_name, u.status, u.last_login_time, u.create_account, u.create_time, u.update_account, u.update_time
-    FROM ji_sys_user u INNER JOIN ji_role r ON u.role_id = r.id
+    FROM ji_sys_user u LEFT JOIN ji_role r ON u.role_id = r.id
   </sql>
 
   <select id="getSysUserVoList" resultMap="UserVOResultMap">
