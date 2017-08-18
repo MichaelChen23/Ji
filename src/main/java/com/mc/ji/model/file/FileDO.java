@@ -1,38 +1,30 @@
-package com.mc.ji.model.system;
+package com.mc.ji.model.file;
 
 import com.mc.ji.common.base.BaseDO;
 
-import javax.persistence.*;
 import java.util.Date;
+import javax.persistence.*;
 
 /**
- * 系统用户的实体类
+ * 文档的实体类
  * @author mc
- * @date 2017-8-8
+ * @date 2017-8-17
  */
-@Table(name = "ji_sys_user")
-public class SysUserDO extends BaseDO {
+@Table(name = "ji_file")
+public class FileDO extends BaseDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    private String username;
+    private String title;
 
-    private String password;
-
-    private String name;
-
-    private String phone;
-
-    private String email;
-
-    @Column(name = "role_id")
-    private String roleId;
+    /**
+     * 默认为我的文件夹id
+     */
+    @Column(name = "folder_id")
+    private String folderId;
 
     private String status;
-
-    @Column(name = "last_login_time")
-    private Date lastLoginTime;
 
     @Column(name = "create_account")
     private String createAccount;
@@ -45,6 +37,8 @@ public class SysUserDO extends BaseDO {
 
     @Column(name = "update_time")
     private Date updateTime;
+
+    private String content;
 
     /**
      * @return id
@@ -61,87 +55,35 @@ public class SysUserDO extends BaseDO {
     }
 
     /**
-     * @return username
+     * @return title
      */
-    public String getUsername() {
-        return username;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param username
+     * @param title
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
-     * @return password
+     * 获取默认为我的文件夹id
+     *
+     * @return folder_id - 默认为我的文件夹id
      */
-    public String getPassword() {
-        return password;
+    public String getFolderId() {
+        return folderId;
     }
 
     /**
-     * @param password
+     * 设置默认为我的文件夹id
+     *
+     * @param folderId 默认为我的文件夹id
      */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
-     * @return name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return phone
-     */
-    public String getPhone() {
-        return phone;
-    }
-
-    /**
-     * @param phone
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * @return email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return role_id
-     */
-    public String getRoleId() {
-        return roleId;
-    }
-
-    /**
-     * @param roleId
-     */
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setFolderId(String folderId) {
+        this.folderId = folderId;
     }
 
     /**
@@ -156,20 +98,6 @@ public class SysUserDO extends BaseDO {
      */
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    /**
-     * @return last_login_time
-     */
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     /**
@@ -226,5 +154,19 @@ public class SysUserDO extends BaseDO {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    /**
+     * @return content
+     */
+    public String getContent() {
+        return content;
+    }
+
+    /**
+     * @param content
+     */
+    public void setContent(String content) {
+        this.content = content;
     }
 }

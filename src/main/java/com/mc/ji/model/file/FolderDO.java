@@ -1,4 +1,4 @@
-package com.mc.ji.model.system;
+package com.mc.ji.model.file;
 
 import com.mc.ji.common.base.BaseDO;
 
@@ -6,33 +6,37 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 系统用户的实体类
+ * 文件夹的实体类
  * @author mc
- * @date 2017-8-8
+ * @date 2017-8-17
  */
-@Table(name = "ji_sys_user")
-public class SysUserDO extends BaseDO {
+@Table(name = "ji_folder")
+public class FolderDO extends BaseDO {
+    /**
+     * 文件夹id，每个用户都默认一个父文件-我的文件夹，相当于/根文件夹
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    private String username;
-
-    private String password;
-
     private String name;
 
-    private String phone;
+    /**
+     * 父文件夹id
+     */
+    private String pid;
 
-    private String email;
+    /**
+     * 文件夹全路径/隔开文件夹名name
+     */
+    private String path;
 
-    @Column(name = "role_id")
-    private String roleId;
+    /**
+     * 文件夹层级，首层层级为1，依次递增
+     */
+    private Integer level;
 
     private String status;
-
-    @Column(name = "last_login_time")
-    private Date lastLoginTime;
 
     @Column(name = "create_account")
     private String createAccount;
@@ -47,45 +51,21 @@ public class SysUserDO extends BaseDO {
     private Date updateTime;
 
     /**
-     * @return id
+     * 获取文件夹id，每个用户都默认一个父文件-我的文件夹，相当于/根文件夹
+     *
+     * @return id - 文件夹id，每个用户都默认一个父文件-我的文件夹，相当于/根文件夹
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @param id
+     * 设置文件夹id，每个用户都默认一个父文件-我的文件夹，相当于/根文件夹
+     *
+     * @param id 文件夹id，每个用户都默认一个父文件-我的文件夹，相当于/根文件夹
      */
     public void setId(String id) {
         this.id = id;
-    }
-
-    /**
-     * @return username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     * @return password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
@@ -103,45 +83,57 @@ public class SysUserDO extends BaseDO {
     }
 
     /**
-     * @return phone
+     * 获取父文件夹id
+     *
+     * @return pid - 父文件夹id
      */
-    public String getPhone() {
-        return phone;
+    public String getPid() {
+        return pid;
     }
 
     /**
-     * @param phone
+     * 设置父文件夹id
+     *
+     * @param pid 父文件夹id
      */
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     /**
-     * @return email
+     * 获取文件夹全路径/隔开文件夹名name
+     *
+     * @return path - 文件夹全路径/隔开文件夹名name
      */
-    public String getEmail() {
-        return email;
+    public String getPath() {
+        return path;
     }
 
     /**
-     * @param email
+     * 设置文件夹全路径/隔开文件夹名name
+     *
+     * @param path 文件夹全路径/隔开文件夹名name
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     /**
-     * @return role_id
+     * 获取文件夹层级，首层层级为1，依次递增
+     *
+     * @return level - 文件夹层级，首层层级为1，依次递增
      */
-    public String getRoleId() {
-        return roleId;
+    public Integer getLevel() {
+        return level;
     }
 
     /**
-     * @param roleId
+     * 设置文件夹层级，首层层级为1，依次递增
+     *
+     * @param level 文件夹层级，首层层级为1，依次递增
      */
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     /**
@@ -156,20 +148,6 @@ public class SysUserDO extends BaseDO {
      */
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    /**
-     * @return last_login_time
-     */
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     /**

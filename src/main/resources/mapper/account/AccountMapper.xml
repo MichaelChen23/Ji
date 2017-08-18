@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.ji.dao.account.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.mc.ji.model.account.AccountDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="account_type_id" jdbcType="VARCHAR" property="accountTypeId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="AccountVOResultMap" type="com.mc.ji.common.vo.AccountVO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="account_type_name" jdbcType="VARCHAR" property="accountTypeName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="selectAccountVoALL">
+    SELECT a.id, a.title, a.action, a.amount, t.name AS account_type_name, a.create_account, a.create_time, a.update_account, a.update_time
+    FROM ji_account a LEFT JOIN ji_account_type t ON a.account_type_id = t.id
+  </sql>
+
+  <select id="getAccountVoList" resultMap="AccountVOResultMap">
+    <include refid="selectAccountVoALL" />
+    ORDER BY a.create_time DESC
+  </select>
+
+  <select id="getAccountVoListByTitle" resultMap="AccountVOResultMap" parameterType="String">
+    <include refid="selectAccountVoALL" />
+    WHERE a.title LIKE CONCAT(CONCAT('%', #{title}), '%')
+    ORDER BY a.create_time DESC
+  </select>
+</mapper>

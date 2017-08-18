@@ -19,4 +19,36 @@
     <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <resultMap id="UserVOResultMap" type="com.mc.ji.common.vo.SysUserVO">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="selectSysUserVoALL">
+    SELECT u.id, u.username, u.password, u.name, u.phone, u.email, r.name AS role_name, u.status, u.last_login_time, u.create_account, u.create_time, u.update_account, u.update_time
+    FROM ji_sys_user u LEFT JOIN ji_role r ON u.role_id = r.id
+  </sql>
+
+  <select id="getSysUserVoList" resultMap="UserVOResultMap">
+    <include refid="selectSysUserVoALL" />
+      ORDER BY u.create_time DESC
+  </select>
+
+  <select id="getSysUserVoListByName" resultMap="UserVOResultMap" parameterType="String">
+    <include refid="selectSysUserVoALL" />
+      WHERE u.username LIKE CONCAT(CONCAT('%', #{name}), '%') OR u.name LIKE CONCAT(CONCAT('%', #{name}), '%')
+      ORDER BY u.create_time DESC
+  </select>
 </mapper>

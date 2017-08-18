@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.ji.dao.file.FileMapper">
+  <resultMap id="BaseResultMap" type="com.mc.ji.model.file.FileDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="folder_id" jdbcType="VARCHAR" property="folderId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+
+  <resultMap id="FileVOResultMap" type="com.mc.ji.common.vo.FileVO">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="folder_id" jdbcType="VARCHAR" property="folderId" />
+    <result column="folder_name" jdbcType="VARCHAR" property="folderName" />
+    <result column="folder_pid" jdbcType="VARCHAR" property="folderPid" />
+    <result column="folder_path" jdbcType="VARCHAR" property="folderPath" />
+    <result column="folder_level" jdbcType="INTEGER" property="folderLevel" />
+  </resultMap>
+
+  <sql id="selectFileVoALL">
+    SELECT f.id, f.title, f.status, f.create_account, f.create_time, f.update_account, f.update_time, f.content,
+      o.id AS folder_id, o.name AS folder_name, o.pid AS folder_pid, o.path AS folder_path, o.level AS folder_level
+    FROM ji_file f LEFT JOIN ji_folder o ON f.folder_id = o.id
+  </sql>
+
+  <select id="getFileVoList" resultMap="FileVOResultMap">
+    <include refid="selectFileVoALL" />
+    ORDER BY f.create_time DESC
+  </select>
+
+  <select id="getFileVoListByTitle" resultMap="FileVOResultMap" parameterType="String">
+    <include refid="selectFileVoALL" />
+    WHERE f.title LIKE CONCAT(CONCAT('%', #{title}), '%')
+    ORDER BY f.create_time DESC
+  </select>
+</mapper>

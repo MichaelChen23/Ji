@@ -1,38 +1,35 @@
-package com.mc.ji.model.system;
+package com.mc.ji.model.account;
 
 import com.mc.ji.common.base.BaseDO;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 系统用户的实体类
+ * 账目的实体类
  * @author mc
- * @date 2017-8-8
+ * @date 2017-8-17
  */
-@Table(name = "ji_sys_user")
-public class SysUserDO extends BaseDO {
+@Table(name = "ji_account")
+public class AccountDO extends BaseDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
-    private String username;
+    private String title;
 
-    private String password;
+    /**
+     * earn-收入, pay-支出
+     */
+    private String action;
 
-    private String name;
+    private BigDecimal amount;
 
-    private String phone;
-
-    private String email;
-
-    @Column(name = "role_id")
-    private String roleId;
+    @Column(name = "account_type_id")
+    private String accountTypeId;
 
     private String status;
-
-    @Column(name = "last_login_time")
-    private Date lastLoginTime;
 
     @Column(name = "create_account")
     private String createAccount;
@@ -61,87 +58,63 @@ public class SysUserDO extends BaseDO {
     }
 
     /**
-     * @return username
+     * @return title
      */
-    public String getUsername() {
-        return username;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * @param username
+     * @param title
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
-     * @return password
+     * 获取earn-收入, pay-支出
+     *
+     * @return action - earn-收入, pay-支出
      */
-    public String getPassword() {
-        return password;
+    public String getAction() {
+        return action;
     }
 
     /**
-     * @param password
+     * 设置earn-收入, pay-支出
+     *
+     * @param action earn-收入, pay-支出
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAction(String action) {
+        this.action = action;
     }
 
     /**
-     * @return name
+     * @return amount
      */
-    public String getName() {
-        return name;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     /**
-     * @param name
+     * @param amount
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     /**
-     * @return phone
+     * @return account_type_id
      */
-    public String getPhone() {
-        return phone;
+    public String getAccountTypeId() {
+        return accountTypeId;
     }
 
     /**
-     * @param phone
+     * @param accountTypeId
      */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    /**
-     * @return email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return role_id
-     */
-    public String getRoleId() {
-        return roleId;
-    }
-
-    /**
-     * @param roleId
-     */
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
+    public void setAccountTypeId(String accountTypeId) {
+        this.accountTypeId = accountTypeId;
     }
 
     /**
@@ -156,20 +129,6 @@ public class SysUserDO extends BaseDO {
      */
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    /**
-     * @return last_login_time
-     */
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 
     /**
