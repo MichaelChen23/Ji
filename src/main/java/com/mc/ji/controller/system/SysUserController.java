@@ -3,9 +3,11 @@ package com.mc.ji.controller.system;
 import com.github.pagehelper.PageInfo;
 import com.mc.ji.common.base.BaseController;
 import com.mc.ji.common.base.BaseDO;
+import com.mc.ji.common.base.BaseResponse;
 import com.mc.ji.common.vo.SysUserVO;
 import com.mc.ji.model.system.SysUserDO;
 import com.mc.ji.service.system.ISysUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,28 @@ import java.util.List;
 public class SysUserController extends BaseController<ISysUserService, SysUserDO> {
 
     private static final Logger logger = LoggerFactory.getLogger(SysUserController.class);
+
+    /**
+     * 后台管理员登录接口
+     * add by mc 2017-8-20
+     * @param sysUserDO
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public BaseResponse<SysUserDO> doAdminLogin(@RequestBody SysUserDO sysUserDO) {
+        try {
+            String userName = sysUserDO.getUsername();
+            String password = sysUserDO.getPassword();
+            SysUserDO userDO = null;
+            if (StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(password)) {
+                userDO = getServiceImpl().getOneByObj(sysUserDO);
+            }
+            return new BaseResponse<SysUserDO>(userDO);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
     public PageInfo<SysUserVO> getSysUserList(@RequestBody BaseDO DO) {

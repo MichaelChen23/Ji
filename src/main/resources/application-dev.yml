@@ -41,8 +41,8 @@ spring:
         useGlobalDataSourceStat: true
     mvc:
         view:
-            prefix: /view/
-            suffix: .jsp
+            prefix: /templates/
+            suffix: .html
 
 ########################################################
 ### mybatis 配置
