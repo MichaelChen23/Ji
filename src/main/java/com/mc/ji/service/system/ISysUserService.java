@@ -20,7 +20,7 @@ public interface ISysUserService extends IBaseService<SysUserDO> {
      * @param rows 每页显示行数
      * @return
      */
-    List<SysUserVO> getSysUserVoList(Integer page, Integer rows);
+    List<SysUserVO> getSysUserVoList(Integer page, Integer rows) throws Exception;
 
     /**
      * 根据帐号或名字，模糊查询系统用户列表，分页显示
@@ -30,6 +30,6 @@ public interface ISysUserService extends IBaseService<SysUserDO> {
      * @param rows
      * @return
      */
-    List<SysUserVO> getSysUserVoListByName(String name, Integer page, Integer rows);
+    List<SysUserVO> getSysUserVoListByName(String name, Integer page, Integer rows) throws Exception;
 
 }

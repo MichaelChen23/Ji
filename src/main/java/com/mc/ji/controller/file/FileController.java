@@ -32,7 +32,7 @@ public class FileController extends BaseController<IFileService, FileDO> {
             List<FileVO> list = getServiceImpl().getFileVoList(DO.getPage(), DO.getRows());
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("获取文档列表失败——", e.getMessage());
             return null;
         }
     }
@@ -43,7 +43,7 @@ public class FileController extends BaseController<IFileService, FileDO> {
             List<FileVO> list = getServiceImpl().getFileVoListByTitle(DO.getSearchValue(), DO.getPage(), DO.getRows());
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("根据题目获取文档列表失败——", e.getMessage());
             return null;
         }
     }

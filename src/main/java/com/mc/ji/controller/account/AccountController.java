@@ -32,7 +32,7 @@ public class AccountController extends BaseController<IAccountService, AccountDO
             List<AccountVO> list = getServiceImpl().getAccountVoList(DO.getPage(), DO.getRows());
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("获取账目列表失败——", e.getMessage());
             return null;
         }
     }
@@ -43,7 +43,7 @@ public class AccountController extends BaseController<IAccountService, AccountDO
             List<AccountVO> list = getServiceImpl().getAccountVoListByTitle(DO.getSearchValue(), DO.getPage(), DO.getRows());
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("根据题目获取账目列表失败——", e.getMessage());
             return null;
         }
     }

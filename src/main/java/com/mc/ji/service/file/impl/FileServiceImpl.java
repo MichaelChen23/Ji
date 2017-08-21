@@ -19,7 +19,7 @@ import java.util.List;
 public class FileServiceImpl extends BaseServiceImpl<FileMapper, FileDO> implements IFileService {
 
     @Override
-    public List<FileVO> getFileVoList(Integer page, Integer rows) {
+    public List<FileVO> getFileVoList(Integer page, Integer rows) throws Exception {
         if (page > 0 && rows > 0) {
             PageHelper.startPage(page, rows);
         }
@@ -27,7 +27,7 @@ public class FileServiceImpl extends BaseServiceImpl<FileMapper, FileDO> impleme
     }
 
     @Override
-    public List<FileVO> getFileVoListByTitle(String title, Integer page, Integer rows) {
+    public List<FileVO> getFileVoListByTitle(String title, Integer page, Integer rows) throws Exception {
         if (page > 0 && rows > 0) {
             PageHelper.startPage(page, rows);
         }

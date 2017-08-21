@@ -20,7 +20,7 @@ public interface IFileService extends IBaseService<FileDO> {
      * @param rows 每页显示行数
      * @return
      */
-    List<FileVO> getFileVoList(Integer page, Integer rows);
+    List<FileVO> getFileVoList(Integer page, Integer rows) throws Exception;
 
     /**
      * 根据文档题目，模糊查询文档列表，分页显示
@@ -30,5 +30,5 @@ public interface IFileService extends IBaseService<FileDO> {
      * @param rows
      * @return
      */
-    List<FileVO> getFileVoListByTitle(String title, Integer page, Integer rows);
+    List<FileVO> getFileVoListByTitle(String title, Integer page, Integer rows) throws Exception;
 }

@@ -20,7 +20,7 @@ public interface IAccountService extends IBaseService<AccountDO> {
      * @param rows 每页显示行数
      * @return
      */
-    List<AccountVO> getAccountVoList(Integer page, Integer rows);
+    List<AccountVO> getAccountVoList(Integer page, Integer rows) throws Exception;
 
     /**
      * 根据帐目题目，模糊查询账目列表，分页显示
@@ -30,5 +30,5 @@ public interface IAccountService extends IBaseService<AccountDO> {
      * @param rows
      * @return
      */
-    List<AccountVO> getAccountVoListByTitle(String title, Integer page, Integer rows);
+    List<AccountVO> getAccountVoListByTitle(String title, Integer page, Integer rows) throws Exception;
 }
