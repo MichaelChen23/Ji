@@ -6,3 +6,9 @@ spring:
     # 多环境配置
     profiles:
         active: dev
+    # 编码
+    http:
+        encoding:
+            force: true
+            charset: UTF-8
+            enabled: true
