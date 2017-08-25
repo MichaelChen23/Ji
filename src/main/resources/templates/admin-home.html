@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>admin-home</title>
+    <title>Ji-admin-home</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap-overrides.css"/>
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="../static/css/compiled/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/compiled/elements.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/compiled/icons.css"/>
+
+    <!-- libraries -->
+    <link rel="stylesheet" type="text/css" href="../static/css/lib/jquery-ui-1.10.2.custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/lib/font-awesome.css"/>
+
+    <!-- this page specific styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/compiled/index.css"/>
+
+    <!-- open sans font -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800'/>
+
+    <!-- lato font -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic'/>
+
+    <!--[if lt IE 9]-->
+    <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
 </head>
 <body>
-    <h1>this is admin home!</h1>
+    <!-- navbar -->
+    <header class="navbar navbar-inverse" role="banner">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin-home"><h2>Ji Admin</h2></a>
+        </div>
+        <ul class="nav navbar-nav pull-right hidden-xs">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    你的账号
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="personal-info.html">个人信息</a></li>
+                    <li><a href="#">账号设置</a></li>
+                    <li><a href="#">账单</a></li>
+                    <li><a href="#">导出数据</a></li>
+                    <li><a href="#">发送反馈</a></li>
+                </ul>
+            </li>
+            <li class="settings hidden-xs hidden-sm">
+                <a href="personal-info.html" role="button">
+                    <i class="icon-cog"></i>
+                </a>
+            </li>
+            <li class="settings hidden-xs hidden-sm">
+                <a href="signin.html" role="button">
+                    <i class="icon-share-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </header>
 </body>
 </html>
