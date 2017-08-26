@@ -42,8 +42,7 @@
             </div>
             <ul class="nav navbar-nav pull-right hidden-xs">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                        你的账号
+                    <a id="a-username" href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -121,7 +120,7 @@
         </div>
 
         <!-- scripts -->
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="../static/js/jquery.min.js"></script>
         <script src="../static/js/bootstrap.min.js"></script>
         <script src="../static/js/jquery-ui-1.10.2.custom.min.js"></script>
         <!-- knob -->
@@ -131,5 +130,11 @@
         <script src="../static/js/jquery.flot.stack.js"></script>
         <script src="../static/js/jquery.flot.resize.js"></script>
         <script src="../static/js/theme.js"></script>
+
+        <script type="text/javascript">
+            var str = sessionStorage.getItem("sys-user");
+            var user = JSON.parse(str);
+            $("#a-username").text("hello!   " + user.result.username);
+        </script>
     </body>
 </html>

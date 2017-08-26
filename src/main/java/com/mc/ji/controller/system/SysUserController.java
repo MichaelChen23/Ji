@@ -51,9 +51,10 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
     }
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
-    public PageInfo<SysUserVO> getSysUserList(@RequestBody BaseDO DO) {
+    public PageInfo<SysUserVO> getSysUserList(Integer pageIndex, Integer pageSize, String nameStr, String phoneStr) {
         try {
-            List<SysUserVO> list = getServiceImpl().getSysUserVoList(DO.getPage(), DO.getRows());
+            pageIndex = pageIndex != null ? pageIndex : 1;
+            List<SysUserVO> list = getServiceImpl().getSysUserVoList(pageIndex, pageSize);
             return new PageInfo<SysUserVO>(list);
         } catch (Exception e) {
             logger.error("获取系统用户列表失败——", e.getMessage());
