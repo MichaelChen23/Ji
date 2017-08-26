@@ -51,6 +51,12 @@ body.menu #sidebar-nav {
   color: lightgrey;
 }
 
+#sidebar-nav #dashboard-menu ul.submenu a.active {
+  font-weight: bold;
+  color: #fff;
+  text-shadow: none;
+}
+
 .content {
   box-shadow: none;
 }
