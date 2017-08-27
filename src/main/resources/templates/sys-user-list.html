@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="../static/css/compiled/user-list.css"/>
 
         <!-- open sans font -->
-        <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800'/>
+        <!--<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800'/>-->
 
         <!-- choose deep color skin in nav -->
         <link rel="stylesheet" type="text/css" id="skin-file" href="../static/css/compiled/skins/dark.css">
@@ -135,7 +135,7 @@
                             </div>
                             <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">手机号：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="phoneStr" id="search_tel"/>
+                                <input type="text" class="form-control" name="phoneStr" id="search_phone"/>
                             </div>
                             <div class="col-sm-1 col-sm-offset-4">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
@@ -199,10 +199,13 @@
                 pageSize:10,//单页记录数
                 pageList:[5,10,20,30],//分页步进值
                 showRefresh:true,//刷新按钮
-                showColumns:true,
+                showColumns:true,//选择要显示的列
                 clickToSelect: true,//是否启用点击选中行
                 toolbarAlign:'right',//工具栏对齐方式
                 buttonsAlign:'right',//按钮对齐方式
+                sortable: true,//是否启用排序
+                sortName: 'createTime',
+                sortOrder: 'asc',
                 columns:[
                 {
                     title:'全选',
@@ -230,16 +233,41 @@
                 },
                 {
                     title:'密码',
-                    field:'password',
+                    field:'password'
                 },
                 {
                     title:'手机',
                     field:'phone'
                 },
                 {
+                    title:'邮箱',
+                    field:'email'
+                },
+                {
+                    title:'角色',
+                    field:'roleName'
+                },
+                {
                     title:'创建时间',
                     field:'createTime',
                     sortable:true
+                },
+                {
+                    title:'创建人',
+                    field:'createAccount'
+                },
+                {
+                    title:'最近登录时间',
+                    field:'lastLoginTime',
+                    sortable:true
+                },
+                {
+                    title:'更新时间',
+                    field:'updateTime'
+                },
+                {
+                    title:'更新人',
+                    field:'updateAccount'
                 },
                 {
                     title:'状态',
@@ -261,23 +289,27 @@
             //三个参数，value代表该列的值
             function operateFormatter(value,row,index){
                 if(value=="n"){
-                    return "<i class='fa fa-lock' style='color:red'></i>";
+                    return "停用";
                 }else if(value=="y"){
-                    return "<i class='fa fa-unlock' style='color:green'></i>";
+                    return "启用";
                 }else{
-                    return "数据错误";
+                    return "无数据";
                 }
             }
 
             //请求服务数据时所传参数
             function queryParams(params){
                 return{
+                    //请求第几页
+                    pageIndex: params.offset+1,
                     //每页多少条数据
                     pageSize: params.limit,
-                    //请求第几页
-                    pageIndex: params.pageNumber,
-                    nameStr:$('#search_name').val(),
-                    phoneStr:$('#search_tel').val()
+                    nameStr: $('#search_name').val(),
+                    phoneStr :$('#search_phone').val(),
+                    createTimeBeginStr: "",
+                    createTimeEndStr: "",
+                    sortStr: params.sort,
+                    orderStr: params.order
                 }
             }
             //查询按钮事件

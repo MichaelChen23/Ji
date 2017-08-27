@@ -19,11 +19,11 @@ import java.util.List;
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserDO> implements ISysUserService {
 
     @Override
-    public List<SysUserVO> getSysUserVoList(Integer page, Integer rows) throws Exception {
-        if (page > 0 && rows > 0) {
-            PageHelper.startPage(page, rows);
+    public List<SysUserVO> getSysUserVoList(Integer pageIndex, Integer pageSize, String name, String phone, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception {
+        if (pageIndex > 0 && pageSize > 0) {
+            PageHelper.startPage(pageIndex, pageSize);
         }
-        return getMapper().getSysUserVoList();
+        return getMapper().getSysUserVoList(name, phone, createTimeBegin, createTimeEnd, SysUserVO.getSysUserDBfield(sort), order);
     }
 
     @Override

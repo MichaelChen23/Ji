@@ -43,7 +43,25 @@
 
   <select id="getSysUserVoList" resultMap="UserVOResultMap">
     <include refid="selectSysUserVoALL" />
-      ORDER BY u.create_time DESC
+    <where>
+      <if test="name != null and '' != name">
+        AND (u.username LIKE CONCAT(CONCAT('%', #{name}), '%') OR u.name LIKE CONCAT(CONCAT('%', #{name}), '%'))
+      </if>
+      <if test="phone != null and '' != phone">
+        AND u.phone LIKE CONCAT(CONCAT('%', #{phone}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(u.create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(u.create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
   </select>
 
   <select id="getSysUserVoListByName" resultMap="UserVOResultMap" parameterType="String">

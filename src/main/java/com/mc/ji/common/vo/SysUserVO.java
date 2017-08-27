@@ -139,4 +139,17 @@ public class SysUserVO implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public static String getSysUserDBfield(String field) {
+        if ("createTime".equals(field)) {
+            return "u.create_time";
+        } else if ("username".equals(field)) {
+            return "u.username";
+        } else if ("name".equals(field)) {
+            return  "u.name";
+        } else if ("lastLoginTime".equals(field)) {
+            return  "u.last_login_time";
+        }
+        return "u.create_time";//默认是对创建时间排序
+    }
 }
