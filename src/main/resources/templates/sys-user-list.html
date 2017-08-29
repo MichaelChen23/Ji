@@ -28,6 +28,9 @@
         <!-- choose deep color skin in nav -->
         <link rel="stylesheet" type="text/css" id="skin-file" href="../static/css/compiled/skins/dark.css">
 
+        <!-- import common-utils js-->
+        <script src="../static/js/common-utils.js"></script>
+
         <!--[if lt IE 9]-->
         <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
     </head>
@@ -129,13 +132,21 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">姓名：</label>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">帐号/姓名：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="nameStr" id="search_name"/>
+                                <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入帐号或姓名"/>
                             </div>
                             <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">手机号：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="phoneStr" id="search_phone"/>
+                                <input type="text" class="form-control" name="phoneStr" id="search_phone" placeholder="请输入手机号"/>
+                            </div>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">注册日期：</label>
+                            <div class="col-sm-2">
+                                <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
+                            </div>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <div class="col-sm-2">
+                                <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
                             <div class="col-sm-1 col-sm-offset-4">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
@@ -206,6 +217,7 @@
                 sortable: true,//是否启用排序
                 sortName: 'createTime',
                 sortOrder: 'asc',
+                showToggle:true,//是否显示详细视图和列表视图的切换按钮
                 columns:[
                 {
                     title:'全选',
@@ -250,7 +262,8 @@
                 {
                     title:'创建时间',
                     field:'createTime',
-                    sortable:true
+                    sortable:true,
+                    formatter:timeFormatter
                 },
                 {
                     title:'创建人',
@@ -259,7 +272,8 @@
                 {
                     title:'最近登录时间',
                     field:'lastLoginTime',
-                    sortable:true
+                    sortable:true,
+                    formatter:timeFormatter
                 },
                 {
                     title:'更新时间',
@@ -267,14 +281,15 @@
                 },
                 {
                     title:'更新人',
-                    field:'updateAccount'
+                    field:'updateAccount',
+                    formatter:timeFormatter
                 },
                 {
                     title:'状态',
                     field:'status',
                     align:'center',
                     //列数据格式化
-                    formatter:operateFormatter
+                    formatter:statusFormatter
                 }
                 ],
                 locale:'zh-CN',//中文支持,
@@ -286,16 +301,6 @@
                     };
                 }
             })
-            //三个参数，value代表该列的值
-            function operateFormatter(value,row,index){
-                if(value=="n"){
-                    return "停用";
-                }else if(value=="y"){
-                    return "启用";
-                }else{
-                    return "无数据";
-                }
-            }
 
             //请求服务数据时所传参数
             function queryParams(params){
@@ -305,9 +310,9 @@
                     //每页多少条数据
                     pageSize: params.limit,
                     nameStr: $('#search_name').val(),
-                    phoneStr :$('#search_phone').val(),
-                    createTimeBeginStr: "",
-                    createTimeEndStr: "",
+                    phoneStr: $('#search_phone').val(),
+                    createTimeBeginStr: $('#search_createTimeBegin').val(),
+                    createTimeEndStr: $('#search_createTimeEnd').val(),
                     sortStr: params.sort,
                     orderStr: params.order
                 }
