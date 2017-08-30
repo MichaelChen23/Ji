@@ -32,7 +32,7 @@ function fixFormatter(value) {
 }
 
 //每条记录状态的status形式
-function statusFormatter(value, row, index){//三个参数,value代表该列的值,row代表整个list, index代表list的下标
+function statusFormatter(value, row, index){//三个参数,value代表该列的值,row代表每个bean,index代表整个list当前bean的下标
     if("y" == value){
         return "启用";
     }else if("n" == value){
@@ -40,4 +40,42 @@ function statusFormatter(value, row, index){//三个参数,value代表该列的�
     }else{
         return "无数据";
     }
+}
+
+//每行的颜色style
+function rowStatusStyle(row, index) {
+    //这里有5个取值代表5中颜色['active', 'success', 'info', 'warning', 'danger'];
+    var strclass = "";
+    if (row.status == "n") {
+        strclass = 'danger';
+    } else if (row.status == null){
+        strclass = 'warning';
+    } else {
+        return {};
+    }
+    return { classes: strclass };//按照bootstrap table的规则，必须返回一个json格式的对象型如： { classes: strclass }
+}
+
+//编辑每行数据再保存
+function editRowOnSave(type, url, row) {
+    $.ajax({
+        type: type,
+        url: url,
+        contentType: "application/json;chartset=UTF-8",
+        dataType: 'json',
+        data: JSON.stringify(row),
+        success: function (data, status) {
+            if (data.code == "200") {
+                alert("编辑成功");
+            } else if (data.code == "500") {
+                alert("编辑失败！");
+            }
+        },
+        error: function () {
+            alert("编辑失败！");
+        },
+        complete: function () {
+
+        }
+    });
 }

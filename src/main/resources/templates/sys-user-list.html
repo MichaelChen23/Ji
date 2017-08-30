@@ -7,9 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <!-- bootstrap -->
-        <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap-overrides.css"/>
-        <link rel="stylesheet" href="../static/css/bootstrap/bootstrap-table.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap-table.css"/>
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap-editable.css"/>
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap/bootstrap-datetimepicker.min.css"/>
 
         <!-- global styles -->
         <link rel="stylesheet" type="text/css" href="../static/css/compiled/layout.css"/>
@@ -148,7 +150,7 @@
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
-                            <div class="col-sm-1 col-sm-offset-4">
+                            <div class="col-sm-1 col-sm-offset-10" style="text-align: center; margin-top:5px">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
                             </div>
                         </div>
@@ -178,10 +180,13 @@
 
         <!-- scripts -->
         <script src="../static/js/jquery.min.js"></script>
-        <script src="../static/js/bootstrap.min.js"></script>
+        <script src="../static/js/bootstrap/bootstrap.min.js"></script>
         <script src="../static/js/theme.js"></script>
-        <script src="../static/js/bootstrap-table.min.js"></script>
-        <script src="../static/js/bootstrap-table-zh-CN.min.js"></script>
+        <script src="../static/js/bootstrap/bootstrap-table.js"></script>
+        <script src="../static/js/bootstrap/bootstrap-table-zh-CN.min.js"></script>
+        <script src="../static/js/bootstrap/bootstrap-table-editable.js"></script>
+        <script src="../static/js/bootstrap/bootstrap-editable.js"></script>
+        <script src="../static/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript">
             //根据窗口调整表格高度
             $(window).resize(function() {
@@ -218,6 +223,11 @@
                 sortName: 'createTime',
                 sortOrder: 'asc',
                 showToggle:true,//是否显示详细视图和列表视图的切换按钮
+                rowStyle:rowStatusStyle,//每行显示的颜色style
+                editable:true,//开启编辑模式
+                onEditableSave:function (field, row, oldValue, $el) {
+                    editRowOnSave("POST", "/sys-user/update", row);
+                },//每行编辑后保存
                 columns:[
                 {
                     title:'全选',
@@ -236,28 +246,35 @@
                 {
                     title:'帐号',
                     field:'username',
-                    sortable:true
+                    sortable:true,
+                    editable:true
                 },
                 {
                     title:'姓名',
                     field:'name',
-                    sortable:true
+                    sortable:true,
+                    editable:true
                 },
                 {
                     title:'密码',
-                    field:'password'
+                    field:'password',
+                    editable:true
                 },
                 {
                     title:'手机',
-                    field:'phone'
+                    field:'phone',
+                    editable:true
                 },
                 {
                     title:'邮箱',
-                    field:'email'
+                    field:'email',
+                    editable:true
                 },
                 {
                     title:'角色',
-                    field:'roleName'
+                    field:'roleName',
+                    sortable:true,
+                    editable:true
                 },
                 {
                     title:'创建时间',
@@ -277,19 +294,27 @@
                 },
                 {
                     title:'更新时间',
-                    field:'updateTime'
+                    field:'updateTime',
+                    formatter:timeFormatter,
+                    sortable:true,
+                    editable: {
+                        type: 'datetime',//如果是日期选date类型
+                        title: '更新时间',
+                        format: 'yyyy-mm-dd hh:mm:ss'
+                    }
                 },
                 {
                     title:'更新人',
                     field:'updateAccount',
-                    formatter:timeFormatter
+                    editable:true
                 },
                 {
                     title:'状态',
                     field:'status',
                     align:'center',
                     //列数据格式化
-                    formatter:statusFormatter
+                    formatter:statusFormatter,
+                    editable:true
                 }
                 ],
                 locale:'zh-CN',//中文支持,
@@ -317,10 +342,12 @@
                     orderStr: params.order
                 }
             }
+
             //查询按钮事件
             $('#search_btn').click(function(){
                 $('#mytab').bootstrapTable('refresh', {url: '/sys-user/getUserList'});
             })
+
             //tableHeight函数
             function tableHeight(){
                 //可以根据自己页面情况进行调整

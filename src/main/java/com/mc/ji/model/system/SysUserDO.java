@@ -1,5 +1,7 @@
 package com.mc.ji.model.system;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.mc.ji.common.CustomJsonDatetimeDeserializer;
 import com.mc.ji.common.base.BaseDO;
 
 import javax.persistence.*;
@@ -224,6 +226,7 @@ public class SysUserDO extends BaseDO {
     /**
      * @param updateTime
      */
+    @JsonDeserialize(using = CustomJsonDatetimeDeserializer.class)
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }

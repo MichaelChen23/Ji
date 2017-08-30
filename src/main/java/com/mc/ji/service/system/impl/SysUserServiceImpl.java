@@ -1,6 +1,7 @@
 package com.mc.ji.service.system.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.common.vo.SysUserVO;
 import com.mc.ji.dao.system.SysUserMapper;
@@ -23,7 +24,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserDO
         if (pageIndex > 0 && pageSize > 0) {
             PageHelper.startPage(pageIndex, pageSize);
         }
-        return getMapper().getSysUserVoList(name, phone, createTimeBegin, createTimeEnd, SysUserVO.getSysUserDBfield(sort), order);
+        return getMapper().getSysUserVoList(name, phone, createTimeBegin, createTimeEnd, StringUtil.changeDBfieldPattern("", sort), order);
     }
 
     @Override

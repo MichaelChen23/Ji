@@ -2,6 +2,9 @@ package com.mc.ji.common;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 常用工具类
  * @author MC
@@ -19,6 +22,26 @@ public class StringUtil {
 		Integer result = defaultInt;
 		if (StringUtils.isNotBlank(param)) {
 			result = Integer.valueOf(param);
+		}
+		return result;
+	}
+
+	/**
+	 * 通过正则表达式来把obj的驼峰表达式字段转化为数据库DB的字段, 并与表名拼接起来
+	 * add by mc 2017-8-30
+	 * @param tableName 表别名
+	 * @param objField 类字段
+	 * @return
+	 */
+	public static String changeDBfieldPattern(String tableName, String objField) {
+		Pattern p = Pattern.compile("[A-Z]");
+		Matcher m = p.matcher(objField);
+		String result = objField;
+		while(m.find()) {
+			result = result.replace(m.group(),"_" + m.group().toLowerCase());
+		}
+		if(StringUtils.isNotBlank(tableName) && StringUtils.isNotBlank(result)) {
+			result = tableName + "." + result;
 		}
 		return result;
 	}
