@@ -20,11 +20,13 @@ import java.util.List;
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserMapper, SysUserDO> implements ISysUserService {
 
     @Override
-    public List<SysUserVO> getSysUserVoList(Integer pageIndex, Integer pageSize, String name, String phone, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception {
-        if (pageIndex > 0 && pageSize > 0) {
+    public List<SysUserDO> getSysUserDOList(Integer pageIndex, Integer pageSize, String name, String phone, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception {
+        if (pageIndex == 0 && pageSize > 0) {
             PageHelper.startPage(pageIndex, pageSize);
+        } else if (pageIndex > 0 && pageSize > 0) {
+            PageHelper.offsetPage(pageIndex, pageSize);
         }
-        return getMapper().getSysUserVoList(name, phone, createTimeBegin, createTimeEnd, StringUtil.changeDBfieldPattern("", sort), order);
+        return getMapper().getSysUserDOList(name, phone, createTimeBegin, createTimeEnd, StringUtil.changeDBfieldPattern("", sort), order);
     }
 
     @Override

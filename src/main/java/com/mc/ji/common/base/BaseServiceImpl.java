@@ -49,6 +49,11 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
     }
 
     @Override
+    public List<T> getALL() {
+        return mapper.selectAll();
+    }
+
+    @Override
     public Integer getCount(T DO) {
         return mapper.selectCount(DO);
     }

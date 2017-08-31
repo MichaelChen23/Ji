@@ -19,6 +19,8 @@ public interface IBaseService<T extends BaseDO> {
 
     List<T> getListByObj(T DO);
 
+    List<T> getALL();
+
     Integer getCount(T DO);
 
     List<T> searchListByKV(T DO);

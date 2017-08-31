@@ -82,6 +82,17 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
         }
     }
 
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public List<T> getAll() {
+        try {
+            List<T> list = serviceImpl.getALL();
+            return list;
+        } catch (Exception e) {
+            logger.error("获取所有数据失败——", e.getMessage());
+            return null;
+        }
+    }
+
     @RequestMapping(value = "/count", method = RequestMethod.POST)
     public Integer getCount(@RequestBody T DO) {//输入为null，查询全部的数量，输入唯一性的字段，根据该字段数值查询唯一，数量为1
         try {

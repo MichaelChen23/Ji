@@ -18,6 +18,9 @@ public abstract class Constant {
 	public static final Integer DEFAULT_CURRENT_PAGE = 1;
 	
 	public static final Integer DEFAULT_ROWS = 10;
-	
-	
+
+	public static final String STATUS_UNLOCK = "y";
+
+	public static final String STATUS_LOCK = "n";
+
 }

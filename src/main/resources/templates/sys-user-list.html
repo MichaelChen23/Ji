@@ -221,7 +221,7 @@
                 buttonsAlign:'right',//按钮对齐方式
                 sortable: true,//是否启用排序
                 sortName: 'createTime',
-                sortOrder: 'asc',
+                sortOrder: 'desc',
                 showToggle:true,//是否显示详细视图和列表视图的切换按钮
                 rowStyle:rowStatusStyle,//每行显示的颜色style
                 editable:true,//开启编辑模式
@@ -272,9 +272,38 @@
                 },
                 {
                     title:'角色',
-                    field:'roleName',
+                    field:'roleId',
                     sortable:true,
-                    editable:true
+                    editable: {
+                        type: 'select',
+                        title: '角色',
+                        source: function () {
+                            var result = [];
+//                            var roleArray = sessionStorage.getItem("roleArray");
+//                            if (roleArray == null) {
+                                $.ajax({
+                                    url: '/role/getAll',
+                                    async: false,
+                                    type: "GET",
+                                    data: {},
+                                    success: function (data, status) {
+                                        $.each(data, function (key, value) {
+                                            result.push({value: value.id, text: value.name});
+                                        });
+//                                        var roleArrayStr = JSON.stringify(data);
+//                                        sessionStorage.setItem("roleArray", roleArrayStr);
+                                    }
+                                });
+                                return result;
+//                            } else {
+//                                var roleArrayObj = JSON.parse(roleArray);
+//                                $.each(roleArrayObj, function (key, value) {
+//                                    result.push({value: value.list.id, text: value.list.name});
+//                                });
+//                                return result;
+//                            }
+                        }
+                    }
                 },
                 {
                     title:'创建时间',
@@ -312,9 +341,11 @@
                     title:'状态',
                     field:'status',
                     align:'center',
-                    //列数据格式化
-                    formatter:statusFormatter,
-                    editable:true
+                    editable: {
+                        type: 'select',
+                        title: '状态',
+                        source:[{value:"y",text:"启用"},{value:"n",text:"停用"}]
+                    }
                 }
                 ],
                 locale:'zh-CN',//中文支持,
@@ -331,7 +362,7 @@
             function queryParams(params){
                 return{
                     //请求第几页
-                    pageIndex: params.offset+1,
+                    pageIndex: params.offset,
                     //每页多少条数据
                     pageSize: params.limit,
                     nameStr: $('#search_name').val(),

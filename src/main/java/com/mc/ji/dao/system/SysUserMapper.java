@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface SysUserMapper extends JiMapper<SysUserDO> {
 
-    List<SysUserVO> getSysUserVoList(@Param("name")String name, @Param("phone")String phone, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
+    List<SysUserDO> getSysUserDOList(@Param("name")String name, @Param("phone")String phone, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
 
     List<SysUserVO> getSysUserVoListByName(String name);
 }

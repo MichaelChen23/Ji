@@ -1,6 +1,7 @@
 package com.mc.ji.controller.system;
 
 import com.github.pagehelper.PageInfo;
+import com.mc.ji.common.Constant;
 import com.mc.ji.common.base.BaseController;
 import com.mc.ji.common.base.BaseDO;
 import com.mc.ji.common.base.BaseResponse;
@@ -43,7 +44,11 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
             if (StringUtils.isNotBlank(userName) && StringUtils.isNotBlank(password)) {
                 userDO = getServiceImpl().getOneByObj(sysUserDO);
             }
-            return new BaseResponse<SysUserDO>(userDO);
+            if (userDO != null && Constant.STATUS_UNLOCK.equals(userDO.getStatus())) {
+                return new BaseResponse<SysUserDO>(userDO);
+            } else {
+                return new BaseResponse<SysUserDO>(null);
+            }
         } catch (Exception e) {
             logger.error("系统用户登录失败——", e.getMessage());
             return null;
@@ -51,10 +56,10 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
     }
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
-    public PageInfo<SysUserVO> getSysUserList(Integer pageIndex, Integer pageSize, String nameStr, String phoneStr, String createTimeBeginStr, String createTimeEndStr, String sortStr, String orderStr) {
+    public PageInfo<SysUserDO> getSysUserList(Integer pageIndex, Integer pageSize, String nameStr, String phoneStr, String createTimeBeginStr, String createTimeEndStr, String sortStr, String orderStr) {
         try {
-            List<SysUserVO> list = getServiceImpl().getSysUserVoList(pageIndex, pageSize, nameStr, phoneStr, createTimeBeginStr, createTimeEndStr, sortStr, orderStr);
-            return new PageInfo<SysUserVO>(list);
+            List<SysUserDO> list = getServiceImpl().getSysUserDOList(pageIndex, pageSize, nameStr, phoneStr, createTimeBeginStr, createTimeEndStr, sortStr, orderStr);
+            return new PageInfo<SysUserDO>(list);
         } catch (Exception e) {
             logger.error("获取系统用户列表失败——", e.getMessage());
             return null;

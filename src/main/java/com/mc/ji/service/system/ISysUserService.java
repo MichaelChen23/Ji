@@ -28,7 +28,7 @@ public interface ISysUserService extends IBaseService<SysUserDO> {
      * @return
      * @throws Exception
      */
-    List<SysUserVO> getSysUserVoList(Integer pageIndex, Integer pageSize, String name, String phone, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception;
+    List<SysUserDO> getSysUserDOList(Integer pageIndex, Integer pageSize, String name, String phone, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception;
 
     /**
      * 根据帐号或名字，模糊查询系统用户列表，分页显示
