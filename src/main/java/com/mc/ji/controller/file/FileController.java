@@ -32,7 +32,7 @@ public class FileController extends BaseController<IFileService, FileDO> {
             List<FileVO> list = getServiceImpl().getFileVoList(DO.getPage(), DO.getRows());
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
-            logger.error("获取文档列表失败——", e.getMessage());
+            logger.error("get file list fail(获取文档列表失败)——"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }

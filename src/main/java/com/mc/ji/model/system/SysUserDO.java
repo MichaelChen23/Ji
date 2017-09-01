@@ -230,4 +230,23 @@ public class SysUserDO extends BaseDO {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "SysUserDO{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", roleId='" + roleId + '\'' +
+                ", status='" + status + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

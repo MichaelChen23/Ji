@@ -186,4 +186,20 @@ public class AccountDO extends BaseDO {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "AccountDO{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", action='" + action + '\'' +
+                ", amount=" + amount +
+                ", accountTypeId='" + accountTypeId + '\'' +
+                ", status='" + status + '\'' +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

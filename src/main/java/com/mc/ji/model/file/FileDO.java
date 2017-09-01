@@ -169,4 +169,19 @@ public class FileDO extends BaseDO {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "FileDO{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", folderId='" + folderId + '\'' +
+                ", status='" + status + '\'' +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

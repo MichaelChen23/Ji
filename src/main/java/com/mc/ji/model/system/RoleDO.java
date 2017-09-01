@@ -161,4 +161,19 @@ public class RoleDO extends BaseDO {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "RoleDO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

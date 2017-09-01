@@ -205,4 +205,20 @@ public class FolderDO extends BaseDO {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "FolderDO{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", pid='" + pid + '\'' +
+                ", path='" + path + '\'' +
+                ", level=" + level +
+                ", status='" + status + '\'' +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.mc.ji.common.base;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,7 +33,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.saveByObj(DO);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("保存失败——", e.getMessage());
+            logger.error("save fail(保存失败)——"+DO.toString()+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -45,19 +44,19 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.removeByObj(DO);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("删除失败——", e.getMessage());
+            logger.error("delete fail(删除失败)——"+DO.toString()+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
 
     @RequestMapping(value = "/removeList", method = RequestMethod.POST)
-    public BaseResponse<Boolean> removeList(@RequestParam(value = "ids[]") String[] ids) {//批量删除
+    public BaseResponse<Boolean> removeList(@RequestBody String ids) {//批量删除
         try {
-            List<String> list = Arrays.asList(ids);
+            List<String> list = JSON.parseArray(ids, String.class);
             Boolean result = serviceImpl.batchRemoveByIds(list);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("批量删除失败——", e.getMessage());
+            logger.error("batch delete fail(批量删除失败)——"+ids+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -68,7 +67,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.updateByObj(DO);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("更新失败——", e.getMessage());
+            logger.error("update fail(更新失败)——"+DO.toString()+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -80,7 +79,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             result = (T) serviceImpl.getOneByObj(DO);
             return new BaseResponse<T>(result);
         } catch (Exception e) {
-            logger.error("获取失败——", e.getMessage());
+            logger.error("get fail(获取失败)——"+DO.toString()+":{}", e.getMessage());
             return new BaseResponse(result);
         }
     }
@@ -91,7 +90,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             List<T> list = serviceImpl.getListByObj(DO);
             return new PageInfo<T>(list);
         } catch (Exception e) {
-            logger.error("获取列表失败——", e.getMessage());
+            logger.error("get list fail(获取列表失败)——"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -102,7 +101,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             List<T> list = serviceImpl.getALL();
             return new BaseResponse<>(list);
         } catch (Exception e) {
-            logger.error("获取所有数据失败——", e.getMessage());
+            logger.error("get all(获取所有数据失败)——", e.getMessage());
             return null;
         }
     }
@@ -113,7 +112,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Integer count = serviceImpl.getCount(DO);
             return count;
         } catch (Exception e) {
-            logger.error("统计数目失败——", e.getMessage());
+            logger.error("count fail(统计数目失败)——"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -130,7 +129,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             List<T> list = serviceImpl.searchListByKV(DO);
             return new PageInfo<T>(list);
         } catch (Exception e) {
-            logger.error("搜索查询失败——", e.getMessage());
+            logger.error("search query fail(搜索查询失败)——"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }

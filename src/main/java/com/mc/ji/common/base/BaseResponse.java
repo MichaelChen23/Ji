@@ -15,7 +15,7 @@ public class BaseResponse<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	//返回编码
-	private String code;
+	private Integer code;
 	
 	//返回消息
 	private String msg;
@@ -25,7 +25,7 @@ public class BaseResponse<T> implements Serializable {
 	
 	public BaseResponse(){}
 
-	public BaseResponse(String code, String msg, T result) {
+	public BaseResponse(Integer code, String msg, T result) {
 		super();
 		this.code = code;
 		this.msg = msg;
@@ -44,11 +44,11 @@ public class BaseResponse<T> implements Serializable {
 		this.result = result;
 	}
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 

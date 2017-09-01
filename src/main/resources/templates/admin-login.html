@@ -61,7 +61,7 @@
                     contentType: "application/json;chartset=UTF-8",
                     dataType: 'json',
                     success: function(data){
-                        if (data.code == "200") {
+                        if (data.code == 200) {
                             var str = JSON.stringify(data);
                             sessionStorage.setItem("sys-user", str);
                             window.location.href = "/admin-home"

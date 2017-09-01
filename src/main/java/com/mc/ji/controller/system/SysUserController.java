@@ -50,7 +50,7 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
                 return new BaseResponse<SysUserDO>(null);
             }
         } catch (Exception e) {
-            logger.error("系统用户登录失败——", e.getMessage());
+            logger.error("sys-user login fail(系统用户登录失败)——"+sysUserDO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -61,7 +61,7 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
             List<SysUserDO> list = getServiceImpl().getSysUserDOList(pageIndex, pageSize, nameStr, phoneStr, createTimeBeginStr, createTimeEndStr, sortStr, orderStr);
             return new PageInfo<SysUserDO>(list);
         } catch (Exception e) {
-            logger.error("获取系统用户列表失败——", e.getMessage());
+            logger.error("get sys-user list fail(获取系统用户列表失败)——", e.getMessage());
             return null;
         }
     }
