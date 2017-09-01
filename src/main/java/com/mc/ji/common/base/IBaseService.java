@@ -13,6 +13,8 @@ public interface IBaseService<T extends BaseDO> {
 
     Boolean removeByObj(T DO);
 
+    Boolean batchRemoveByIds(List<String> list);
+
     Boolean updateByObj(T DO);
 
     T getOneByObj(T DO);

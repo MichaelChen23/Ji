@@ -31,6 +31,17 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
     }
 
     @Override
+    public Boolean batchRemoveByIds(List<String> list) {
+        if (list != null && list.size() > 0) {
+            for (String each : list) {
+                mapper.deleteByPrimaryKey(each);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public Boolean updateByObj(T DO) {
         return mapper.updateByPrimaryKey(DO) != 0;
     }

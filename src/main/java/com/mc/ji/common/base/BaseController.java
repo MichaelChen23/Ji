@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -48,6 +50,18 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
         }
     }
 
+    @RequestMapping(value = "/removeList", method = RequestMethod.POST)
+    public BaseResponse<Boolean> removeList(@RequestParam(value = "ids[]") String[] ids) {//批量删除
+        try {
+            List<String> list = Arrays.asList(ids);
+            Boolean result = serviceImpl.batchRemoveByIds(list);
+            return BaseResponse.getRespByResultBool(result);
+        } catch (Exception e) {
+            logger.error("批量删除失败——", e.getMessage());
+            return BaseResponse.getRespByResultBool(false);
+        }
+    }
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public BaseResponse<Boolean> update(@RequestBody T DO) {//一定要通过id来修改
         try {
@@ -83,10 +97,10 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
     }
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public List<T> getAll() {
+    public BaseResponse<List<T>> getAll() {
         try {
             List<T> list = serviceImpl.getALL();
-            return list;
+            return new BaseResponse<>(list);
         } catch (Exception e) {
             logger.error("获取所有数据失败——", e.getMessage());
             return null;

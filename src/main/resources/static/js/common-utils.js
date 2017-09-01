@@ -79,3 +79,54 @@ function editRowOnSave(type, url, row) {
         }
     });
 }
+
+//刷新按钮
+function clickFreshBtn(table, url) {
+    $('#'+table).bootstrapTable('refresh', {url: url});
+}
+
+//批量删除
+function batchDelete(table, delBtn, type, url, freshUrl) {
+    var rows = $('#'+table).bootstrapTable('getSelections');//返回所有选择的行，当没有选择的记录时，返回一个空数组
+    /*封装的表单提示确认框*/
+    // Modal.confirm({
+    //     msg : "确认要删除选中的'" + rows.length + "'条数据吗?"
+    // }).on(
+    $('#'+delBtn).click(function() {
+        // if (!e) {//点击取消，直接返回
+        //     return;
+        // }
+        var ids = new Array();
+        //遍历所有选择的行数据，取每条数据对应的ID
+        $.each(rows, function(i, row) {
+            ids[i] = row['id'];
+        });
+        //定义ajax请求参数
+        var param = {
+            "ids" : ids
+        };
+        $.ajax({
+            type : type,
+            url : url,
+            data : param,
+            contentType: "application/json;chartset=UTF-8",
+            dataType : "json",
+            success : function(data) {
+                if (data.code == "200")
+                    Modal.alert({
+                        msg : "删除成功"
+                    });
+                else
+                    Modal.alert({
+                        msg : "删除失败"
+                    });
+                clickFreshBtn(table, freshUrl);
+            },
+            error : function() {
+                Modal.alert({
+                    msg : "服务器没有返回数据，可能服务器忙，请重试!"
+                });
+            }
+        });
+    });
+}
