@@ -34,16 +34,14 @@
         <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
 
         <!-- scripts -->
-        <script src="../static/js/theme.js"></script>
         <script src="../static/js/jquery.min.js"></script>
         <script src="../static/js/bootstrap/bootstrap.min.js"></script>
+        <script src="../static/js/jquery-ui-1.10.2.custom.min.js"></script>
         <script src="../static/js/bootstrap/bootstrap-table.js"></script>
         <script src="../static/js/bootstrap/bootstrap-table-zh-CN.min.js"></script>
         <script src="../static/js/bootstrap/bootstrap-table-editable.js"></script>
         <script src="../static/js/bootstrap/bootstrap-editable.js"></script>
         <script src="../static/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
-        <!-- import common-utils js-->
-        <script src="../static/js/common-utils.js"></script>
     </head>
     <body>
         <!-- navbar -->
@@ -53,8 +51,7 @@
             </div>
             <ul class="nav navbar-nav pull-right hidden-xs">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                        你的账号
+                    <a id="a-username" href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -80,7 +77,7 @@
         <div id="sidebar-nav">
             <ul id="dashboard-menu">
                 <li>
-                    <a href="#">
+                    <a href="/admin-home">
                         <i class="icon-home"></i>
                         <span>首页</span>
                     </a>
@@ -177,7 +174,7 @@
                         <button id="delete_btn" type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                         </button>
-                        <button id="add_btn" type="button" class="btn btn-default">
+                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-sys-user'">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
                         </button>
                     </div>
@@ -187,12 +184,27 @@
         </div>
         <!-- end main container -->
 
+        <script src="../static/js/theme.js"></script>
+        <!-- knob -->
+        <script src="../static/js/jquery.knob.js"></script>
+        <!-- import common-utils js-->
+        <script src="../static/js/common-utils.js"></script>
         <script type="text/javascript">
+            //显示当前系统用户名
+            var str = sessionStorage.getItem("sys-user");
+            var user = JSON.parse(str);
+            $("#a-username").text("hello!   " + user.result.username);
+
             //根据窗口调整表格高度
             $(window).resize(function() {
                 $('#jitable').bootstrapTable('resetView', {
                     height: tableHeight()
-                })
+                });
+//                $('#new-user').css({
+//                    position: "absolute",
+//                    left: ($(window).width() - $('#new-user').outerWidth())/2,
+//                    top: ($(window).height() - $('#new-user').outerHeight())/2
+//                });
             })
 
             //生成用户数据
@@ -331,17 +343,16 @@
                     title:'更新时间',
                     field:'updateTime',
                     formatter:timeFormatter,
-                    sortable:true,
-                    editable: {
+                    sortable:true
+                    /*editable: {
                         type: 'datetime',//如果是日期选date类型
                         title: '更新时间',
                         format: 'yyyy-mm-dd hh:mm:ss'
-                    }
+                    }*/
                 },
                 {
                     title:'更新人',
-                    field:'updateAccount',
-                    editable:true
+                    field:'updateAccount'
                 },
                 {
                     title:'状态',
@@ -395,6 +406,15 @@
             $('#delete_btn').click(function () {
                 batchDelete("jitable", "delete_btn", "POST", "/sys-user/removeList", "/sys-user/getUserList");
             })
+
+            /*$('#add_btn').click(function () {
+                var newUser = document.getElementById("new-user");
+                if (newUser.style.display == "none") {
+                    newUser.style.display = "";
+                } else if (newUser.style.display == "") {
+                    newUser.style.display = "none";
+                }
+            })*/
 
         </script>
     </body>

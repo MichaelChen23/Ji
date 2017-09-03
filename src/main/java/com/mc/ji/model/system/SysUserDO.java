@@ -226,7 +226,7 @@ public class SysUserDO extends BaseDO {
     /**
      * @param updateTime
      */
-    @JsonDeserialize(using = CustomJsonDatetimeDeserializer.class)
+//    @JsonDeserialize(using = CustomJsonDatetimeDeserializer.class)
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }

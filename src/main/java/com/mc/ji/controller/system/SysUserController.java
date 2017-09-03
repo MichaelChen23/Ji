@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,6 +46,8 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
                 userDO = getServiceImpl().getOneByObj(sysUserDO);
             }
             if (userDO != null && Constant.STATUS_UNLOCK.equals(userDO.getStatus())) {
+                userDO.setLastLoginTime(new Date());
+                update(userDO);//更新最新登录时间
                 return new BaseResponse<SysUserDO>(userDO);
             } else {
                 return new BaseResponse<SysUserDO>(null);

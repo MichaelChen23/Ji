@@ -12,7 +12,7 @@ function dateFormatter(value, row, index) {
     }
 }
 
-//把date类型转换为yyyy-mm-dd形式
+//把date类型转换为yyyy-mm-dd hh:mm:ss 形式
 function timeFormatter(value, row, index) {
     if (value != null) {
         var date = new Date(value);
@@ -58,6 +58,8 @@ function rowStatusStyle(row, index) {
 
 //编辑每行数据再保存
 function editRowOnSave(type, url, row) {
+    row.updateAccount = user.result.username;
+    row.updateTime = new Date();
     $.ajax({
         type: type,
         url: url,
