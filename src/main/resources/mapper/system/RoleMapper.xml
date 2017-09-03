@@ -15,4 +15,29 @@
     <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <sql id="selectRoleDOALL">
+    SELECT id, name, description, status, remark, create_account, create_time, update_account, update_time
+    FROM ji_role
+  </sql>
+
+  <select id="getRoleDOList" resultMap="BaseResultMap">
+    <include refid="selectRoleDOALL" />
+    <where>
+      <if test="name != null and '' != name">
+        AND name LIKE CONCAT(CONCAT('%', #{name}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
+  </select>
 </mapper>

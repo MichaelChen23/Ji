@@ -29,7 +29,7 @@ public class AccountController extends BaseController<IAccountService, AccountDO
     @RequestMapping(value = "/getAccountList", method = RequestMethod.POST)
     public PageInfo<AccountVO> getAccountList(@RequestBody BaseDO DO) {
         try {
-            List<AccountVO> list = getServiceImpl().getAccountVoList(DO.getPage(), DO.getRows());
+            List<AccountVO> list = getServiceImpl().getAccountVoList(DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
             logger.error("get account list fail(获取账目列表失败)——"+DO.toString()+":{}", e.getMessage());
@@ -40,7 +40,7 @@ public class AccountController extends BaseController<IAccountService, AccountDO
     @RequestMapping(value = "/searchAccountListByTitle", method = RequestMethod.POST)
     public PageInfo<AccountVO> searchAccountList(@RequestBody BaseDO DO) {
         try {
-            List<AccountVO> list = getServiceImpl().getAccountVoListByTitle(DO.getSearchValue(), DO.getPage(), DO.getRows());
+            List<AccountVO> list = getServiceImpl().getAccountVoListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
             logger.error("根据题目获取账目列表失败——", e.getMessage());

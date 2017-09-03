@@ -53,10 +53,12 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
 
     @Override
     public List<T> getListByObj(T DO) {
-        if (DO.getPage() != null && DO.getRows() != null) {
-            PageHelper.startPage(DO.getPage(), DO.getRows());
+        if (DO.getPageIndex() == 0 && DO.getPageSize() > 0) {
+            PageHelper.startPage(DO.getPageIndex(), DO.getPageSize());
+        } else if (DO.getPageIndex() > 0 && DO.getPageSize() > 0) {
+            PageHelper.offsetPage(DO.getPageIndex(), DO.getPageSize());
         }
-        return mapper.selectAll();
+        return mapper.select(DO);
     }
 
     @Override
@@ -71,8 +73,10 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
 
     @Override
     public List<T> searchListByKV(T DO) {
-        if (DO.getPage() != null && DO.getRows() != null) {
-            PageHelper.startPage(DO.getPage(), DO.getRows());
+        if (DO.getPageIndex() == 0 && DO.getPageSize() > 0) {
+            PageHelper.startPage(DO.getPageIndex(), DO.getPageSize());
+        } else if (DO.getPageIndex() > 0 && DO.getPageSize() > 0) {
+            PageHelper.offsetPage(DO.getPageIndex(), DO.getPageSize());
         }
         Example example = new Example(DO.getClass());
         example.createCriteria().andLike(""+DO.getSearchKey(),"%"+DO.getSearchValue()+"%");

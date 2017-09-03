@@ -72,7 +72,7 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
     @RequestMapping(value = "/searchUserListByName", method = RequestMethod.POST)
     public PageInfo<SysUserVO> searchSysUserList(@RequestBody BaseDO DO) {
         try {
-            List<SysUserVO> list = getServiceImpl().getSysUserVoListByName(DO.getSearchValue(), DO.getPage(), DO.getRows());
+            List<SysUserVO> list = getServiceImpl().getSysUserVoListByName(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<SysUserVO>(list);
         } catch (Exception e) {
             logger.error("根据名字获取系统用户列表失败——", e.getMessage());

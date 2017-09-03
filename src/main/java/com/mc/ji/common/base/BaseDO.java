@@ -12,10 +12,10 @@ import javax.persistence.Transient;
 public class BaseDO {
 
     @Transient
-    private Integer page = Constant.DEFAULT_CURRENT_PAGE;
+    private Integer pageIndex = Constant.DEFAULT_CURRENT_PAGE;
 
     @Transient
-    private Integer rows = Constant.DEFAULT_ROWS;
+    private Integer pageSize = Constant.DEFAULT_ROWS;
 
     //searchKey-查询的字段
     @Transient
@@ -25,20 +25,20 @@ public class BaseDO {
     @Transient
     private String searchValue;
 
-    public Integer getPage() {
-        return page;
+    public Integer getPageIndex() {
+        return pageIndex;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPageIndex(Integer pageIndex) {
+        this.pageIndex = pageIndex;
     }
 
-    public Integer getRows() {
-        return rows;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public String getSearchKey() {

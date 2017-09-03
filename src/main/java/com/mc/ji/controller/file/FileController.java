@@ -29,7 +29,7 @@ public class FileController extends BaseController<IFileService, FileDO> {
     @RequestMapping(value = "/getFileList", method = RequestMethod.POST)
     public PageInfo<FileVO> getFileList(@RequestBody BaseDO DO) {
         try {
-            List<FileVO> list = getServiceImpl().getFileVoList(DO.getPage(), DO.getRows());
+            List<FileVO> list = getServiceImpl().getFileVoList(DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
             logger.error("get file list fail(获取文档列表失败)——"+DO.toString()+":{}", e.getMessage());
@@ -40,7 +40,7 @@ public class FileController extends BaseController<IFileService, FileDO> {
     @RequestMapping(value = "/searchFileListByTitle", method = RequestMethod.POST)
     public PageInfo<FileVO> searchFileList(@RequestBody BaseDO DO) {
         try {
-            List<FileVO> list = getServiceImpl().getFileVoListByTitle(DO.getSearchValue(), DO.getPage(), DO.getRows());
+            List<FileVO> list = getServiceImpl().getFileVoListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
             logger.error("根据题目获取文档列表失败——", e.getMessage());
