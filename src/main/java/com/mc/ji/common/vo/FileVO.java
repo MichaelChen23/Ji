@@ -8,7 +8,7 @@ import java.util.Date;
  * @author mc
  * @date 2017-8-17
  */
-public class FileVO implements Serializable {
+public class FileVO extends BaseVO implements Serializable {
 
     private String id;//文档Id
 
@@ -138,5 +138,23 @@ public class FileVO implements Serializable {
 
     public void setFolderLevel(String folderLevel) {
         this.folderLevel = folderLevel;
+    }
+
+    public String toString() {
+        return "FileVO{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                ", content='" + content + '\'' +
+                ", folderId='" + folderId + '\'' +
+                ", folderName='" + folderName + '\'' +
+                ", folderPid='" + folderPid + '\'' +
+                ", folderPath='" + folderPath + '\'' +
+                ", folderLevel='" + folderLevel + '\'' +
+                super.toString() + '}';
     }
 }

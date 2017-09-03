@@ -27,12 +27,24 @@ public class FileController extends BaseController<IFileService, FileDO> {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @RequestMapping(value = "/getFileList", method = RequestMethod.POST)
-    public PageInfo<FileVO> getFileList(@RequestBody BaseDO DO) {
+    public PageInfo<FileDO> getFileList(Integer pageIndex, Integer pageSize, String titleStr, String createAccountStr, String createTimeBeginStr, String createTimeEndStr, String sortStr, String orderStr) {
         try {
-            List<FileVO> list = getServiceImpl().getFileVoList(DO.getPageIndex(), DO.getPageSize());
+            List<FileDO> list = getServiceImpl().getFileDOList(pageIndex, pageSize, titleStr, createAccountStr, createTimeBeginStr, createTimeEndStr, sortStr, orderStr);
+            return new PageInfo<FileDO>(list);
+        } catch (Exception e) {
+            logger.error("get file list fail(获取文档列表失败)-- :{}", e.getMessage());
+            return null;
+        }
+    }
+
+    @RequestMapping(value = "/getFileVOList", method = RequestMethod.POST)
+    public PageInfo<FileVO> getFileVOList(@RequestBody FileVO VO) {
+        try {
+            if (VO == null) return null;
+            List<FileVO> list = getServiceImpl().getFileVOList(VO);
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
-            logger.error("get file list fail(获取文档列表失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("get fileVO list fail(获取文档列表失败)——"+VO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -40,7 +52,7 @@ public class FileController extends BaseController<IFileService, FileDO> {
     @RequestMapping(value = "/searchFileListByTitle", method = RequestMethod.POST)
     public PageInfo<FileVO> searchFileList(@RequestBody BaseDO DO) {
         try {
-            List<FileVO> list = getServiceImpl().getFileVoListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
+            List<FileVO> list = getServiceImpl().getFileVOListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {
             logger.error("根据题目获取文档列表失败——", e.getMessage());

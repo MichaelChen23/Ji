@@ -3,13 +3,14 @@ package com.mc.ji.common.base;
 import com.mc.ji.common.Constant;
 
 import javax.persistence.Transient;
+import java.io.Serializable;
 
 /**
  * 基础实体信息
  * @author MC
  * @date 2017-8-8
  */
-public class BaseDO {
+public class BaseDO implements Serializable{
 
     @Transient
     private Integer pageIndex = Constant.DEFAULT_CURRENT_PAGE;
@@ -17,13 +18,11 @@ public class BaseDO {
     @Transient
     private Integer pageSize = Constant.DEFAULT_ROWS;
 
-    //searchKey-查询的字段
     @Transient
-    private String searchKey;
+    private String searchKey;//searchKey-查询的字段
 
-    //searchValue-查询字段的值
     @Transient
-    private String searchValue;
+    private String searchValue;//searchValue-查询字段的值
 
     public Integer getPageIndex() {
         return pageIndex;

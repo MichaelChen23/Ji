@@ -14,13 +14,30 @@ import java.util.List;
 public interface IFileService extends IBaseService<FileDO> {
 
     /**
-     * 获取文档列表，分页显示
-     * add by mc 2017-8-17
-     * @param page 页码
-     * @param rows 每页显示行数
+     * 根据条件获取文档列表，并分页显示
+     * add by mc 2017-9-3
+     * @param pageIndex 页码
+     * @param pageSize 每页显示行数
+     * @param title 文件名
+     * @param createAccount 创建用户
+     * @param createTimeBegin 创建开始时间
+     * @param createTimeEnd 创建结束时间
+     * @param sort 排序字段
+     * @param order 排序升降
      * @return
+     * @throws Exception
      */
-    List<FileVO> getFileVoList(Integer page, Integer rows) throws Exception;
+    List<FileDO> getFileDOList(Integer pageIndex, Integer pageSize, String title, String createAccount, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception;
+
+
+    /**
+     * 根据条件获取文档VO列表,关联查询，并分页显示
+     * modify by mc 2017-9-3
+     * @param VO
+     * @return
+     * @throws Exception
+     */
+    List<FileVO> getFileVOList(FileVO VO) throws Exception;
 
     /**
      * 根据文档题目，模糊查询文档列表，分页显示
@@ -30,5 +47,5 @@ public interface IFileService extends IBaseService<FileDO> {
      * @param rows
      * @return
      */
-    List<FileVO> getFileVoListByTitle(String title, Integer page, Integer rows) throws Exception;
+    List<FileVO> getFileVOListByTitle(String title, Integer page, Integer rows) throws Exception;
 }
