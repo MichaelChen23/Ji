@@ -63,7 +63,7 @@ function editRowOnSave(type, url, row) {
     $.ajax({
         type: type,
         url: url,
-        contentType: "application/json;chartset=UTF-8",
+        contentType: "application/json;charset=UTF-8",
         dataType: 'json',
         data: JSON.stringify(row),
         success: function (data, status) {
@@ -102,7 +102,7 @@ function batchDelete(table, delBtn, type, url, freshUrl) {
                     type: type,
                     url: url,
                     data: JSON.stringify(ids),
-                    contentType: "application/json;chartset=UTF-8",
+                    contentType: "application/json;charset=UTF-8",
                     dataType: "json",
                     success: function (data) {
                         if (data.code == 200) {

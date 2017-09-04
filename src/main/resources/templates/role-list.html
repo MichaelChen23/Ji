@@ -196,7 +196,7 @@
             //生成用户数据
             $('#jitable').bootstrapTable({
                 method: 'POST',
-                contentType: "application/x-www-form-urlencoded;charset=UTF-8",//必须要有！！！！
+                contentType: "application/json;charset=UTF-8",//必须要有！！！！
                 url:"/role/getRoleList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整
@@ -305,17 +305,17 @@
 
             //请求服务数据时所传参数
             function queryParams(params){
-                return {
+                return JSON.stringify({
                     //请求第几页
                     pageIndex: params.offset,
                     //每页多少条数据
                     pageSize: params.limit,
-                    nameStr: $('#search_name').val(),
-                    createTimeBeginStr: $('#search_createTimeBegin').val(),
-                    createTimeEndStr: $('#search_createTimeEnd').val(),
-                    sortStr: params.sort,
-                    orderStr: params.order
-                }
+                    name: $('#search_name').val(),
+                    createTimeBegin: $('#search_createTimeBegin').val(),
+                    createTimeEnd: $('#search_createTimeEnd').val(),
+                    sort: params.sort,
+                    order: params.order
+                })
             }
 
             //tableHeight函数

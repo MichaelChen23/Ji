@@ -59,12 +59,13 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
     }
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
-    public PageInfo<SysUserDO> getSysUserList(Integer pageIndex, Integer pageSize, String nameStr, String phoneStr, String createTimeBeginStr, String createTimeEndStr, String sortStr, String orderStr) {
+    public PageInfo<SysUserDO> getSysUserList(@RequestBody SysUserDO DO) {
         try {
-            List<SysUserDO> list = getServiceImpl().getSysUserDOList(pageIndex, pageSize, nameStr, phoneStr, createTimeBeginStr, createTimeEndStr, sortStr, orderStr);
+            if (DO == null) return null;
+            List<SysUserDO> list = getServiceImpl().getSysUserDOList(DO);
             return new PageInfo<SysUserDO>(list);
         } catch (Exception e) {
-            logger.error("get sys-user list fail(获取系统用户列表失败)——", e.getMessage());
+            logger.error("get sys-user list fail(获取系统用户列表失败) -- :{}", e.getMessage());
             return null;
         }
     }

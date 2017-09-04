@@ -5,6 +5,7 @@ import com.mc.ji.common.CustomJsonDatetimeDeserializer;
 import com.mc.ji.common.base.BaseDO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  * @date 2017-8-8
  */
 @Table(name = "ji_sys_user")
-public class SysUserDO extends BaseDO {
+public class SysUserDO extends BaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -247,6 +248,6 @@ public class SysUserDO extends BaseDO {
                 ", createTime=" + createTime +
                 ", updateAccount='" + updateAccount + '\'' +
                 ", updateTime=" + updateTime +
-                '}';
+                super.toString() + '}';
     }
 }

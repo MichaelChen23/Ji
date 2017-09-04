@@ -204,7 +204,7 @@
             //生成用户数据
             $('#jitable').bootstrapTable({
                 method: 'POST',
-                contentType: "application/json;chartset=UTF-8",//必须要有！！！！
+                contentType: "application/json;charset=UTF-8",//必须要有！！！！
                 url:"/folder/getFolderVOList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整

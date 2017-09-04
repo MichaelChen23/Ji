@@ -24,6 +24,18 @@ public class BaseDO implements Serializable{
     @Transient
     private String searchValue;//searchValue-查询字段的值
 
+    @Transient
+    String createTimeBegin;//创建开始时间
+
+    @Transient
+    String createTimeEnd;//创建结束时间
+
+    @Transient
+    String sort;//排序的字段
+
+    @Transient
+    String order;//排序的升降
+
     public Integer getPageIndex() {
         return pageIndex;
     }
@@ -54,5 +66,37 @@ public class BaseDO implements Serializable{
 
     public void setSearchValue(String searchValue) {
         this.searchValue = searchValue;
+    }
+
+    public String getCreateTimeBegin() {
+        return createTimeBegin;
+    }
+
+    public void setCreateTimeBegin(String createTimeBegin) {
+        this.createTimeBegin = createTimeBegin;
+    }
+
+    public String getCreateTimeEnd() {
+        return createTimeEnd;
+    }
+
+    public void setCreateTimeEnd(String createTimeEnd) {
+        this.createTimeEnd = createTimeEnd;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
     }
 }

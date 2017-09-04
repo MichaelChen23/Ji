@@ -15,16 +15,10 @@ public interface IRoleService extends IBaseService<RoleDO> {
     /**
      * 根据条件获取角色列表，并分页显示
      * add by mc 2017-9-3
-     * @param pageIndex 页码
-     * @param pageSize 每页显示行数
-     * @param name 角色名
-     * @param createTimeBegin 创建开始时间
-     * @param createTimeEnd 创建结束时间
-     * @param sort 排序字段
-     * @param order 排序升降
+     * @param DO
      * @return
      * @throws Exception
      */
-    List<RoleDO> getRoleDOList(Integer pageIndex, Integer pageSize, String name, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception;
+    List<RoleDO> getRoleDOList(RoleDO DO) throws Exception;
 
 }

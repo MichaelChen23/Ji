@@ -16,19 +16,12 @@ public interface ISysUserService extends IBaseService<SysUserDO> {
     /**
      * 根据条件获取系统用户列表，并分页显示
      * add by mc 2017-8-15
-     * modify by mc 2017-8-27
-     * @param pageIndex 页码
-     * @param pageSize 每页显示行数
-     * @param name 账号或用户名
-     * @param phone 手机号
-     * @param createTimeBegin 创建开始时间
-     * @param createTimeEnd 创建结束时间
-     * @param sort 排序字段
-     * @param order 排序升降
+     * modify by mc 2017-9-4
+     * @param DO
      * @return
      * @throws Exception
      */
-    List<SysUserDO> getSysUserDOList(Integer pageIndex, Integer pageSize, String name, String phone, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception;
+    List<SysUserDO> getSysUserDOList(SysUserDO DO) throws Exception;
 
     /**
      * 根据帐号或名字，模糊查询系统用户列表，分页显示

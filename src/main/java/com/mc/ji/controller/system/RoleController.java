@@ -6,6 +6,7 @@ import com.mc.ji.model.system.RoleDO;
 import com.mc.ji.service.system.IRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,9 +25,10 @@ public class RoleController extends BaseController<IRoleService, RoleDO> {
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @RequestMapping(value = "/getRoleList", method = RequestMethod.POST)
-    public PageInfo<RoleDO> getRoleList(Integer pageIndex, Integer pageSize, String nameStr, String createTimeBeginStr, String createTimeEndStr, String sortStr, String orderStr) {
+    public PageInfo<RoleDO> getRoleList(@RequestBody RoleDO DO) {
         try {
-            List<RoleDO> list = getServiceImpl().getRoleDOList(pageIndex, pageSize, nameStr, createTimeBeginStr, createTimeEndStr, sortStr, orderStr);
+            if (DO == null) return null;
+            List<RoleDO> list = getServiceImpl().getRoleDOList(DO);
             return new PageInfo<RoleDO>(list);
         } catch (Exception e) {
             logger.error("get role list fail(获取用户角色列表失败)——", e.getMessage());
