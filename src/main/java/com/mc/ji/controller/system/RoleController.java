@@ -31,7 +31,7 @@ public class RoleController extends BaseController<IRoleService, RoleDO> {
             List<RoleDO> list = getServiceImpl().getRoleDOList(DO);
             return new PageInfo<RoleDO>(list);
         } catch (Exception e) {
-            logger.error("get role list fail(获取用户角色列表失败)——", e.getMessage());
+            logger.error("get role list fail(获取用户角色列表失败) -- :{}", e.getMessage());
             return null;
         }
     }

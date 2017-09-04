@@ -3,6 +3,7 @@ package com.mc.ji.model.file;
 import com.mc.ji.common.base.BaseDO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  * @date 2017-8-17
  */
 @Table(name = "ji_folder")
-public class FolderDO extends BaseDO {
+public class FolderDO extends BaseDO implements Serializable {
     /**
      * 文件夹id，每个用户都默认一个父文件-我的文件夹，相当于/根文件夹
      */
@@ -219,6 +220,6 @@ public class FolderDO extends BaseDO {
                 ", createTime=" + createTime +
                 ", updateAccount='" + updateAccount + '\'' +
                 ", updateTime=" + updateTime +
-                '}';
+                super.toString() + '}';
     }
 }

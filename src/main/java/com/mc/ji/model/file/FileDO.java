@@ -2,6 +2,7 @@ package com.mc.ji.model.file;
 
 import com.mc.ji.common.base.BaseDO;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
  * @date 2017-8-17
  */
 @Table(name = "ji_file")
-public class FileDO extends BaseDO {
+public class FileDO extends BaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -182,6 +183,6 @@ public class FileDO extends BaseDO {
                 ", updateAccount='" + updateAccount + '\'' +
                 ", updateTime=" + updateTime +
                 ", content='" + content + '\'' +
-                '}';
+                super.toString() + '}';
     }
 }

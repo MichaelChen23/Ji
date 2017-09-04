@@ -3,6 +3,7 @@ package com.mc.ji.model.account;
 import com.mc.ji.common.base.BaseDO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  * @date 2017-8-17
  */
 @Table(name = "ji_account")
-public class AccountDO extends BaseDO {
+public class AccountDO extends BaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -200,6 +201,6 @@ public class AccountDO extends BaseDO {
                 ", createTime=" + createTime +
                 ", updateAccount='" + updateAccount + '\'' +
                 ", updateTime=" + updateTime +
-                '}';
+                super.toString() + '}';
     }
 }

@@ -3,6 +3,7 @@ package com.mc.ji.model.system;
 import com.mc.ji.common.base.BaseDO;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  * @date 2017-8-11
  */
 @Table(name = "ji_role")
-public class RoleDO extends BaseDO {
+public class RoleDO extends BaseDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -174,6 +175,6 @@ public class RoleDO extends BaseDO {
                 ", createTime=" + createTime +
                 ", updateAccount='" + updateAccount + '\'' +
                 ", updateTime=" + updateTime +
-                '}';
+                super.toString() + '}';
     }
 }
