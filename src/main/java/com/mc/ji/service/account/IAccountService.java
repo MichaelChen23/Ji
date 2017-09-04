@@ -14,13 +14,14 @@ import java.util.List;
 public interface IAccountService extends IBaseService<AccountDO> {
 
     /**
-     * 获取账目列表，分页显示
+     * 根据条件获取账目VO列表,关联查询，并分页显示
      * add by mc 2017-8-17
-     * @param page 页码
-     * @param rows 每页显示行数
+     * modify by mc 2017-9-3
+     * @param VO
      * @return
+     * @throws Exception
      */
-    List<AccountVO> getAccountVoList(Integer page, Integer rows) throws Exception;
+    List<AccountVO> getAccountVOList(AccountVO VO) throws Exception;
 
     /**
      * 根据帐目题目，模糊查询账目列表，分页显示
@@ -30,5 +31,5 @@ public interface IAccountService extends IBaseService<AccountDO> {
      * @param rows
      * @return
      */
-    List<AccountVO> getAccountVoListByTitle(String title, Integer page, Integer rows) throws Exception;
+    List<AccountVO> getAccountVOListByTitle(String title, Integer page, Integer rows) throws Exception;
 }

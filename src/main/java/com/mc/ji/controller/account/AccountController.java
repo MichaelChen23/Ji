@@ -27,12 +27,13 @@ public class AccountController extends BaseController<IAccountService, AccountDO
     private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @RequestMapping(value = "/getAccountList", method = RequestMethod.POST)
-    public PageInfo<AccountVO> getAccountList(@RequestBody BaseDO DO) {
+    public PageInfo<AccountVO> getAccountList(@RequestBody AccountVO VO) {
         try {
-            List<AccountVO> list = getServiceImpl().getAccountVoList(DO.getPageIndex(), DO.getPageSize());
+            if (VO == null) return null;
+            List<AccountVO> list = getServiceImpl().getAccountVOList(VO);
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
-            logger.error("get account list fail(获取账目列表失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("get account VO list fail(获取账目列表失败)——"+VO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -40,7 +41,7 @@ public class AccountController extends BaseController<IAccountService, AccountDO
     @RequestMapping(value = "/searchAccountListByTitle", method = RequestMethod.POST)
     public PageInfo<AccountVO> searchAccountList(@RequestBody BaseDO DO) {
         try {
-            List<AccountVO> list = getServiceImpl().getAccountVoListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
+            List<AccountVO> list = getServiceImpl().getAccountVOListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
             logger.error("根据题目获取账目列表失败——", e.getMessage());

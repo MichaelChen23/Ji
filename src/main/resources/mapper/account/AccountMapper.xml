@@ -18,13 +18,11 @@
   </resultMap>
 
   <resultMap id="AccountVOResultMap" type="com.mc.ji.common.vo.AccountVO">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="action" jdbcType="VARCHAR" property="action" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="account_type_id" jdbcType="VARCHAR" property="accountTypeId" />
     <result column="account_type_name" jdbcType="VARCHAR" property="accountTypeName" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
@@ -33,18 +31,39 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 
-  <sql id="selectAccountVoALL">
-    SELECT a.id, a.title, a.action, a.amount, t.name AS account_type_name, a.create_account, a.create_time, a.update_account, a.update_time
+  <sql id="selectAccountVOALL">
+    SELECT a.id, a.title, a.action, a.amount, a.account_type_id, t.name AS account_type_name, a.status, a.create_account, a.create_time, a.update_account, a.update_time
     FROM ji_account a LEFT JOIN ji_account_type t ON a.account_type_id = t.id
   </sql>
 
-  <select id="getAccountVoList" resultMap="AccountVOResultMap">
-    <include refid="selectAccountVoALL" />
-    ORDER BY a.create_time DESC
+  <select id="getAccountVOList" resultMap="AccountVOResultMap">
+    <include refid="selectAccountVOALL" />
+    <where>
+      <if test="title != null and '' != title">
+        AND a.title LIKE CONCAT(CONCAT('%', #{title}), '%')
+      </if>
+      <if test="action != null and '' != action">
+        AND a.action LIKE CONCAT(CONCAT('%', #{action}), '%')
+      </if>
+      <if test="createAccount != null and '' != createAccount">
+        AND a.create_account LIKE CONCAT(CONCAT('%', #{createAccount}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(a.create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(a.create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
   </select>
 
-  <select id="getAccountVoListByTitle" resultMap="AccountVOResultMap" parameterType="String">
-    <include refid="selectAccountVoALL" />
+  <select id="getAccountVOListByTitle" resultMap="AccountVOResultMap" parameterType="String">
+    <include refid="selectAccountVOALL" />
     WHERE a.title LIKE CONCAT(CONCAT('%', #{title}), '%')
     ORDER BY a.create_time DESC
   </select>

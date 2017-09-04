@@ -9,7 +9,7 @@ import java.util.Date;
  * @author mc
  * @date 2017-8-17
  */
-public class AccountVO implements Serializable {
+public class AccountVO extends BaseVO implements Serializable {
 
     private String id;//账目Id
 
@@ -18,6 +18,8 @@ public class AccountVO implements Serializable {
     private String action;//账目进出，earn-收入, pay-支出
 
     private BigDecimal amount;//账目金额
+
+    private String accountTypeId;//账目类型Id
 
     private String accountTypeName;//账目类型
 
@@ -61,6 +63,14 @@ public class AccountVO implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getAccountTypeId() {
+        return accountTypeId;
+    }
+
+    public void setAccountTypeId(String accountTypeId) {
+        this.accountTypeId = accountTypeId;
     }
 
     public String getAccountTypeName() {
@@ -109,5 +119,22 @@ public class AccountVO implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountVO{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", action='" + action + '\'' +
+                ", amount=" + amount +
+                ", accountTypeId='" + accountTypeId + '\'' +
+                ", accountTypeName='" + accountTypeName + '\'' +
+                ", status='" + status + '\'' +
+                ", createAccount='" + createAccount + '\'' +
+                ", createTime=" + createTime +
+                ", updateAccount='" + updateAccount + '\'' +
+                ", updateTime=" + updateTime +
+                super.toString() + '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.mc.ji.service.account.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.common.vo.AccountVO;
 import com.mc.ji.dao.account.AccountMapper;
@@ -19,18 +20,20 @@ import java.util.List;
 public class AccountServiceImpl extends BaseServiceImpl<AccountMapper, AccountDO> implements IAccountService {
 
     @Override
-    public List<AccountVO> getAccountVoList(Integer page, Integer rows) throws Exception {
-        if (page > 0 && rows > 0) {
-            PageHelper.startPage(page, rows);
+    public List<AccountVO> getAccountVOList(AccountVO VO) throws Exception {
+        if (VO.getPageIndex() == 0 && VO.getPageSize() > 0) {
+            PageHelper.startPage(VO.getPageIndex(), VO.getPageSize());
+        } else if (VO.getPageIndex() > 0 && VO.getPageSize() > 0) {
+            PageHelper.offsetPage(VO.getPageIndex(), VO.getPageSize());
         }
-        return getMapper().getAccountVoList();
+        return getMapper().getAccountVOList(VO.getTitle(), VO.getAction(), VO.getCreateAccount(), VO.getCreateTimeBegin(), VO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("a", VO.getSort()), VO.getOrder());
     }
 
     @Override
-    public List<AccountVO> getAccountVoListByTitle(String title, Integer page, Integer rows) throws Exception {
+    public List<AccountVO> getAccountVOListByTitle(String title, Integer page, Integer rows) throws Exception {
         if (page > 0 && rows > 0) {
             PageHelper.startPage(page, rows);
         }
-        return getMapper().getAccountVoListByTitle(title);
+        return getMapper().getAccountVOListByTitle(title);
     }
 }
