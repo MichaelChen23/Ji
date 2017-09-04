@@ -4,17 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 文档显示类
+ * 文件夹显示类
  * @author mc
- * @date 2017-8-17
+ * @date 2017-9-4
  */
-public class FileVO extends BaseVO implements Serializable {
+public class FolderVO extends BaseVO implements Serializable {
 
-    private String id;//文档Id
+    private String id;//文件夹Id
 
-    private String title;//文档题目
+    private String name;//文件夹名
 
-    private String status;//文档状态
+    private String pid;//父文件夹id
+
+    private String path;//文件夹路径
+
+    private Integer level;//文件夹层级
+
+    private String status;//文件夹状态
 
     private String createAccount;//创建人的帐号
 
@@ -24,17 +30,13 @@ public class FileVO extends BaseVO implements Serializable {
 
     private Date updateTime;//更新时间
 
-    private String content;//文档内容
+    private String folderName;//父文件夹名
 
-    private String folderId;//文档所在文件夹Id
+    private String folderPid;//父文件夹的父文件夹Id
 
-    private String folderName;//文档所在文件夹名
+    private String folderPath;//父文件夹路径
 
-    private String folderPid;//父文件夹Id
-
-    private String folderPath;//文件夹全路径
-
-    private Integer folderLevel;//文件夹层级
+    private Integer folderLevel;//父文件夹层级
 
     public String getId() {
         return id;
@@ -44,12 +46,36 @@ public class FileVO extends BaseVO implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getStatus() {
@@ -92,22 +118,6 @@ public class FileVO extends BaseVO implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getFolderId() {
-        return folderId;
-    }
-
-    public void setFolderId(String folderId) {
-        this.folderId = folderId;
-    }
-
     public String getFolderName() {
         return folderName;
     }
@@ -140,21 +150,23 @@ public class FileVO extends BaseVO implements Serializable {
         this.folderLevel = folderLevel;
     }
 
+    @Override
     public String toString() {
-        return "FileVO{" +
+        return "FolderVO{" +
                 "id='" + id + '\'' +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
+                ", pid='" + pid + '\'' +
+                ", path='" + path + '\'' +
+                ", level=" + level +
                 ", status='" + status + '\'' +
                 ", createAccount='" + createAccount + '\'' +
                 ", createTime=" + createTime +
                 ", updateAccount='" + updateAccount + '\'' +
                 ", updateTime=" + updateTime +
-                ", content='" + content + '\'' +
-                ", folderId='" + folderId + '\'' +
                 ", folderName='" + folderName + '\'' +
                 ", folderPid='" + folderPid + '\'' +
                 ", folderPath='" + folderPath + '\'' +
-                ", folderLevel='" + folderLevel + '\'' +
+                ", folderLevel=" + folderLevel +
                 super.toString() + '}';
     }
 }

@@ -30,6 +30,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/new-role").setViewName("new-role");
         registry.addViewController("/file").setViewName("file-list");
         registry.addViewController("/new-file").setViewName("new-file");
+        registry.addViewController("/folder").setViewName("folder-list");
+        registry.addViewController("/new-folder").setViewName("new-folder");
         super.addViewControllers(registry);
     }
 }

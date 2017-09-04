@@ -140,11 +140,12 @@
                                     <span class="charactersleft">请输入内容</span>
                                 </div>
                                 <div class="col-md-12 field-box">
-                                    <label>选择归属文件夹</label>
-                                    <div class="ui-select span5">
-                                        <select id="folderSelect">
-                                        </select>
-                                    </div>
+                                    <label>归属文件夹Id</label>
+                                    <input id="inputFolderId" class="form-control" type="text" placeholder="输入归属文件夹Id"/>
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>创建帐号</label>
+                                    <input id="inputCreateAccount" class="form-control" type="text" placeholder="输入创建帐号"/>
                                 </div>
                                 <div class="col-md-12 field-box">
                                     <label>状态</label>
@@ -182,24 +183,6 @@
             var user = JSON.parse(str);
             $("#a-username").text("hello!   " + user.result.username);
 
-            //获取用户的文件夹列表
-            $(function () {
-                $.ajax({
-                    url: '/folder/getAll',
-                    async: false,
-                    type: "GET",
-                    data: {},
-                    success: function (data, status) {
-                        if (data.code == 200) {
-                            $.each(data.result, function (key, value) {
-                                var option = $("<option>").val(value.id).text(value.name);
-                                $("#folderSelect").append(option);
-                            });
-                        }
-                    }
-                });
-            })
-
             //保存新文档
             $("#save_btn").click(function(){
                 $.ajax({
@@ -208,9 +191,9 @@
                     data: JSON.stringify ({
                         "title": $("#inputTitle").val(),
                         "content": $("#inputContent").val(),
-                        "createAccount": user.result.username,
+                        "folderId": $("#inputFolderId").val(),
+                        "createAccount": $("#inputCreateAccount").val(),
                         "createTime": new Date(),
-                        "folderId": $("#folderSelect").find("option:selected").val(),
                         "status": $("#statusSelect").find("option:selected").val()
                     }),
                     contentType: "application/json;chartset=UTF-8",

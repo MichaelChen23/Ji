@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>用户角色列表</title>
+        <title>文件夹列表</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -80,30 +80,30 @@
                         <span>首页</span>
                     </a>
                 </li>
+                <li>
+                    <a class="dropdown-toggle" href="#">
+                        <i class="icon-group"></i>
+                        <span>用户</span>
+                        <i class="icon-chevron-down"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/sys-user">系统用户列表</a></li>
+                        <li><a href="/role">用户角色列表</a></li>
+                    </ul>
+                </li>
                 <li class="active">
                     <div class="pointer">
                         <div class="arrow"></div>
                         <div class="arrow_border"></div>
                     </div>
                     <a class="dropdown-toggle" href="#">
-                        <i class="icon-group"></i>
-                        <span>用户</span>
-                        <i class="icon-chevron-down"></i>
-                    </a>
-                    <ul class="active submenu">
-                        <li><a href="/sys-user">系统用户列表</a></li>
-                        <li><a href="/role" class="active">用户角色列表</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="dropdown-toggle" href="#">
                         <i class="icon-file"></i>
                         <span>文档</span>
                         <i class="icon-chevron-down"></i>
                     </a>
-                    <ul class="submenu">
+                    <ul class="active submenu">
                         <li><a href="/file">文档列表</a></li>
-                        <li><a href="/folder">文件夹列表</a></li>
+                        <li><a href="/folder" class="active">文件夹列表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -113,8 +113,8 @@
                         <i class="icon-chevron-down"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="/account">账目列表</a></li>
-                        <li><a href="/acc-type">账目类型列表</a></li>
+                        <li><a href="account-list.html">账目列表</a></li>
+                        <li><a href="acc-type-list.html">账目类型列表</a></li>
                     </ul>
                 </li>
             </ul>
@@ -128,7 +128,7 @@
                 <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>用户角色</h4>
+                        <h4>文件夹</h4>
                     </div>
                 </div>
 
@@ -138,9 +138,17 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">角色名：</label>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">文件夹名：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入角色名"/>
+                                <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入文件夹名"/>
+                            </div>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">父文件夹名：</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="folderNameStr" id="search_folderName" placeholder="请输入父文件夹名"/>
+                            </div>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建用户：</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="createAccountStr" id="search_createAccount" placeholder="请输入创建用户账号"/>
                             </div>
                             <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
                             <div class="col-sm-2">
@@ -165,7 +173,7 @@
                         <button id="delete_btn" type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                         </button>
-                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-role'">
+                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-folder'">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
                         </button>
                     </div>
@@ -196,8 +204,8 @@
             //生成用户数据
             $('#jitable').bootstrapTable({
                 method: 'POST',
-                contentType: "application/x-www-form-urlencoded;charset=UTF-8",//必须要有！！！！
-                url:"/role/getRoleList",//要请求数据的文件路径
+                contentType: "application/json;chartset=UTF-8",//必须要有！！！！
+                url:"/folder/getFolderVOList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整
                 toolbar: '#toolbar',//指定工具栏
@@ -225,7 +233,7 @@
                 rowStyle:rowStatusStyle,//每行显示的颜色style
                 editable:true,//开启编辑模式
                 onEditableSave:function (field, row, oldValue, $el) {
-                    editRowOnSave("POST", "/role/update", row);
+                    editRowOnSave("POST", "/folder/update", row);
                 },//每行编辑后保存
                 columns:[
                     {
@@ -243,7 +251,7 @@
                         visible:false
                     },
                     {
-                        title:'角色名',
+                        title:'文件夹名',
                         field:'name',
                         sortable:true,
                         editable:{
@@ -252,15 +260,38 @@
                         }
                     },
                     {
-                        title:'描述',
-                        field:'description',
+                        title:'文件夹路径',
+                        field:'path',
                         sortable:true,
                         editable:true
                     },
                     {
-                        title:'备注',
-                        field:'remark',
+                        title:'文件夹层级',
+                        field:'level',
+                        sortable:true,
                         editable:true
+                    },
+                    {
+                        title:'父文件夹id',
+                        field:'pid',
+                        editable:true
+                    },
+                    {
+                        title:'父文件夹名',
+                        field:'folderName'
+                    },
+                    {
+                        title:'父文件夹的父文件夹Id',
+                        field:'folderPid',
+                        visible:false
+                    },
+                    {
+                        title:'父文件夹路径',
+                        field:'folderPath'
+                    },
+                    {
+                        title:'父文件夹层级',
+                        field:'folderLevel'
                     },
                     {
                         title:'创建时间',
@@ -270,7 +301,9 @@
                     },
                     {
                         title:'创建人',
-                        field:'createAccount'
+                        field:'createAccount',
+                        sortable:true,
+                        editable:true
                     },
                     {
                         title:'更新时间',
@@ -280,7 +313,8 @@
                     },
                     {
                         title:'更新人',
-                        field:'updateAccount'
+                        field:'updateAccount',
+                        sortable:true
                     },
                     {
                         title:'状态',
@@ -305,17 +339,19 @@
 
             //请求服务数据时所传参数
             function queryParams(params){
-                return {
+                return JSON.stringify({
                     //请求第几页
                     pageIndex: params.offset,
                     //每页多少条数据
                     pageSize: params.limit,
-                    nameStr: $('#search_name').val(),
-                    createTimeBeginStr: $('#search_createTimeBegin').val(),
-                    createTimeEndStr: $('#search_createTimeEnd').val(),
-                    sortStr: params.sort,
-                    orderStr: params.order
-                }
+                    name: $('#search_name').val(),
+                    folderName: $('#search_folderName').val(),
+                    createAccount: $('#search_createAccount').val(),
+                    createTimeBegin: $('#search_createTimeBegin').val(),
+                    createTimeEnd: $('#search_createTimeEnd').val(),
+                    sort: params.sort,
+                    order: params.order
+                })
             }
 
             //tableHeight函数
@@ -326,12 +362,12 @@
 
             //查询按钮事件
             $('#search_btn').click(function () {
-                tableFresh("jitable", "/role/getRoleList");
+                tableFresh("jitable", "/folder/getFolderVOList");
             })
 
             //批量删除事件
             $('#delete_btn').click(function () {
-                batchDelete("jitable", "delete_btn", "POST", "/role/removeList", "/role/getRoleList");
+                batchDelete("jitable", "delete_btn", "POST", "/folder/removeList", "/folder/getFolderVOList");
             })
 
         </script>

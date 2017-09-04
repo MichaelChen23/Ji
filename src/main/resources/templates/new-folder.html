@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>用户角色列表-添加新角色</title>
+        <title>文件夹列表-添加新文档</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -74,30 +74,30 @@
                     <span>首页</span>
                 </a>
             </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>用户</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="/sys-user">系统用户列表</a></li>
+                    <li><a href="/role">用户角色列表</a></li>
+                </ul>
+            </li>
             <li class="active">
                 <div class="pointer">
                     <div class="arrow"></div>
                     <div class="arrow_border"></div>
                 </div>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>用户</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="active submenu">
-                    <li><a href="/sys-user">系统用户列表</a></li>
-                    <li><a href="/role" class="active">用户角色列表</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
                     <i class="icon-file"></i>
                     <span>文档</span>
                     <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="submenu">
+                <ul class="active submenu">
                     <li><a href="/file">文档列表</a></li>
-                    <li><a href="/folder">文件夹列表</a></li>
+                    <li><a href="/folder" class="active">文件夹列表</a></li>
                 </ul>
             </li>
             <li>
@@ -107,8 +107,8 @@
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="/account">账目列表</a></li>
-                    <li><a href="/acc-type">账目类型列表</a></li>
+                    <li><a href="account-list.html">账目列表</a></li>
+                    <li><a href="acc-type-list.html">账目类型列表</a></li>
                 </ul>
             </li>
         </ul>
@@ -120,7 +120,7 @@
         <div id="pad-wrapper" class="new-user">
             <div class="row head">
                 <div class="col-md-12">
-                    <h4>添加新角色</h4>
+                    <h4>添加新文件夹</h4>
                 </div>
             </div>
 
@@ -131,16 +131,24 @@
                     <div class="container">
                         <form class="new_user_form">
                             <div class="col-md-12 field-box">
-                                <label>角色名</label>
-                                <input id="inputName" class="input validate char_digit" type="text" placeholder="输入字母或数字"/>
+                                <label>文件夹名</label>
+                                <input id="inputName" class="form-control" type="text" placeholder="输入文件夹名"/>
                             </div>
                             <div class="col-md-12 field-box">
-                                <label>描述</label>
-                                <input id="inputDescription" class="form-control" type="text" placeholder="请输入描述">
+                                <label>文件夹路径</label>
+                                <input id="inputPath" class="form-control" type="text" placeholder="输入文件夹路径"/>
                             </div>
                             <div class="col-md-12 field-box">
-                                <label>备注</label>
-                                <input id="inputRemark" class="form-control" type="text" placeholder="输入备注">
+                                <label>文件夹层级</label>
+                                <input id="inputLevel" class="form-control" type="text" placeholder="输入文件夹层级"/>
+                            </div>
+                            <div class="col-md-12 field-box">
+                                <label>父文件夹ID</label>
+                                <input id="inputPid" class="form-control" type="text" placeholder="输入父文件夹ID"/>
+                            </div>
+                            <div class="col-md-12 field-box">
+                                <label>创建帐号</label>
+                                <input id="inputCreateAccount" class="form-control" type="text" placeholder="输入创建帐号"/>
                             </div>
                             <div class="col-md-12 field-box">
                                 <label>状态</label>
@@ -178,16 +186,17 @@
         var user = JSON.parse(str);
         $("#a-username").text("hello!   " + user.result.username);
 
-        //保存新用户角色
+        //保存新文件夹
         $("#save_btn").click(function(){
             $.ajax({
                 type: "POST",
-                url: "/role/save",
+                url: "/folder/save",
                 data: JSON.stringify ({
                     "name": $("#inputName").val(),
-                    "description": $("#inputDescription").val(),
-                    "remark": $("#inputRemark").val(),
-                    "createAccount": user.result.username,
+                    "path": $("#inputPath").val(),
+                    "level": $("#inputLevel").val(),
+                    "pid": $("#inputPid").val(),
+                    "createAccount": $("#inputCreateAccount").val(),
                     "createTime": new Date(),
                     "status": $("#statusSelect").find("option:selected").val()
                 }),
@@ -196,7 +205,7 @@
                 success: function(data){
                     if (data.code == 200) {
                         alert("保存成功！");
-                        window.location.href = "/role";
+                        window.location.href = "/folder";
                     } else {
                         alert("保存失败！");
                     }
@@ -204,6 +213,5 @@
             });
         });
     </script>
-
     </body>
 </html>

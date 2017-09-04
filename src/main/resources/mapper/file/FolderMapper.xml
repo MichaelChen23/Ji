@@ -16,4 +16,54 @@
     <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <resultMap id="FolderVOResultMap" type="com.mc.ji.common.vo.FolderVO">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="folder_name" jdbcType="VARCHAR" property="folderName" />
+    <result column="folder_pid" jdbcType="VARCHAR" property="folderPid" />
+    <result column="folder_path" jdbcType="VARCHAR" property="folderPath" />
+    <result column="folder_level" jdbcType="INTEGER" property="folderLevel" />
+  </resultMap>
+
+  <sql id="selectFolderVOALL">
+    SELECT f.id, f.name, f.pid, f.path, f.level, f.status, f.create_account, f.create_time, f.update_account, f.update_time,
+    o.name AS folder_name, o.pid AS folder_pid, o.path AS folder_path, o.level AS folder_level
+    FROM ji_folder f LEFT JOIN ji_folder o ON f.pid = o.id
+  </sql>
+
+  <select id="getFolderVOList" resultMap="FolderVOResultMap">
+    <include refid="selectFolderVOALL" />
+    <where>
+      <if test="name != null and '' != name">
+        AND f.name LIKE CONCAT(CONCAT('%', #{name}), '%')
+      </if>
+      <if test="folderName != null and '' != folderName">
+        AND o.name LIKE CONCAT(CONCAT('%', #{folderName}), '%')
+      </if>
+      <if test="createAccount != null and '' != createAccount">
+        AND f.create_account LIKE CONCAT(CONCAT('%', #{createAccount}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(f.create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(f.create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
+  </select>
+
 </mapper>
