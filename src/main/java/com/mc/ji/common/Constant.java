@@ -23,4 +23,7 @@ public abstract class Constant {
 
 	public static final String STATUS_LOCK = "n";
 
+	public static final String ACCOUNT_EARN = "earn";//账目方式-收入
+
+	public static final String ACCOUNT_PAY = "pay";//账目方式-支出
 }

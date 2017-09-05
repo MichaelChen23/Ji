@@ -138,11 +138,11 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">角色名：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">角色名：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入角色名"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
@@ -193,7 +193,7 @@
                 });
             })
 
-            //生成用户数据
+            //生成用户角色数据
             $('#jitable').bootstrapTable({
                 method: 'POST',
                 contentType: "application/json;charset=UTF-8",//必须要有！！！！
@@ -269,7 +269,7 @@
                         formatter:timeFormatter
                     },
                     {
-                        title:'创建人',
+                        title:'创建帐号',
                         field:'createAccount'
                     },
                     {
@@ -279,7 +279,7 @@
                         sortable:true
                     },
                     {
-                        title:'更新人',
+                        title:'更新帐号',
                         field:'updateAccount'
                     },
                     {

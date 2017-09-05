@@ -138,23 +138,23 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">题目：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">题目：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="titleStr" id="search_title" placeholder="请输入文档题目"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建用户：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">创建用户：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="createAccountStr" id="search_createAccount" placeholder="请输入创建用户账号"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">至</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
-                            <div class="col-sm-1 col-sm-offset-10" style="text-align: center; margin-top:5px">
+                            <div class="col-sm-1 col-sm-offset-11" style="text-align: center; margin-top:5px">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
             $('#jitable').bootstrapTable({
                 method: 'POST',
                 contentType: "application/json;charset=UTF-8",//必须要有！！！！
-                url:"/file/getFileVOList",//要请求数据的文件路径
+                url:"/file/getFileList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整
                 toolbar: '#toolbar',//指定工具栏
@@ -288,7 +288,7 @@
                     formatter:timeFormatter
                 },
                 {
-                    title:'创建人',
+                    title:'创建帐号',
                     field:'createAccount',
                     editable:true,
                     sortable:true
@@ -300,7 +300,7 @@
                     sortable:true
                 },
                 {
-                    title:'更新人',
+                    title:'更新帐号',
                     field:'updateAccount',
                     sortable:true
                 },
@@ -349,12 +349,12 @@
 
             //查询按钮事件
             $('#search_btn').click(function () {
-                tableFresh("jitable", "/file/getFileVOList");
+                tableFresh("jitable", "/file/getFileList");
             })
 
             //批量删除事件
             $('#delete_btn').click(function () {
-                batchDelete("jitable", "delete_btn", "POST", "/file/removeList", "/file/getFileVOList");
+                batchDelete("jitable", "delete_btn", "POST", "/file/removeList", "/file/getFileList");
             })
 
         </script>

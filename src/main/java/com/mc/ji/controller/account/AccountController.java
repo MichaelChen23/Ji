@@ -2,7 +2,6 @@ package com.mc.ji.controller.account;
 
 import com.github.pagehelper.PageInfo;
 import com.mc.ji.common.base.BaseController;
-import com.mc.ji.common.base.BaseDO;
 import com.mc.ji.common.vo.AccountVO;
 import com.mc.ji.model.account.AccountDO;
 import com.mc.ji.service.account.IAccountService;
@@ -33,19 +32,9 @@ public class AccountController extends BaseController<IAccountService, AccountDO
             List<AccountVO> list = getServiceImpl().getAccountVOList(VO);
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
-            logger.error("get account VO list fail(获取账目列表失败)——"+VO.toString()+":{}", e.getMessage());
+            logger.error("get account VO list fail(获取账目列表失败) -- "+VO.toString()+":{}", e.getMessage());
             return null;
         }
     }
 
-    @RequestMapping(value = "/searchAccountListByTitle", method = RequestMethod.POST)
-    public PageInfo<AccountVO> searchAccountList(@RequestBody BaseDO DO) {
-        try {
-            List<AccountVO> list = getServiceImpl().getAccountVOListByTitle(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
-            return new PageInfo<AccountVO>(list);
-        } catch (Exception e) {
-            logger.error("根据题目获取账目列表失败——", e.getMessage());
-            return null;
-        }
-    }
 }

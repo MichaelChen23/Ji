@@ -1,7 +1,6 @@
 package com.mc.ji.dao.system;
 
 import com.mc.ji.common.base.JiMapper;
-import com.mc.ji.common.vo.SysUserVO;
 import com.mc.ji.model.system.SysUserDO;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,6 +25,4 @@ public interface SysUserMapper extends JiMapper<SysUserDO> {
      * @return
      */
     List<SysUserDO> getSysUserDOList(@Param("name")String name, @Param("phone")String phone, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
-
-    List<SysUserVO> getSysUserVoListByName(String name);
 }

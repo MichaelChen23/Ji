@@ -138,27 +138,33 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">账目题目：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">账目题目：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="titleStr" id="search_title" placeholder="请输入账目题目"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">账目方式：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">账目方式：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="actionStr" id="search_action" placeholder="请输入账目方式"/>
+                                <div class="ui-select span5">
+                                    <select id="actionSelect">
+                                        <option value="">全部</option>
+                                        <option value="earn">收入</option>
+                                        <option value="pay">支出</option>
+                                    </select>
+                                </div>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建用户：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建用户：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="createAccountStr" id="search_createAccount" placeholder="请输入创建用户账号"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">至</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
-                            <div class="col-sm-1 col-sm-offset-10" style="text-align: center; margin-top:5px">
+                            <div class="col-sm-1 col-sm-offset-11" style="text-align: center; margin-top:5px">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
                             </div>
                         </div>
@@ -263,7 +269,11 @@
                     title:'账目方式',
                     field:'action',
                     sortable:true,
-                    editable:true
+                    editable: {
+                        type: 'select',
+                        title: '选择账目方式',
+                        source:[{value:"earn",text:"收入"},{value:"pay",text:"支出"}]
+                    }
                 },
                 {
                     title:'金额',
@@ -287,7 +297,7 @@
                     formatter:timeFormatter
                 },
                 {
-                    title:'创建人',
+                    title:'创建帐号',
                     field:'createAccount',
                     editable:true,
                     sortable:true
@@ -299,7 +309,7 @@
                     sortable:true
                 },
                 {
-                    title:'更新人',
+                    title:'更新帐号',
                     field:'updateAccount',
                     sortable:true
                 },
@@ -332,7 +342,7 @@
                     //每页多少条数据
                     pageSize: params.limit,
                     title: $('#search_title').val(),
-                    action: $('#search_action').val(),
+                    action: $("#actionSelect").find("option:selected").val(),
                     createAccount: $('#search_createAccount').val(),
                     createTimeBegin: $('#search_createTimeBegin').val(),
                     createTimeEnd: $('#search_createTimeEnd').val(),

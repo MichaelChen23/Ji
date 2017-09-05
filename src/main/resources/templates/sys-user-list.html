@@ -140,23 +140,23 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">帐号/姓名：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">帐号/姓名：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入帐号或姓名"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">手机号：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">手机号：</label>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" name="phoneStr" id="search_phone" placeholder="请输入手机号"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">注册日期：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">注册日期：</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">至</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
-                            <div class="col-sm-1 col-sm-offset-10" style="text-align: center; margin-top:5px">
+                            <div class="col-sm-1 col-sm-offset-11" style="text-align: center; margin-top:18px">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
                             </div>
                         </div>
@@ -168,9 +168,6 @@
                 <div class="row">
                     <table id="jitable" class="table table-hover"></table>
                     <div id="toolbar" class="btn-group pull-right" style="margin-right: 20px;">
-                        <button id="edit_btn" type="button" class="btn btn-default" style="display: none; border-radius: 0">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span>修改
-                        </button>
                         <button id="delete_btn" type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                         </button>
@@ -200,18 +197,13 @@
                 $('#jitable').bootstrapTable('resetView', {
                     height: tableHeight()
                 });
-//                $('#new-user').css({
-//                    position: "absolute",
-//                    left: ($(window).width() - $('#new-user').outerWidth())/2,
-//                    top: ($(window).height() - $('#new-user').outerHeight())/2
-//                });
             })
 
-            //生成用户数据
+            //生成系统用户数据
             $('#jitable').bootstrapTable({
                 method: 'POST',
                 contentType: "application/json;charset=UTF-8",//必须要有！！！！
-                url:"/sys-user/getUserList",//要请求数据的文件路径
+                url:"/sys-user/getSysUserList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整
                 toolbar: '#toolbar',//指定工具栏
@@ -330,7 +322,7 @@
                     formatter:timeFormatter
                 },
                 {
-                    title:'创建人',
+                    title:'创建帐号',
                     field:'createAccount'
                 },
                 {
@@ -344,15 +336,11 @@
                     field:'updateTime',
                     formatter:timeFormatter,
                     sortable:true
-                    /*editable: {
-                        type: 'datetime',//如果是日期选date类型
-                        title: '更新时间',
-                        format: 'yyyy-mm-dd hh:mm:ss'
-                    }*/
                 },
                 {
-                    title:'更新人',
-                    field:'updateAccount'
+                    title:'更新帐号',
+                    field:'updateAccount',
+                    sortable:true
                 },
                 {
                     title:'状态',
@@ -399,22 +387,13 @@
 
             //查询按钮事件
             $('#search_btn').click(function () {
-                tableFresh("jitable", "/sys-user/getUserList");
+                tableFresh("jitable", "/sys-user/getSysUserList");
             })
 
             //批量删除事件
             $('#delete_btn').click(function () {
-                batchDelete("jitable", "delete_btn", "POST", "/sys-user/removeList", "/sys-user/getUserList");
+                batchDelete("jitable", "delete_btn", "POST", "/sys-user/removeList", "/sys-user/getSysUserList");
             })
-
-            /*$('#add_btn').click(function () {
-                var newUser = document.getElementById("new-user");
-                if (newUser.style.display == "none") {
-                    newUser.style.display = "";
-                } else if (newUser.style.display == "") {
-                    newUser.style.display = "none";
-                }
-            })*/
 
         </script>
     </body>

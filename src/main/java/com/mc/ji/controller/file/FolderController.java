@@ -25,14 +25,14 @@ public class FolderController extends BaseController<IFolderService, FolderDO> {
 
     private static final Logger logger = LoggerFactory.getLogger(FolderController.class);
 
-    @RequestMapping(value = "/getFolderVOList", method = RequestMethod.POST)
-    public PageInfo<FolderVO> getFileVOList(@RequestBody FolderVO VO) {
+    @RequestMapping(value = "/getFolderList", method = RequestMethod.POST)
+    public PageInfo<FolderVO> getFolderList(@RequestBody FolderVO VO) {
         try {
             if (VO == null) return null;
             List<FolderVO> list = getServiceImpl().getFolderVOList(VO);
             return new PageInfo<FolderVO>(list);
         } catch (Exception e) {
-            logger.error("get FolderVO list fail(获取文件夹列表失败)——"+VO.toString()+":{}", e.getMessage());
+            logger.error("get FolderVO list fail(获取文件夹列表失败)--"+VO.toString()+":{}", e.getMessage());
             return null;
         }
     }

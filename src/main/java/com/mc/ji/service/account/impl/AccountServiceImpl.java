@@ -29,11 +29,4 @@ public class AccountServiceImpl extends BaseServiceImpl<AccountMapper, AccountDO
         return getMapper().getAccountVOList(VO.getTitle(), VO.getAction(), VO.getCreateAccount(), VO.getCreateTimeBegin(), VO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("a", VO.getSort()), VO.getOrder());
     }
 
-    @Override
-    public List<AccountVO> getAccountVOListByTitle(String title, Integer page, Integer rows) throws Exception {
-        if (page > 0 && rows > 0) {
-            PageHelper.startPage(page, rows);
-        }
-        return getMapper().getAccountVOListByTitle(title);
-    }
 }

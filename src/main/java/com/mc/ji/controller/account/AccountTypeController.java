@@ -25,7 +25,7 @@ public class AccountTypeController extends BaseController<IAccountTypeService, A
     private static final Logger logger = LoggerFactory.getLogger(AccountTypeController.class);
 
     @RequestMapping(value = "/getAccountTypeList", method = RequestMethod.POST)
-    public PageInfo<AccountTypeDO> getRoleList(@RequestBody AccountTypeDO DO) {
+    public PageInfo<AccountTypeDO> getAccountTypeList(@RequestBody AccountTypeDO DO) {
         try {
             if (DO == null) return null;
             List<AccountTypeDO> list = getServiceImpl().getAccountTypeDOList(DO);

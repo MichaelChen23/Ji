@@ -1,7 +1,6 @@
 package com.mc.ji.service.system;
 
 import com.mc.ji.common.base.IBaseService;
-import com.mc.ji.common.vo.SysUserVO;
 import com.mc.ji.model.system.SysUserDO;
 
 import java.util.List;
@@ -22,15 +21,5 @@ public interface ISysUserService extends IBaseService<SysUserDO> {
      * @throws Exception
      */
     List<SysUserDO> getSysUserDOList(SysUserDO DO) throws Exception;
-
-    /**
-     * 根据帐号或名字，模糊查询系统用户列表，分页显示
-     * add by mc 2017-8-15
-     * @param name 帐号或用户名
-     * @param page
-     * @param rows
-     * @return
-     */
-    List<SysUserVO> getSysUserVoListByName(String name, Integer page, Integer rows) throws Exception;
 
 }

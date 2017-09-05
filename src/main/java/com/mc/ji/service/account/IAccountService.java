@@ -23,13 +23,4 @@ public interface IAccountService extends IBaseService<AccountDO> {
      */
     List<AccountVO> getAccountVOList(AccountVO VO) throws Exception;
 
-    /**
-     * 根据帐目题目，模糊查询账目列表，分页显示
-     * add by mc 2017-8-17
-     * @param title 账目题目
-     * @param page
-     * @param rows
-     * @return
-     */
-    List<AccountVO> getAccountVOListByTitle(String title, Integer page, Integer rows) throws Exception;
 }

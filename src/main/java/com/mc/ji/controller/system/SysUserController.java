@@ -3,9 +3,7 @@ package com.mc.ji.controller.system;
 import com.github.pagehelper.PageInfo;
 import com.mc.ji.common.Constant;
 import com.mc.ji.common.base.BaseController;
-import com.mc.ji.common.base.BaseDO;
 import com.mc.ji.common.base.BaseResponse;
-import com.mc.ji.common.vo.SysUserVO;
 import com.mc.ji.model.system.SysUserDO;
 import com.mc.ji.service.system.ISysUserService;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +56,7 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
         }
     }
 
-    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getSysUserList", method = RequestMethod.POST)
     public PageInfo<SysUserDO> getSysUserList(@RequestBody SysUserDO DO) {
         try {
             if (DO == null) return null;
@@ -70,14 +68,4 @@ public class SysUserController extends BaseController<ISysUserService, SysUserDO
         }
     }
 
-    @RequestMapping(value = "/searchUserListByName", method = RequestMethod.POST)
-    public PageInfo<SysUserVO> searchSysUserList(@RequestBody BaseDO DO) {
-        try {
-            List<SysUserVO> list = getServiceImpl().getSysUserVoListByName(DO.getSearchValue(), DO.getPageIndex(), DO.getPageSize());
-            return new PageInfo<SysUserVO>(list);
-        } catch (Exception e) {
-            logger.error("根据名字获取系统用户列表失败——", e.getMessage());
-            return null;
-        }
-    }
 }

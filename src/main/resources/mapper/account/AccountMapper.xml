@@ -62,9 +62,4 @@
     ORDER BY ${sortName} ${sortOrder}
   </select>
 
-  <select id="getAccountVOListByTitle" resultMap="AccountVOResultMap" parameterType="String">
-    <include refid="selectAccountVOALL" />
-    WHERE a.title LIKE CONCAT(CONCAT('%', #{title}), '%')
-    ORDER BY a.create_time DESC
-  </select>
 </mapper>

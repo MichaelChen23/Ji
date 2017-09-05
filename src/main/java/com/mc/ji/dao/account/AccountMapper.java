@@ -27,6 +27,4 @@ public interface AccountMapper extends JiMapper<AccountDO> {
      * @return
      */
     List<AccountVO> getAccountVOList(@Param("title")String title, @Param("action")String action, @Param("createAccount")String createAccount, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
-
-    List<AccountVO> getAccountVOListByTitle(String title);
 }

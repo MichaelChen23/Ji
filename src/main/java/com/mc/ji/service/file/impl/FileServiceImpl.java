@@ -20,16 +20,6 @@ import java.util.List;
 public class FileServiceImpl extends BaseServiceImpl<FileMapper, FileDO> implements IFileService {
 
     @Override
-    public List<FileDO> getFileDOList(Integer pageIndex, Integer pageSize, String title, String createAccount, String createTimeBegin, String createTimeEnd, String sort, String order) throws Exception {
-        if (pageIndex == 0 && pageSize > 0) {
-            PageHelper.startPage(pageIndex, pageSize);
-        } else if (pageIndex > 0 && pageSize > 0) {
-            PageHelper.offsetPage(pageIndex, pageSize);
-        }
-        return getMapper().getFileDOList(title, createAccount, createTimeBegin, createTimeEnd, StringUtil.changeDBfieldPattern("", sort), order);
-    }
-
-    @Override
     public List<FileVO> getFileVOList(FileVO VO) throws Exception {
         if (VO.getPageIndex() == 0 && VO.getPageSize() > 0) {
             PageHelper.startPage(VO.getPageIndex(), VO.getPageSize());
@@ -39,11 +29,4 @@ public class FileServiceImpl extends BaseServiceImpl<FileMapper, FileDO> impleme
         return getMapper().getFileVOList(VO.getTitle(), VO.getCreateAccount(), VO.getCreateTimeBegin(), VO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("f", VO.getSort()), VO.getOrder());
     }
 
-    @Override
-    public List<FileVO> getFileVOListByTitle(String title, Integer page, Integer rows) throws Exception {
-        if (page > 0 && rows > 0) {
-            PageHelper.startPage(page, rows);
-        }
-        return getMapper().getFileVOListByTitle(title);
-    }
 }

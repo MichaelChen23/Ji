@@ -33,7 +33,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.saveByObj(DO);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("save fail(保存失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("save fail(保存失败)--"+DO.toString()+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -44,7 +44,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.removeByObj(DO);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("delete fail(删除失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("delete fail(删除失败)--"+DO.toString()+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -56,7 +56,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.batchRemoveByIds(list);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("batch delete fail(批量删除失败)——"+ids+":{}", e.getMessage());
+            logger.error("batch delete fail(批量删除失败)--"+ids+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -67,7 +67,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Boolean result = serviceImpl.updateByObj(DO);
             return BaseResponse.getRespByResultBool(result);
         } catch (Exception e) {
-            logger.error("update fail(更新失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("update fail(更新失败)--"+DO.toString()+":{}", e.getMessage());
             return BaseResponse.getRespByResultBool(false);
         }
     }
@@ -79,7 +79,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             result = (T) serviceImpl.getOneByObj(DO);
             return new BaseResponse<T>(result);
         } catch (Exception e) {
-            logger.error("get fail(获取失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("get fail(获取失败)--"+DO.toString()+":{}", e.getMessage());
             return new BaseResponse(result);
         }
     }
@@ -90,7 +90,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             List<T> list = serviceImpl.getListByObj(DO);
             return new PageInfo<T>(list);
         } catch (Exception e) {
-            logger.error("get list fail(获取列表失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("get list fail(获取列表失败)--"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -101,7 +101,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             List<T> list = serviceImpl.getALL();
             return new BaseResponse<>(list);
         } catch (Exception e) {
-            logger.error("get all(获取所有数据失败)——", e.getMessage());
+            logger.error("get all(获取所有数据失败)-- :{}", e.getMessage());
             return null;
         }
     }
@@ -112,7 +112,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             Integer count = serviceImpl.getCount(DO);
             return count;
         } catch (Exception e) {
-            logger.error("count fail(统计数目失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("count fail(统计数目失败)--"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }
@@ -129,7 +129,7 @@ public class BaseController<M extends IBaseService<T>, T extends BaseDO> {
             List<T> list = serviceImpl.searchListByKV(DO);
             return new PageInfo<T>(list);
         } catch (Exception e) {
-            logger.error("search query fail(搜索查询失败)——"+DO.toString()+":{}", e.getMessage());
+            logger.error("search query fail(搜索查询失败)--"+DO.toString()+":{}", e.getMessage());
             return null;
         }
     }

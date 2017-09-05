@@ -136,7 +136,12 @@
                                 </div>
                                 <div class="col-md-12 field-box">
                                     <label>账目方式</label>
-                                    <input id="inputAction" class="form-control" type="text" placeholder="输入账目方式"/>
+                                    <div class="ui-select span5">
+                                        <select id="actionSelect">
+                                            <option value="pay">支出</option>
+                                            <option value="earn">收入</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 field-box">
                                     <label>金额</label>
@@ -186,14 +191,14 @@
             var user = JSON.parse(str);
             $("#a-username").text("hello!   " + user.result.username);
 
-            //保存新文档
+            //保存新账目
             $("#save_btn").click(function(){
                 $.ajax({
                     type: "POST",
                     url: "/account/save",
                     data: JSON.stringify ({
                         "title": $("#inputTitle").val(),
-                        "action": $("#inputAction").val(),
+                        "action": $("#actionSelect").find("option:selected").val(),
                         "amount": $("#inputAmount").val(),
                         "accountTypeId": $("#inputAccountTypeId").val(),
                         "createAccount": $("#inputCreateAccount").val(),

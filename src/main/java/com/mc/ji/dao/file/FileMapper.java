@@ -14,9 +14,5 @@ import java.util.List;
  */
 public interface FileMapper extends JiMapper<FileDO> {
 
-    List<FileDO> getFileDOList(@Param("title")String title, @Param("createAccount")String createAccount, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
-
     List<FileVO> getFileVOList(@Param("title")String title, @Param("createAccount")String createAccount, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
-
-    List<FileVO> getFileVOListByTitle(String title);
 }

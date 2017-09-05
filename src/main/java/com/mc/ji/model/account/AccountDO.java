@@ -21,6 +21,7 @@ public class AccountDO extends BaseDO implements Serializable {
     private String title;
 
     /**
+     * 账目方式：
      * earn-收入, pay-支出
      */
     private String action;
