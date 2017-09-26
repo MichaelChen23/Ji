@@ -1,5 +1,12 @@
 package com.mc.ji.conf;
 
+import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -37,5 +44,33 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/account").setViewName("account-list");
         registry.addViewController("/new-account").setViewName("new-account");
         super.addViewControllers(registry);
+    }
+
+    @Bean
+    public EmbeddedServletContainerFactory servletContainer() {
+        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
+            @Override
+            protected void postProcessContext(Context context) {
+                SecurityConstraint securityConstraint = new SecurityConstraint();
+                securityConstraint.setUserConstraint("CONFIDENTIAL");
+                SecurityCollection collection = new SecurityCollection();
+                collection.addPattern("/*");
+                securityConstraint.addCollection(collection);
+                context.addConstraint(securityConstraint);
+            }
+        };
+
+        tomcat.addAdditionalTomcatConnectors(httpConnector());
+        return tomcat;
+    }
+
+    @Bean
+    public Connector httpConnector() {//设置http的80端口自动跳转到https的443端口，还需要在ECS上的安全组-安全规则上添加开放这两个端口
+        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        connector.setScheme("http");
+        connector.setPort(80);
+        connector.setSecure(false);
+        connector.setRedirectPort(443);
+        return connector;
     }
 }
