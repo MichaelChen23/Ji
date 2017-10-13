@@ -25,9 +25,9 @@
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
     <result column="folder_name" jdbcType="VARCHAR" property="folderName" />
     <result column="folder_pid" jdbcType="VARCHAR" property="folderPid" />
     <result column="folder_path" jdbcType="VARCHAR" property="folderPath" />
@@ -35,7 +35,7 @@
   </resultMap>
 
   <sql id="selectFolderVOALL">
-    SELECT f.id, f.name, f.pid, f.path, f.level, f.status, f.create_account, f.create_time, f.update_account, f.update_time,
+    SELECT f.id, f.name, f.pid, f.path, f.level, f.status, f.create_account, DATE_FORMAT(f.create_time, '%Y-%m-%d %T') AS create_time, f.update_account, DATE_FORMAT(f.update_time, '%Y-%m-%d %T') AS update_time,
     o.name AS folder_name, o.pid AS folder_pid, o.path AS folder_path, o.level AS folder_level
     FROM ji_folder f LEFT JOIN ji_folder o ON f.pid = o.id
   </sql>

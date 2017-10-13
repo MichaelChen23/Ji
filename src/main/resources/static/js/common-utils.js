@@ -60,6 +60,7 @@ function rowStatusStyle(row, index) {
 function editRowOnSave(type, url, row) {
     row.updateAccount = user.result.username;
     row.updateTime = new Date();
+    row.createTime = Date.parse(new Date(row.createTime));//把"YYYY-mm-dd HH:mm:ss"格式的字符串转化为时间戳date类型
     $.ajax({
         type: type,
         url: url,

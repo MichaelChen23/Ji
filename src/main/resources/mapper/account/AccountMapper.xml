@@ -26,13 +26,13 @@
     <result column="account_type_name" jdbcType="VARCHAR" property="accountTypeName" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
     <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
   </resultMap>
 
   <sql id="selectAccountVOALL">
-    SELECT a.id, a.title, a.action, a.amount, a.account_type_id, t.name AS account_type_name, a.status, a.create_account, a.create_time, a.update_account, a.update_time
+    SELECT a.id, a.title, a.action, a.amount, a.account_type_id, t.name AS account_type_name, a.status, a.create_account, DATE_FORMAT(a.create_time, '%Y-%m-%d %T') AS create_time, a.update_account, DATE_FORMAT(a.update_time, '%Y-%m-%d %T') AS update_time
     FROM ji_account a LEFT JOIN ji_account_type t ON a.account_type_id = t.id
   </sql>
 

@@ -18,11 +18,11 @@ public class FileVO extends BaseVO implements Serializable {
 
     private String createAccount;//创建人的帐号
 
-    private Date createTime;//创建时间
+    private String createTime;//创建时间
 
     private String updateAccount;//更新人的帐号
 
-    private Date updateTime;//更新时间
+    private String updateTime;//更新时间
 
     private String content;//文档内容
 
@@ -68,11 +68,11 @@ public class FileVO extends BaseVO implements Serializable {
         this.createAccount = createAccount;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -84,11 +84,11 @@ public class FileVO extends BaseVO implements Serializable {
         this.updateAccount = updateAccount;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
