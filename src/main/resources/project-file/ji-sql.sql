@@ -1,3 +1,23 @@
+--用户表 add by MC 2017-10-29
+DROP TABLE IF EXISTS `ji_user`;
+CREATE TABLE `ji_user` (
+  `id` varchar(38) NOT NULL,
+  `nickName` varchar(38) NOT NULL,
+  `gender` int(2) NOT NULL,
+  `country` varchar(28) NOT NULL,
+  `province` varchar(28) DEFAULT NULL,
+  `city` varchar(28) DEFAULT NULL,
+  `language` varchar(18) DEFAULT NULL,
+  `avatarUrl` varchar(255) DEFAULT NULL,
+  `remark` varchar(168) DEFAULT NULL,
+  `status` varchar(8) DEFAULT 'y' COMMENT 'y-启用；n-禁用，默认为y',
+  `last_login_time` datetime DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  `update_account` varchar(28) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --系统用户表
 DROP TABLE IF EXISTS `ji_sys_user`;
 CREATE TABLE `ji_sys_user` (
@@ -8,7 +28,7 @@ CREATE TABLE `ji_sys_user` (
   `phone` varchar(18) DEFAULT NULL,
   `email` varchar(38) DEFAULT NULL,
   `role_id` varchar(38) DEFAULT NULL,
-  `status` varchar(8) DEFAULT 'y',
+  `status` varchar(8) DEFAULT 'y' COMMENT 'y-启用；n-禁用，默认为y',
   `last_login_time` datetime DEFAULT NULL,
   `create_account` varchar(28) NOT NULL,
   `create_time` datetime NOT NULL,
@@ -95,4 +115,25 @@ CREATE TABLE `ji_account_type` (
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--广告表 add by MC 2017-10-29
+DROP TABLE IF EXISTS `ji_advert`;
+CREATE TABLE `ji_advert` (
+  `id` varchar(38) NOT NULL,
+  `title` varchar(68) NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `status` varchar(8) DEFAULT 'y' COMMENT '广告状态：y-启用；n-禁用，默认为y',
+  `start_time` datetime DEFAULT NULL COMMENT '广告上架时间',
+  `end_time` datetime DEFAULT NULL COMMENT '广告下架时间',
+  `sort` int(8) DEFAULT 0 COMMENT '排列顺序：数值越大越排前面，默认为0',
+  `type` varchar(68) DEFAULT 'home' COMMENT '广告类别：home-首页，默认为home',
+  `remark` varchar(168) DEFAULT NULL,
+  `create_account` varchar(28) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_account` varchar(28) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
