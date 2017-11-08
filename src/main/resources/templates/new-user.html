@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>系统用户列表-添加新用户</title>
+        <title>用户列表-添加新用户</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -74,29 +74,29 @@
                         <span>首页</span>
                     </a>
                 </li>
+                <li>
+                    <a class="dropdown-toggle" href="#">
+                        <i class="icon-windows"></i>
+                        <span>系统</span>
+                        <i class="icon-chevron-down"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/sys-user">系统用户列表</a></li>
+                        <li><a href="/role">用户角色列表</a></li>
+                    </ul>
+                </li>
                 <li class="active">
                     <div class="pointer">
                         <div class="arrow"></div>
                         <div class="arrow_border"></div>
                     </div>
                     <a class="dropdown-toggle" href="#">
-                        <i class="icon-windows"></i>
-                        <span>系统</span>
-                        <i class="icon-chevron-down"></i>
-                    </a>
-                    <ul class="active submenu">
-                        <li><a href="/sys-user" class="active">系统用户列表</a></li>
-                        <li><a href="/role">用户角色列表</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="dropdown-toggle" href="#">
                         <i class="icon-group"></i>
                         <span>用户</span>
                         <i class="icon-chevron-down"></i>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="/user">用户列表</a></li>
+                    <ul class="active submenu">
+                        <li><a href="/user" class="active">用户列表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -130,7 +130,7 @@
             <div id="pad-wrapper" class="new-user">
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>添加新系统用户</h4>
+                        <h4>添加新用户</h4>
                     </div>
                 </div>
 
@@ -139,33 +139,44 @@
                     <!-- left column -->
                     <div class="col-md-9 with-sidebar">
                         <div class="container">
-                            <form class="new_user_form">
+                            <form id="add_form" class="new_user_form">
                                 <div class="col-md-12 field-box">
-                                    <label>账号</label>
-                                    <input id="inputUsername" class="input validate char_digit" type="text" placeholder="输入字母或数字"/>
+                                    <label>用户名</label>
+                                    <input id="inputNikeName" class="form-control" type="text" placeholder="输入用户名"/>
                                 </div>
                                 <div class="col-md-12 field-box">
-                                    <label>姓名</label>
-                                    <input id="inputName" class="input validate Chinese" type="text" placeholder="请输入汉字"/>
-                                </div>
-                                <div class="col-md-12 field-box">
-                                    <label>密码</label>
-                                    <input id="inputPassword" class="input validate password" type="password" placeholder="输入6到18位密码">
-                                </div>
-                                <div class="col-md-12 field-box">
-                                    <label>手机号</label>
-                                    <input id="inputPhone" class="input validate phone" type="text" placeholder="输入手机号">
-                                </div>
-                                <div class="col-md-12 field-box">
-                                    <label>邮箱</label>
-                                    <input id="inputEmail" class="input validate email" type="text" placeholder="输入邮箱地址">
-                                </div>
-                                <div class="col-md-12 field-box">
-                                    <label>角色</label>
+                                    <label>性别</label>
                                     <div class="ui-select span5">
-                                        <select id="roleSelect">
+                                        <select id="genderSelect">
+                                            <option value="1">男</option>
+                                            <option value="0">女</option>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>国家</label>
+                                    <input id="inputCountry" class="form-control" type="text" placeholder="请输入国家" />
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>省份</label>
+                                    <input id="inputProvince" class="form-control" type="text" placeholder="请输入省份" />
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>城市</label>
+                                    <input id="inputCity" class="form-control" type="text" placeholder="请输入城市" />
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>语言</label>
+                                    <input id="inputLanguage" class="form-control" type="text" placeholder="请输入语言" />
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>头像</label>
+                                    <img width="100" height="100" id="picUrl"/>
+                                    <input id="inputAvatarUrl" class="form-control" type="file" onchange="uploadFile()" />
+                                </div>
+                                <div class="col-md-12 field-box">
+                                    <label>备注</label>
+                                    <input id="inputRemark" class="form-control" type="text" placeholder="输入备注" />
                                 </div>
                                 <div class="col-md-12 field-box">
                                     <label>状态</label>
@@ -203,39 +214,22 @@
             var user = JSON.parse(str);
             $("#a-username").text("hello!   " + user.result.username);
 
-            $(function () {
-                $.ajax({
-                    url: '/role/getAll',
-                    async: false,
-                    type: "GET",
-                    data: {},
-                    success: function (data, status) {
-                        if (data.code == 200) {
-                            $.each(data.result, function (key, value) {
-                                var option = $("<option>").val(value.id).text(value.name);
-                                $("#roleSelect").append(option);
-                            });
-                            var roleArrayStr = JSON.stringify(data);
-                            sessionStorage.setItem("roleArray", roleArrayStr);//缓存角色的list
-                        }
-                    }
-                });
-            })
-
-            //保存新系统用户
+            //保存新用户角色
             $("#save_btn").click(function(){
                 $.ajax({
                     type: "POST",
-                    url: "/sys-user/save",
+                    url: "/user/save",
                     data: JSON.stringify ({
-                        "username": $("#inputUsername").val(),
-                        "name": $("#inputName").val(),
-                        "password": $("#inputPassword").val(),
-                        "phone": $("#inputPhone").val(),
-                        "email": $("#inputEmail").val(),
+                        "nickName": $("#inputNikeName").val(),
+                        "gender": $("#genderSelect").find("option:selected").val(),
+                        "country": $("#inputCountry").val(),
+                        "province": $("#inputProvince").val(),
+                        "city": $("#inputCity").val(),
+                        "language": $("#inputLanguage").val(),
+                        "avatarUrl": document.getElementById("picUrl").getAttribute("src"),
+                        "remark": $("#inputRemark").val(),
                         "createAccount": user.result.username,
                         "createTime": new Date(),
-                        "roleId": $("#roleSelect").find("option:selected").val(),
                         "status": $("#statusSelect").find("option:selected").val()
                     }),
                     contentType: "application/json;charset=UTF-8",
@@ -243,13 +237,34 @@
                     success: function(data){
                         if (data.code == 200) {
                             alert("保存成功！");
-                            window.location.href = "/sys-user";
+                            window.location.href = "/user";
                         } else {
                             alert("保存失败！");
                         }
                     }
                 });
             });
+
+            // 上传头像
+            var uploadFile = function uploadPic() {
+                var formData = new FormData();
+                formData.append("file", $("#add_form").find('input[type="file"]')[0].files[0]);
+                $.ajax({
+                    type: "POST",
+                    url: "/upload/uploadPic",
+                    data: formData,
+                    dataType: 'json',
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    // 请求成功时执行的回调函数
+                    success: function(data, status, xhr) {
+                        // 图片显示地址
+                        $("#picUrl").attr("src", data.picPath);
+                    }
+                });
+            };
         </script>
 
     </body>

@@ -1,3 +1,9 @@
+# 自动化打jar包
+#        1.Run ->> edit-configurations ->> + 号添加 里选择maven项目的命令，随意给个名字，如package；
+#        2.Working directory里面填写要构建的项目目录；
+#        3.Command line 里面填写clean package 这句命令 然后 OK即可完成配置；
+#        4.选择该配置，run运行，如果通过maven编译，就会在target目录下打出ji.jar包。
+
 # 默认的profile为develop，其他环境通过指定启动参数使用不同的profile，比如：
 #   开发环境：java -jar my-spring-boot.jar --spring.profiles.active=dev
 #   测试环境：java -jar my-spring-boot.jar --spring.profiles.active=test
@@ -12,3 +18,5 @@ spring:
             force: true
             charset: UTF-8
             enabled: true
+
+uploadpath: /pic/
