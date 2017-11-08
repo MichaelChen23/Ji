@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>账目列表</title>
+        <title>广告列表</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -80,16 +80,20 @@
                         <span>首页</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
+                    <div class="pointer">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
                     <a class="dropdown-toggle" href="#">
                         <i class="icon-windows"></i>
                         <span>系统</span>
                         <i class="icon-chevron-down"></i>
                     </a>
-                    <ul class="submenu">
+                    <ul class="active submenu">
                         <li><a href="/sys-user">系统用户列表</a></li>
                         <li><a href="/role">用户角色列表</a></li>
-                        <li><a href="/advert">广告列表</a></li>
+                        <li><a href="/advert" class="active">广告列表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -113,18 +117,14 @@
                         <li><a href="/folder">文件夹列表</a></li>
                     </ul>
                 </li>
-                <li class="active">
-                    <div class="pointer">
-                        <div class="arrow"></div>
-                        <div class="arrow_border"></div>
-                    </div>
+                <li>
                     <a class="dropdown-toggle" href="#">
                         <i class="icon-edit-sign"></i>
                         <span>账目</span>
                         <i class="icon-chevron-down"></i>
                     </a>
-                    <ul class="active submenu">
-                        <li><a href="/account" class="active">账目列表</a></li>
+                    <ul class="submenu">
+                        <li><a href="/account">账目列表</a></li>
                         <li><a href="/acc-type">账目类型列表</a></li>
                     </ul>
                 </li>
@@ -139,7 +139,7 @@
                 <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>账目</h4>
+                        <h4>广告</h4>
                     </div>
                 </div>
 
@@ -149,33 +149,19 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">账目题目：</label>
+                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">题目：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="titleStr" id="search_title" placeholder="请输入账目题目"/>
-                            </div>
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">账目方式：</label>
-                            <div class="col-sm-2">
-                                <div class="ui-select span5">
-                                    <select id="actionSelect">
-                                        <option value="">全部</option>
-                                        <option value="earn">收入</option>
-                                        <option value="pay">支出</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建用户：</label>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" name="createAccountStr" id="search_createAccount" placeholder="请输入创建用户账号"/>
+                                <input type="text" class="form-control" name="titleStr" id="search_title" placeholder="请输入题目"/>
                             </div>
                             <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
-                            <div class="col-sm-1 col-sm-offset-11" style="text-align: center; margin-top:5px">
+                            <div class="col-sm-1 col-sm-offset-10" style="text-align: center; margin-top:5px">
                                 <button class="btn btn-primary" id="search_btn">查询</button>
                             </div>
                         </div>
@@ -190,7 +176,7 @@
                         <button id="delete_btn" type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                         </button>
-                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-account'">
+                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-advert'">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
                         </button>
                     </div>
@@ -218,11 +204,11 @@
                 });
             })
 
-            //生成账目数据
+            //生成用户角色数据
             $('#jitable').bootstrapTable({
                 method: 'POST',
                 contentType: "application/json;charset=UTF-8",//必须要有！！！！
-                url:"/account/getAccountList",//要请求数据的文件路径
+                url:"/advert/getAdvertList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整
                 toolbar: '#toolbar',//指定工具栏
@@ -250,88 +236,113 @@
                 rowStyle:rowStatusStyle,//每行显示的颜色style
                 editable:true,//开启编辑模式
                 onEditableSave:function (field, row, oldValue, $el) {
-                    editRowOnSave("POST", "/account/update", row);
+                    editRowOnSave("POST", "/advert/update", row);
                 },//每行编辑后保存
                 columns:[
-                {
-                    title:'全选',
-                    field:'state',
-                    //复选框
-                    checkbox:true,
-                    width:25,
-                    align:'center',
-                    valign:'middle'
-                },
-                {
-                    title:'ID',
-                    field:'id',
-                    visible:false
-                },
-                {
-                    title:'账目题目',
-                    field:'title',
-                    sortable:true,
-                    editable:{
-                        type: 'text',
-                        placement: 'right'
+                    {
+                        title:'全选',
+                        field:'state',
+                        //复选框
+                        checkbox:true,
+                        width:25,
+                        align:'center',
+                        valign:'middle'
+                    },
+                    {
+                        title:'ID',
+                        field:'id',
+                        visible:false
+                    },
+                    {
+                        title:'题目',
+                        field:'title',
+                        sortable:true,
+                        editable:{
+                            type: 'text',
+                            placement: 'right'
+                        }
+                    },
+                    {
+                        title:'图片',
+                        field:'imageUrl',
+                        formatter: function(value, row, index){
+                            if (value != null && value != "") {
+                                return "<img  src='"+ value + "' width='188' height='188'>";
+                            }
+                        }
+                    },
+                    {
+                        title:'内容',
+                        field:'content',
+                        sortable:true,
+                        editable:true
+                    },
+                    {
+                        title:'链接地址',
+                        field:'url',
+                        sortable:true,
+                        editable:true
+                    },
+                    {
+                        title:'上架时间',
+                        field:'startTime',
+                        sortable:true,
+                        formatter:timeFormatter
+                    },
+                    {
+                        title:'下架时间',
+                        field:'endTime',
+                        sortable:true,
+                        formatter:timeFormatter
+                    },
+                    {
+                        title:'排列顺序',
+                        field:'sortNo',
+                        sortable:true,
+                        editable:true
+                    },
+                    {
+                        title:'广告类别',
+                        field:'type',
+                        sortable:true,
+                        editable:true
+                    },
+                    {
+                        title:'备注',
+                        field:'remark',
+                        sortable:true,
+                        editable:true
+                    },
+                    {
+                        title:'创建时间',
+                        field:'createTime',
+                        sortable:true,
+                        formatter:timeFormatter
+                    },
+                    {
+                        title:'创建帐号',
+                        field:'createAccount'
+                    },
+                    {
+                        title:'更新时间',
+                        field:'updateTime',
+                        formatter:timeFormatter,
+                        sortable:true
+                    },
+                    {
+                        title:'更新帐号',
+                        field:'updateAccount'
+                    },
+                    {
+                        title:'状态',
+                        field:'status',
+                        align:'center',
+                        editable: {
+                            type: 'select',
+                            title: '选择状态',
+                            source:[{value:"y",text:"启用"},{value:"n",text:"停用"}]
+                        }
                     }
-                },
-                {
-                    title:'账目方式',
-                    field:'action',
-                    sortable:true,
-                    editable: {
-                        type: 'select',
-                        title: '选择账目方式',
-                        source:[{value:"earn",text:"收入"},{value:"pay",text:"支出"}]
-                    }
-                },
-                {
-                    title:'金额',
-                    field:'amount',
-                    sortable:true,
-                    editable:true
-                },
-                {
-                    title:'账目类型Id',
-                    field:'accountTypeId',
-                    editable:true
-                },
-                {
-                    title:'账目类型',
-                    field:'accountTypeName'
-                },
-                {
-                    title:'创建时间',
-                    field:'createTime',
-                    sortable:true
-                },
-                {
-                    title:'创建帐号',
-                    field:'createAccount',
-                    editable:true,
-                    sortable:true
-                },
-                {
-                    title:'更新时间',
-                    field:'updateTime',
-                    sortable:true
-                },
-                {
-                    title:'更新帐号',
-                    field:'updateAccount',
-                    sortable:true
-                },
-                {
-                    title:'状态',
-                    field:'status',
-                    align:'center',
-                    editable: {
-                        type: 'select',
-                        title: '选择状态',
-                        source:[{value:"y",text:"启用"},{value:"n",text:"停用"}]
-                    }
-                }
                 ],
                 locale:'zh-CN',//中文支持,
                 responseHandler:function(res){
@@ -351,8 +362,6 @@
                     //每页多少条数据
                     pageSize: params.limit,
                     title: $('#search_title').val(),
-                    action: $("#actionSelect").find("option:selected").val(),
-                    createAccount: $('#search_createAccount').val(),
                     createTimeBegin: $('#search_createTimeBegin').val(),
                     createTimeEnd: $('#search_createTimeEnd').val(),
                     sort: params.sort,
@@ -368,12 +377,12 @@
 
             //查询按钮事件
             $('#search_btn').click(function () {
-                tableFresh("jitable", "/account/getAccountList");
+                tableFresh("jitable", "/advert/getAdvertList");
             })
 
             //批量删除事件
             $('#delete_btn').click(function () {
-                batchDelete("jitable", "delete_btn", "POST", "/account/removeList", "/account/getAccountList");
+                batchDelete("jitable", "delete_btn", "POST", "/advert/removeList", "/advert/getAdvertList");
             })
 
         </script>

@@ -128,7 +128,7 @@ CREATE TABLE `ji_advert` (
   `status` varchar(8) DEFAULT 'y' COMMENT '广告状态：y-启用；n-禁用，默认为y',
   `start_time` datetime DEFAULT NULL COMMENT '广告上架时间',
   `end_time` datetime DEFAULT NULL COMMENT '广告下架时间',
-  `sort` int(8) DEFAULT 0 COMMENT '排列顺序：数值越大越排前面，默认为0',
+  `sort_no` int(8) DEFAULT 0 COMMENT '排列顺序：数值越大越排前面，默认为0',
   `type` varchar(68) DEFAULT 'home' COMMENT '广告类别：home-首页，默认为home',
   `remark` varchar(168) DEFAULT NULL,
   `create_account` varchar(28) NOT NULL,
