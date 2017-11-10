@@ -2,9 +2,9 @@
 DROP TABLE IF EXISTS `ji_user`;
 CREATE TABLE `ji_user` (
   `id` varchar(38) NOT NULL,
-  `nick_name` varchar(38) NOT NULL,
-  `gender` int(2) NOT NULL,
-  `country` varchar(28) NOT NULL,
+  `nick_name` varchar(38) DEFAULT NULL,
+  `gender` int(2) DEFAULT NULL,
+  `country` varchar(28) DEFAULT NULL,
   `province` varchar(28) DEFAULT NULL,
   `city` varchar(28) DEFAULT NULL,
   `language` varchar(18) DEFAULT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE `ji_user` (
   `remark` varchar(168) DEFAULT NULL,
   `status` varchar(8) DEFAULT 'y' COMMENT 'y-启用；n-禁用，默认为y',
   `last_login_time` datetime DEFAULT NULL,
-  `create_time` datetime NOT NULL,
+  `create_time` datetime DEFAULT NULL,
   `update_account` varchar(28) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

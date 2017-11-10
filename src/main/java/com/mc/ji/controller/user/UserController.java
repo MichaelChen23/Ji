@@ -1,16 +1,20 @@
 package com.mc.ji.controller.user;
 
 import com.github.pagehelper.PageInfo;
+import com.mc.ji.common.Constant;
+import com.mc.ji.common.HttpUtil;
 import com.mc.ji.common.base.BaseController;
+import com.mc.ji.common.base.BaseResponse;
 import com.mc.ji.model.user.UserDO;
 import com.mc.ji.service.user.IUserService;
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,14 +29,45 @@ public class UserController extends BaseController<IUserService, UserDO> {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
-    public PageInfo<UserDO> getUserList(@RequestBody UserDO DO) {
+    public PageInfo<UserDO> getUserList(@RequestBody UserDO userDO) {
         try {
-            if (DO == null) return null;
-            List<UserDO> list = getServiceImpl().getUserDOList(DO);
+            if (userDO == null) {
+                return null;
+            }
+            List<UserDO> list = getServiceImpl().getUserDOList(userDO);
             return new PageInfo<UserDO>(list);
         } catch (Exception e) {
             logger.error("get user list fail(获取用户列表失败) -- :{}", e.getMessage());
             return null;
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/login/{code}", method = RequestMethod.GET)
+    public BaseResponse<UserDO> loginUser(@PathVariable("code") @NotNull String code) {
+        StringBuilder sb = new StringBuilder(Constant.WEI_XIN_API + "?");
+        sb.append("appid=" + Constant.WEI_XIN_APP_ID + "&");
+        sb.append("secret=" + Constant.WEI_XIN_APP_SECRET + "&");
+        sb.append("js_code=" + code + "&");
+        sb.append("grant_type=" + Constant.WEI_XIN_AUTH_TYPE);
+        UserDO userDO = null;
+        try {
+            String resultStr = HttpUtil.httpGetByJson(sb.toString());
+            if (StringUtils.isNotBlank(resultStr)) {
+                JSONObject resultObj = new JSONObject(resultStr);
+                String openId = resultObj.getString("openid");
+                if (StringUtils.isNotBlank(openId)) {
+                    userDO = new UserDO();
+                    userDO.setId(openId);
+                    userDO.setCreateTime(new Date());
+                    //首次登录，要注册录入数据库
+                    getServiceImpl().saveByObj(userDO);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("login user fail(用户登录失败) -- :{}", e.getMessage());
+        }
+        return new BaseResponse<UserDO>(userDO);
+    }
+
 }

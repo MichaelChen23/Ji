@@ -43,7 +43,15 @@ public class BaseServiceImpl<M extends JiMapper<T>, T extends BaseDO> implements
 
     @Override
     public Boolean updateByObj(T DO) {
-        return mapper.updateByPrimaryKey(DO) != 0;
+        //根据主键进行更新,这里最多只会更新一条数据
+        //参数 T 为实体类
+        //int updateByPrimaryKey(T record);
+        /**
+         * 根据主键进行更新
+         * 只会更新不是null的数据
+         * T 为实体类
+         */
+        return mapper.updateByPrimaryKeySelective(DO) != 0;
     }
 
     @Override

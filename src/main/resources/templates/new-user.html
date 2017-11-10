@@ -149,8 +149,9 @@
                                     <label>性别</label>
                                     <div class="ui-select span5">
                                         <select id="genderSelect">
-                                            <option value="1">男</option>
-                                            <option value="0">女</option>
+                                            <option value="0">未知</option>
+                                            <option value="1" selected="selected">男</option>
+                                            <option value="2">女</option>
                                         </select>
                                     </div>
                                 </div>
@@ -229,7 +230,6 @@
                         "language": $("#inputLanguage").val(),
                         "avatarUrl": document.getElementById("picUrl").getAttribute("src"),
                         "remark": $("#inputRemark").val(),
-                        "createAccount": user.result.username,
                         "createTime": new Date(),
                         "status": $("#statusSelect").find("option:selected").val()
                     }),

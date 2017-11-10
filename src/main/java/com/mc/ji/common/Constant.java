@@ -23,7 +23,33 @@ public abstract class Constant {
 
 	public static final String STATUS_LOCK = "n";
 
-	public static final String ACCOUNT_EARN = "earn";//账目方式-收入
+	/**
+	 * 账目方式-收入
+	 */
+	public static final String ACCOUNT_EARN = "earn";
 
-	public static final String ACCOUNT_PAY = "pay";//账目方式-支出
+	/**
+	 * 账目方式-支出
+	 */
+	public static final String ACCOUNT_PAY = "pay";
+
+	/**
+	 * 微信api地址
+	 */
+	public static final String WEI_XIN_API = "https://api.weixin.qq.com/sns/jscode2session";
+
+	/**
+	 * 小程序唯一标识
+	 */
+	public static final String WEI_XIN_APP_ID = "wxe691f5fda926b51b";
+
+	/**
+	 * 小程序的 app secret
+	 */
+	public static final String WEI_XIN_APP_SECRET = "4852586815b755430775bf0ef9f960d9";
+
+	/**
+	 * 小程序的认证类型
+	 */
+	public static final String WEI_XIN_AUTH_TYPE = "authorization_code";
 }

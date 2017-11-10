@@ -20,6 +20,9 @@ public class UserDO extends BaseDO implements Serializable {
     @Column(name = "nick_name")
     private String nickName;
 
+    /**
+     * 性别：0- 未知；1- 男；2- 女
+     */
     private Integer gender;
 
     private String country;
