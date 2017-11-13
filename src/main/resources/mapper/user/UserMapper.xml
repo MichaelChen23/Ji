@@ -29,6 +29,9 @@
   <select id="getUserDOList" resultMap="BaseResultMap">
     <include refid="selectUserDOALL" />
     <where>
+      <if test="id != null and '' != id">
+        AND id LIKE CONCAT(CONCAT('%', #{id}), '%')
+      </if>
       <if test="nikeName != null and '' != nikeName">
         AND nick_name LIKE CONCAT(CONCAT('%', #{nikeName}), '%')
       </if>

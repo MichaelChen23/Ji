@@ -15,6 +15,7 @@ public interface UserMapper extends JiMapper<UserDO> {
     /**
      * 根据条件查询用户列表
      * add by mc 2017-11-7
+     * @param id 用户ID
      * @param nikeName 用户名
      * @param createTimeBegin 创建开始时间
      * @param createTimeEnd 创建结束时间
@@ -22,5 +23,5 @@ public interface UserMapper extends JiMapper<UserDO> {
      * @param order 排序升降
      * @return
      */
-    List<UserDO> getUserDOList(@Param("nikeName")String nikeName, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
+    List<UserDO> getUserDOList(@Param("id")String id, @Param("nikeName")String nikeName, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
 }

@@ -25,6 +25,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, UserDO> impleme
         } else if (DO.getPageIndex() > 0 && DO.getPageSize() > 0) {
             PageHelper.offsetPage(DO.getPageIndex(), DO.getPageSize());
         }
-        return getMapper().getUserDOList(DO.getNickName(), DO.getCreateTimeBegin(), DO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("", DO.getSort()), DO.getOrder());
+        return getMapper().getUserDOList(DO.getId(), DO.getNickName(), DO.getCreateTimeBegin(), DO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("", DO.getSort()), DO.getOrder());
     }
 }

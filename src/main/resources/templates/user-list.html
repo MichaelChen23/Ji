@@ -149,15 +149,19 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">用户名：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">用户ID：</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control" name="nikenameStr" id="search_nickname" placeholder="请输入用户名"/>
+                                <input type="text" class="form-control" name="userIdStr" id="search_user_id" placeholder="请输入用户ID"/>
                             </div>
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">用户名：</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="nicknameStr" id="search_nickname" placeholder="请输入用户名"/>
+                            </div>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">至</label>
                             <div class="col-sm-2">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
@@ -365,7 +369,8 @@
                     pageIndex: params.offset,
                     //每页多少条数据
                     pageSize: params.limit,
-                    nikeName: $('#search_nickname').val(),
+                    id: $('#search_user_id').val(),
+                    nickName: $('#search_nickname').val(),
                     createTimeBegin: $('#search_createTimeBegin').val(),
                     createTimeEnd: $('#search_createTimeEnd').val(),
                     sort: params.sort,
