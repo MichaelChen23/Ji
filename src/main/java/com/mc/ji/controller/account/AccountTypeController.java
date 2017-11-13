@@ -27,7 +27,9 @@ public class AccountTypeController extends BaseController<IAccountTypeService, A
     @RequestMapping(value = "/getAccountTypeList", method = RequestMethod.POST)
     public PageInfo<AccountTypeDO> getAccountTypeList(@RequestBody AccountTypeDO DO) {
         try {
-            if (DO == null) return null;
+            if (DO == null) {
+                return null;
+            }
             List<AccountTypeDO> list = getServiceImpl().getAccountTypeDOList(DO);
             return new PageInfo<AccountTypeDO>(list);
         } catch (Exception e) {

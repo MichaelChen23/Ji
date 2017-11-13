@@ -28,7 +28,9 @@ public class FileController extends BaseController<IFileService, FileDO> {
     @RequestMapping(value = "/getFileList", method = RequestMethod.POST)
     public PageInfo<FileVO> getFileList(@RequestBody FileVO VO) {
         try {
-            if (VO == null) return null;
+            if (VO == null) {
+                return null;
+            }
             List<FileVO> list = getServiceImpl().getFileVOList(VO);
             return new PageInfo<FileVO>(list);
         } catch (Exception e) {

@@ -28,7 +28,9 @@ public class FolderController extends BaseController<IFolderService, FolderDO> {
     @RequestMapping(value = "/getFolderList", method = RequestMethod.POST)
     public PageInfo<FolderVO> getFolderList(@RequestBody FolderVO VO) {
         try {
-            if (VO == null) return null;
+            if (VO == null) {
+                return null;
+            }
             List<FolderVO> list = getServiceImpl().getFolderVOList(VO);
             return new PageInfo<FolderVO>(list);
         } catch (Exception e) {

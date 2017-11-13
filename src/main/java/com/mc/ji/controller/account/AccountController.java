@@ -28,7 +28,9 @@ public class AccountController extends BaseController<IAccountService, AccountDO
     @RequestMapping(value = "/getAccountList", method = RequestMethod.POST)
     public PageInfo<AccountVO> getAccountList(@RequestBody AccountVO VO) {
         try {
-            if (VO == null) return null;
+            if (VO == null) {
+                return null;
+            }
             List<AccountVO> list = getServiceImpl().getAccountVOList(VO);
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {

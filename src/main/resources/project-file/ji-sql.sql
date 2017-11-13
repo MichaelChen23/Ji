@@ -13,7 +13,7 @@ CREATE TABLE `ji_user` (
   `status` varchar(8) DEFAULT 'y' COMMENT 'y-启用；n-禁用，默认为y',
   `last_login_time` datetime DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
-  `update_account` varchar(28) DEFAULT NULL,
+  `update_account` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -63,9 +63,9 @@ CREATE TABLE `ji_folder` (
   `path` varchar(38) DEFAULT '/' COMMENT '文件夹全路径/隔开文件夹名name',
   `level` int(8) DEFAULT 1 COMMENT '文件夹层级，首层层级为1，依次递增',
   `status` varchar(8) DEFAULT 'y',
-  `create_account` varchar(28) NOT NULL,
+  `create_account` varchar(255) NOT NULL,
   `create_time` datetime NOT NULL,
-  `update_account` varchar(28) DEFAULT NULL,
+  `update_account` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`)
@@ -79,9 +79,9 @@ CREATE TABLE `ji_file` (
   `content` text DEFAULT NULL,
   `folder_id` varchar(38) DEFAULT NULL COMMENT '默认为我的文件夹id',
   `status` varchar(8) DEFAULT 'y',
-  `create_account` varchar(28) NOT NULL,
+  `create_account` varchar(255) NOT NULL,
   `create_time` datetime NOT NULL,
-  `update_account` varchar(28) DEFAULT NULL,
+  `update_account` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`title`)
@@ -96,9 +96,9 @@ CREATE TABLE `ji_account` (
   `amount` decimal(10,2) NOT NULL,
   `account_type_id` varchar(38) NOT NULL,
   `status` varchar(8) DEFAULT 'y',
-  `create_account` varchar(28) NOT NULL,
+  `create_account` varchar(255) NOT NULL,
   `create_time` datetime NOT NULL,
-  `update_account` varchar(28) DEFAULT NULL,
+  `update_account` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -109,9 +109,9 @@ CREATE TABLE `ji_account_type` (
   `id` varchar(38) NOT NULL,
   `name` varchar(18) NOT NULL,
   `status` varchar(8) DEFAULT 'y',
-  `create_account` varchar(28) NOT NULL,
+  `create_account` varchar(255) NOT NULL,
   `create_time` datetime NOT NULL,
-  `update_account` varchar(28) DEFAULT NULL,
+  `update_account` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_name` (`name`)
