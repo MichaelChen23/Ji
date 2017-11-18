@@ -13,7 +13,7 @@ import java.util.List;
 public interface IAdvertService extends IBaseService<AdvertDO> {
 
     /**
-     * 根据条件获取广告列表，并分页显示
+     * 后台-根据条件获取广告列表，并分页显示
      * add by mc 2017-9-3
      * @param advertDO
      * @return
@@ -21,4 +21,12 @@ public interface IAdvertService extends IBaseService<AdvertDO> {
      */
     List<AdvertDO> getAdvertDOList(AdvertDO advertDO) throws Exception;
 
+    /**
+     * 前端-根据条件获取广告分页，只显示可看的内容
+     * add by mc 2017-11-18
+     * @param advertDO
+     * @return
+     * @throws Exception
+     */
+    List<AdvertDO> getAdvertPage(AdvertDO advertDO) throws Exception;
 }

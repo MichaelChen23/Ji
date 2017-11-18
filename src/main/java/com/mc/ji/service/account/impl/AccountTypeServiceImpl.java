@@ -6,7 +6,9 @@ import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.dao.account.AccountTypeMapper;
 import com.mc.ji.model.account.AccountTypeDO;
 import com.mc.ji.service.account.IAccountTypeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -19,12 +21,26 @@ import java.util.List;
 public class AccountTypeServiceImpl extends BaseServiceImpl<AccountTypeMapper, AccountTypeDO> implements IAccountTypeService {
 
     @Override
-    public List<AccountTypeDO> getAccountTypeDOList(AccountTypeDO DO) throws Exception {
-        if (DO.getPageIndex() == 0 && DO.getPageSize() > 0) {
-            PageHelper.startPage(DO.getPageIndex(), DO.getPageSize());
-        } else if (DO.getPageIndex() > 0 && DO.getPageSize() > 0) {
-            PageHelper.offsetPage(DO.getPageIndex(), DO.getPageSize());
+    public List<AccountTypeDO> getAccountTypeDOList(AccountTypeDO accountTypeDO) throws Exception {
+        if (accountTypeDO.getPageIndex() == 0 && accountTypeDO.getPageSize() > 0) {
+            PageHelper.startPage(accountTypeDO.getPageIndex(), accountTypeDO.getPageSize());
+        } else if (accountTypeDO.getPageIndex() > 0 && accountTypeDO.getPageSize() > 0) {
+            PageHelper.offsetPage(accountTypeDO.getPageIndex(), accountTypeDO.getPageSize());
         }
-        return getMapper().getAccountTypeDOList(DO.getName(), DO.getCreateAccount(), DO.getCreateTimeBegin(), DO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("", DO.getSort()), DO.getOrder());
+        return getMapper().getAccountTypeDOList(accountTypeDO.getName(), accountTypeDO.getCreateAccount(), accountTypeDO.getCreateTimeBegin(), accountTypeDO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("", accountTypeDO.getSort()), accountTypeDO.getOrder());
     }
+
+    @Override
+    public List<AccountTypeDO> getAccountTypeAllList(AccountTypeDO accountTypeDO) throws Exception {
+        Example example = new Example(AccountTypeDO.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("status","y");
+        criteria.andEqualTo("createAccount", "sys");
+        if (accountTypeDO != null && StringUtils.isNotBlank(accountTypeDO.getCreateAccount())) {
+            criteria.orEqualTo("createAccount", accountTypeDO.getCreateAccount());
+        }
+        return getMapper().selectByExample(example);
+    }
+
+
 }

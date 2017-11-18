@@ -37,4 +37,16 @@ public class AdvertController extends BaseController<IAdvertService, AdvertDO> {
             return null;
         }
     }
+
+    @RequestMapping(value = "/getAdvertPage", method = RequestMethod.POST)
+    public PageInfo<AdvertDO> getAdvertPage(@RequestBody AdvertDO advertDO) {
+        try {
+            List<AdvertDO> list = getServiceImpl().getAdvertPage(advertDO);
+            return new PageInfo<AdvertDO>(list);
+        } catch (Exception e) {
+            logger.error("get advert page fail(获取广告可视分页失败) -- :{}", e.getMessage());
+            return null;
+        }
+    }
+
 }

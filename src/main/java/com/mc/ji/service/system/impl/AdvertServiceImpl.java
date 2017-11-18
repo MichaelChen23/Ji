@@ -7,6 +7,7 @@ import com.mc.ji.dao.system.AdvertMapper;
 import com.mc.ji.model.system.AdvertDO;
 import com.mc.ji.service.system.IAdvertService;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -26,6 +27,18 @@ public class AdvertServiceImpl extends BaseServiceImpl<AdvertMapper, AdvertDO> i
             PageHelper.offsetPage(advertDO.getPageIndex(), advertDO.getPageSize());
         }
         return getMapper().getAdvertDOList(advertDO.getTitle(), advertDO.getCreateTimeBegin(), advertDO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("", advertDO.getSort()), advertDO.getOrder());
+    }
+
+    @Override
+    public List<AdvertDO> getAdvertPage(AdvertDO advertDO) throws Exception {
+        if (advertDO.getPageIndex() == 0 && advertDO.getPageSize() > 0) {
+            PageHelper.startPage(advertDO.getPageIndex(), advertDO.getPageSize());
+        } else if (advertDO.getPageIndex() > 0 && advertDO.getPageSize() > 0) {
+            PageHelper.offsetPage(advertDO.getPageIndex(), advertDO.getPageSize());
+        }
+        Example example = new Example(AdvertDO.class);
+        example.createCriteria().andEqualTo("status", "y");
+        return getMapper().selectByExample(example);
     }
 
 }

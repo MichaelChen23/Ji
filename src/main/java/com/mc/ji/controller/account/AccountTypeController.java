@@ -25,16 +25,28 @@ public class AccountTypeController extends BaseController<IAccountTypeService, A
     private static final Logger logger = LoggerFactory.getLogger(AccountTypeController.class);
 
     @RequestMapping(value = "/getAccountTypeList", method = RequestMethod.POST)
-    public PageInfo<AccountTypeDO> getAccountTypeList(@RequestBody AccountTypeDO DO) {
+    public PageInfo<AccountTypeDO> getAccountTypeList(@RequestBody AccountTypeDO accountTypeDO) {
         try {
-            if (DO == null) {
+            if (accountTypeDO == null) {
                 return null;
             }
-            List<AccountTypeDO> list = getServiceImpl().getAccountTypeDOList(DO);
+            List<AccountTypeDO> list = getServiceImpl().getAccountTypeDOList(accountTypeDO);
             return new PageInfo<AccountTypeDO>(list);
         } catch (Exception e) {
             logger.error("get account type list fail(获取账目类型列表失败) -- :{}", e.getMessage());
             return null;
         }
     }
+
+    @RequestMapping(value = "/getAccountTypeAllList", method = RequestMethod.POST)
+    public List<AccountTypeDO> getAccountTypeAllList(@RequestBody AccountTypeDO accountTypeDO) {
+        try {
+            List<AccountTypeDO> list = getServiceImpl().getAccountTypeAllList(accountTypeDO);
+            return list;
+        } catch (Exception e) {
+            logger.error("get account type all list fail(获取全部账目类型列表失败) -- :{}", e.getMessage());
+            return null;
+        }
+    }
+
 }
