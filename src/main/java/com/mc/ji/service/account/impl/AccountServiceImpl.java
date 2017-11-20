@@ -20,13 +20,13 @@ import java.util.List;
 public class AccountServiceImpl extends BaseServiceImpl<AccountMapper, AccountDO> implements IAccountService {
 
     @Override
-    public List<AccountVO> getAccountVOList(AccountVO VO) throws Exception {
-        if (VO.getPageIndex() == 0 && VO.getPageSize() > 0) {
-            PageHelper.startPage(VO.getPageIndex(), VO.getPageSize());
-        } else if (VO.getPageIndex() > 0 && VO.getPageSize() > 0) {
-            PageHelper.offsetPage(VO.getPageIndex(), VO.getPageSize());
+    public List<AccountVO> getAccountVOList(AccountVO accountVO) throws Exception {
+        if (accountVO.getPageIndex() == 0 && accountVO.getPageSize() > 0) {
+            PageHelper.startPage(accountVO.getPageIndex(), accountVO.getPageSize());
+        } else if (accountVO.getPageIndex() > 0 && accountVO.getPageSize() > 0) {
+            PageHelper.offsetPage(accountVO.getPageIndex(), accountVO.getPageSize());
         }
-        return getMapper().getAccountVOList(VO.getTitle(), VO.getAction(), VO.getCreateAccount(), VO.getCreateTimeBegin(), VO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("a", VO.getSort()), VO.getOrder());
+        return getMapper().getAccountVOList(accountVO.getTitle(), accountVO.getAction(), accountVO.getAccountTypeId(), accountVO.getCreateAccount(), accountVO.getCreateTimeBegin(), accountVO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("a", accountVO.getSort()), accountVO.getOrder());
     }
 
 }

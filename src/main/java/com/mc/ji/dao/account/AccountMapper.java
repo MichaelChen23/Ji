@@ -19,6 +19,7 @@ public interface AccountMapper extends JiMapper<AccountDO> {
      * modify by mc 2017-9-4
      * @param title 账目标题
      * @param action 账目方式
+     * @param accountTypeId 账目类型Id
      * @param createAccount 创建帐号
      * @param createTimeBegin 创建开始时间
      * @param createTimeEnd 创建结束时间
@@ -26,5 +27,5 @@ public interface AccountMapper extends JiMapper<AccountDO> {
      * @param order 排序升降
      * @return
      */
-    List<AccountVO> getAccountVOList(@Param("title")String title, @Param("action")String action, @Param("createAccount")String createAccount, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
+    List<AccountVO> getAccountVOList(@Param("title")String title, @Param("action")String action, @Param("accountTypeId")String accountTypeId, @Param("createAccount")String createAccount, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
 }

@@ -92,7 +92,7 @@ DROP TABLE IF EXISTS `ji_account`;
 CREATE TABLE `ji_account` (
   `id` varchar(38) NOT NULL,
   `title` varchar(68) NOT NULL,
-  `action` varchar(18) NOT NULL COMMENT 'earn-收入, pay-支出',
+  `action` varchar(18) NOT NULL COMMENT '1-收入, 0-支出',
   `amount` decimal(10,2) NOT NULL,
   `account_type_id` varchar(38) NOT NULL,
   `status` varchar(8) DEFAULT 'y',
@@ -137,3 +137,11 @@ CREATE TABLE `ji_advert` (
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 插入初始化配置数据
+-- 账目公共类型
+INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('1', '饮食', 'sys', now());
+INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('2', '购物', 'sys', now());
+INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('3', '住房', 'sys', now());
+INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('4', '通信', 'sys', now());
+INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('5', '交通', 'sys', now());

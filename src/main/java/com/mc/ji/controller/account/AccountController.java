@@ -26,15 +26,15 @@ public class AccountController extends BaseController<IAccountService, AccountDO
     private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @RequestMapping(value = "/getAccountList", method = RequestMethod.POST)
-    public PageInfo<AccountVO> getAccountList(@RequestBody AccountVO VO) {
+    public PageInfo<AccountVO> getAccountList(@RequestBody AccountVO accountVO) {
         try {
-            if (VO == null) {
+            if (accountVO == null) {
                 return null;
             }
-            List<AccountVO> list = getServiceImpl().getAccountVOList(VO);
+            List<AccountVO> list = getServiceImpl().getAccountVOList(accountVO);
             return new PageInfo<AccountVO>(list);
         } catch (Exception e) {
-            logger.error("get account VO list fail(获取账目列表失败) -- "+VO.toString()+":{}", e.getMessage());
+            logger.error("get account VO list fail(获取账目列表失败) -- "+accountVO.toString()+":{}", e.getMessage());
             return null;
         }
     }

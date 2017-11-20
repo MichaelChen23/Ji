@@ -17,10 +17,10 @@ public interface IAccountService extends IBaseService<AccountDO> {
      * 根据条件获取账目VO列表,关联查询，并分页显示
      * add by mc 2017-8-17
      * modify by mc 2017-9-3
-     * @param VO
+     * @param accountVO
      * @return
      * @throws Exception
      */
-    List<AccountVO> getAccountVOList(AccountVO VO) throws Exception;
+    List<AccountVO> getAccountVOList(AccountVO accountVO) throws Exception;
 
 }

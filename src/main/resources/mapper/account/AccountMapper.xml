@@ -45,6 +45,9 @@
       <if test="action != null and '' != action">
         AND a.action LIKE CONCAT(CONCAT('%', #{action}), '%')
       </if>
+      <if test="accountTypeId != null and '' != accountTypeId">
+        AND a.account_type_id = #{accountTypeId}
+      </if>
       <if test="createAccount != null and '' != createAccount">
         AND a.create_account LIKE CONCAT(CONCAT('%', #{createAccount}), '%')
       </if>
