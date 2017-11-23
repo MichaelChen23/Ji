@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>用户角色列表-添加新角色</title>
+        <title>用户建议列表-添加新建议</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -86,9 +86,9 @@
                 </a>
                 <ul class="active submenu">
                     <li><a href="/sys-user">系统用户列表</a></li>
-                    <li><a href="/role" class="active">用户角色列表</a></li>
+                    <li><a href="/role">用户角色列表</a></li>
                     <li><a href="/advert">广告列表</a></li>
-                    <li><a href="/user-advise">用户建议列表</a></li>
+                    <li><a href="/user-advise" class="active">用户建议列表</a></li>
                 </ul>
             </li>
             <li>
@@ -132,7 +132,7 @@
         <div id="pad-wrapper" class="new-user">
             <div class="row head">
                 <div class="col-md-12">
-                    <h4>添加新角色</h4>
+                    <h4>添加新建议</h4>
                 </div>
             </div>
 
@@ -143,12 +143,16 @@
                     <div class="container">
                         <form class="new_user_form">
                             <div class="col-md-12 field-box">
-                                <label>角色名</label>
-                                <input id="inputName" class="input validate char_digit" type="text" placeholder="输入字母或数字"/>
+                                <label>评分</label>
+                                <input id="inputScore" class="input validate integer" type="text" placeholder="输入数字"/>
                             </div>
                             <div class="col-md-12 field-box">
-                                <label>描述</label>
-                                <input id="inputDescription" class="form-control" type="text" placeholder="请输入描述">
+                                <label>用户名</label>
+                                <input id="inputName" class="form-control" type="text" placeholder="请输入用户名">
+                            </div>
+                            <div class="col-md-12 field-box">
+                                <label>建议</label>
+                                <input id="inputAdvise" class="form-control" type="text" placeholder="请输入建议">
                             </div>
                             <div class="col-md-12 field-box">
                                 <label>备注</label>
@@ -194,12 +198,12 @@
         $("#save_btn").click(function(){
             $.ajax({
                 type: "POST",
-                url: "/role/save",
+                url: "/user-advise/save",
                 data: JSON.stringify ({
-                    "name": $("#inputName").val(),
-                    "description": $("#inputDescription").val(),
+                    "score": $("#inputScore").val(),
+                    "advise": $("#inputAdvise").val(),
                     "remark": $("#inputRemark").val(),
-                    "createAccount": user.result.username,
+                    "createAccount": $("#inputName").val(),
                     "createTime": new Date(),
                     "status": $("#statusSelect").find("option:selected").val()
                 }),
@@ -208,7 +212,7 @@
                 success: function(data){
                     if (data.code == 200) {
                         alert("保存成功！");
-                        window.location.href = "/role";
+                        window.location.href = "/user-advise";
                     } else {
                         alert("保存失败！");
                     }

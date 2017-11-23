@@ -138,6 +138,21 @@ CREATE TABLE `ji_advert` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--用户建议表 add by MC 2017-11-23
+DROP TABLE IF EXISTS `ji_user_advise`;
+CREATE TABLE `ji_user_advise` (
+  `id` varchar(38) NOT NULL,
+  `score` int(3) DEFAULT 0,
+  `advise` varchar(255) NOT NULL,
+  `status` varchar(8) DEFAULT 'y',
+  `remark` varchar(255) DEFAULT NULL,
+  `create_account` varchar(255) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_account` varchar(255) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 插入初始化配置数据
 -- 账目公共类型
 INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('1', '饮食', 'sys', now());

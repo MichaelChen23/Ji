@@ -25,10 +25,9 @@ public class RoleController extends BaseController<IRoleService, RoleDO> {
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @RequestMapping(value = "/getRoleList", method = RequestMethod.POST)
-    public PageInfo<RoleDO> getRoleList(@RequestBody RoleDO DO) {
+    public PageInfo<RoleDO> getRoleList(@RequestBody RoleDO roleDO) {
         try {
-            if (DO == null) return null;
-            List<RoleDO> list = getServiceImpl().getRoleDOList(DO);
+            List<RoleDO> list = getServiceImpl().getRoleDOList(roleDO);
             return new PageInfo<RoleDO>(list);
         } catch (Exception e) {
             logger.error("get role list fail(获取用户角色列表失败) -- :{}", e.getMessage());

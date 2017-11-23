@@ -52,4 +52,15 @@ public abstract class Constant {
 	 * 小程序的认证类型
 	 */
 	public static final String WEI_XIN_AUTH_TYPE = "authorization_code";
+
+	/**
+	 * 升幂排序
+	 */
+	public static final String ORDER_ASC = "asc";
+
+	/**
+	 * 降幂排序
+	 */
+	public static final String ORDER_DESC = "desc";
+
 }

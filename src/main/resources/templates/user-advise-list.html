@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>用户角色列表</title>
+        <title>用户建议列表</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -92,9 +92,9 @@
                     </a>
                     <ul class="active submenu">
                         <li><a href="/sys-user">系统用户列表</a></li>
-                        <li><a href="/role" class="active">用户角色列表</a></li>
+                        <li><a href="/role">用户角色列表</a></li>
                         <li><a href="/advert">广告列表</a></li>
-                        <li><a href="/user-advise">用户建议列表</a></li>
+                        <li><a href="/user-advise" class="active">用户建议列表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -140,7 +140,7 @@
                 <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
                 <div class="row head">
                     <div class="col-md-12">
-                        <h4>用户角色</h4>
+                        <h4>用户建议</h4>
                     </div>
                 </div>
 
@@ -150,16 +150,20 @@
                             查询条件
                         </div>
                         <div class="panel-body form-group" style="margin-bottom:0px;">
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">角色名：</label>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入角色名"/>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">用户名：</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="nameStr" id="search_name" placeholder="请输入用户名"/>
                             </div>
-                            <label class="col-sm-2 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
-                            <div class="col-sm-2">
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">建议内容：</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="adviseStr" id="search_advise" placeholder="请输入建议内容"/>
+                            </div>
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">创建日期：</label>
+                            <div class="col-sm-3">
                                 <input type="date" class="form-control" name="createTimeBeginStr" id="search_createTimeBegin"/>
                             </div>
-                            <label class="col-sm-1 control-label" style="text-align: right; margin-top:5px">至</label>
-                            <div class="col-sm-2">
+                            <label class="col-sm-3 control-label" style="text-align: right; margin-top:5px">至</label>
+                            <div class="col-sm-3">
                                 <input type="date" class="form-control" name="createTimeEndStr" id="search_createTimeEnd"/>
                             </div>
                             <div class="col-sm-1 col-sm-offset-10" style="text-align: center; margin-top:5px">
@@ -177,7 +181,7 @@
                         <button id="delete_btn" type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                         </button>
-                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-role'">
+                        <button id="add_btn" type="button" class="btn btn-default" onclick="window.location.href='/new-user-advise'">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
                         </button>
                     </div>
@@ -209,7 +213,7 @@
             $('#jitable').bootstrapTable({
                 method: 'POST',
                 contentType: "application/json;charset=UTF-8",//必须要有！！！！
-                url:"/role/getRoleList",//要请求数据的文件路径
+                url:"/user-advise/getUserAdviseList",//要请求数据的文件路径
                 dataType: "json",
                 height:tableHeight(),//高度调整
                 toolbar: '#toolbar',//指定工具栏
@@ -237,7 +241,7 @@
                 rowStyle:rowStatusStyle,//每行显示的颜色style
                 editable:true,//开启编辑模式
                 onEditableSave:function (field, row, oldValue, $el) {
-                    editRowOnSave("POST", "/role/update", row);
+                    editRowOnSave("POST", "/user-advise/update", row);
                 },//每行编辑后保存
                 columns:[
                     {
@@ -255,8 +259,8 @@
                         visible:false
                     },
                     {
-                        title:'角色名',
-                        field:'name',
+                        title:'评分',
+                        field:'score',
                         sortable:true,
                         editable:{
                             type: 'text',
@@ -264,14 +268,15 @@
                         }
                     },
                     {
-                        title:'描述',
-                        field:'description',
+                        title:'建议',
+                        field:'advise',
                         sortable:true,
                         editable:true
                     },
                     {
                         title:'备注',
                         field:'remark',
+                        sortable:true,
                         editable:true
                     },
                     {
@@ -322,7 +327,8 @@
                     pageIndex: params.offset,
                     //每页多少条数据
                     pageSize: params.limit,
-                    name: $('#search_name').val(),
+                    createAccount: $('#search_name').val(),
+                    advise: $('#search_advise').val(),
                     createTimeBegin: $('#search_createTimeBegin').val(),
                     createTimeEnd: $('#search_createTimeEnd').val(),
                     sort: params.sort,
@@ -338,12 +344,12 @@
 
             //查询按钮事件
             $('#search_btn').click(function () {
-                tableFresh("jitable", "/role/getRoleList");
+                tableFresh("jitable", "/user-advise/getUserAdviseList");
             })
 
             //批量删除事件
             $('#delete_btn').click(function () {
-                batchDelete("jitable", "delete_btn", "POST", "/role/removeList", "/role/getRoleList");
+                batchDelete("jitable", "delete_btn", "POST", "/user-advise/removeList", "/user-advise/getUserAdviseList");
             })
 
         </script>
