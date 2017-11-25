@@ -15,7 +15,7 @@ public class AccountVO extends BaseVO implements Serializable {
 
     private String title;//账目题目
 
-    private String action;//账目进出，earn-收入, pay-支出
+    private String action;//账目进出，"1"-收入, "0"-支出
 
     private BigDecimal amount;//账目金额
 

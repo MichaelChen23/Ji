@@ -2,6 +2,7 @@ package com.mc.ji.dao.account;
 
 import com.mc.ji.common.base.JiMapper;
 import com.mc.ji.common.vo.AccountVO;
+import com.mc.ji.common.vo.BaseCountAccountVO;
 import com.mc.ji.model.account.AccountDO;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,12 @@ public interface AccountMapper extends JiMapper<AccountDO> {
      * @return
      */
     List<AccountVO> getAccountVOList(@Param("title")String title, @Param("action")String action, @Param("accountTypeId")String accountTypeId, @Param("createAccount")String createAccount, @Param("createTimeBegin")String createTimeBegin, @Param("createTimeEnd")String createTimeEnd, @Param("sortName")String sort, @Param("sortOrder")String order);
+
+    /**
+     * 根据创建人、支出收入、账目类型对账单做统计
+     * add by mc 2017-11-25
+     * @param accountVO
+     * @return
+     */
+    List<BaseCountAccountVO> countAccountByActionType(AccountVO accountVO);
 }

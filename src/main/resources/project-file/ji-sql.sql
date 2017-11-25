@@ -103,7 +103,7 @@ CREATE TABLE `ji_account` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---账目类型表
+--账目类型表 modify by mc 2017-11-25 建立唯一组合索引
 DROP TABLE IF EXISTS `ji_account_type`;
 CREATE TABLE `ji_account_type` (
   `id` varchar(38) NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE `ji_account_type` (
   `update_account` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_name` (`name`)
+  UNIQUE KEY `uk_account_name` (`create_account`, `name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --广告表 add by MC 2017-10-29

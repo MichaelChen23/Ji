@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.common.vo.AccountVO;
+import com.mc.ji.common.vo.BaseCountAccountVO;
 import com.mc.ji.dao.account.AccountMapper;
 import com.mc.ji.model.account.AccountDO;
 import com.mc.ji.service.account.IAccountService;
@@ -27,6 +28,11 @@ public class AccountServiceImpl extends BaseServiceImpl<AccountMapper, AccountDO
             PageHelper.offsetPage(accountVO.getPageIndex(), accountVO.getPageSize());
         }
         return getMapper().getAccountVOList(accountVO.getTitle(), accountVO.getAction(), accountVO.getAccountTypeId(), accountVO.getCreateAccount(), accountVO.getCreateTimeBegin(), accountVO.getCreateTimeEnd(), StringUtil.changeDBfieldPattern("a", accountVO.getSort()), accountVO.getOrder());
+    }
+
+    @Override
+    public List<BaseCountAccountVO> countAccountByActionType(AccountVO accountVO) throws Exception {
+        return getMapper().countAccountByActionType(accountVO);
     }
 
 }

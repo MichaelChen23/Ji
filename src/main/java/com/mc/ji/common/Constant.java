@@ -24,14 +24,14 @@ public abstract class Constant {
 	public static final String STATUS_LOCK = "n";
 
 	/**
-	 * 账目方式-收入
+	 * 账目方式-收入-"1"
 	 */
-	public static final String ACCOUNT_EARN = "earn";
+	public static final String ACCOUNT_EARN = "1";
 
 	/**
-	 * 账目方式-支出
+	 * 账目方式-支出-"0"
 	 */
-	public static final String ACCOUNT_PAY = "pay";
+	public static final String ACCOUNT_PAY = "0";
 
 	/**
 	 * 微信api地址
