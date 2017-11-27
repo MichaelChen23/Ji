@@ -27,6 +27,10 @@ public class CountAccountVO implements Serializable {
 
     Integer totalCount;
 
+    String countBeginDate;
+
+    String countEndDate;
+
     public List<BaseCountAccountVO> getEarnList() {
         return earnList;
     }
@@ -89,5 +93,21 @@ public class CountAccountVO implements Serializable {
 
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
+    }
+
+    public String getCountBeginDate() {
+        return countBeginDate;
+    }
+
+    public void setCountBeginDate(String countBeginDate) {
+        this.countBeginDate = countBeginDate;
+    }
+
+    public String getCountEndDate() {
+        return countEndDate;
+    }
+
+    public void setCountEndDate(String countEndDate) {
+        this.countEndDate = countEndDate;
     }
 }

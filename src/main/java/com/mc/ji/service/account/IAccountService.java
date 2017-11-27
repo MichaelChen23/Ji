@@ -6,6 +6,7 @@ import com.mc.ji.common.vo.BaseCountAccountVO;
 import com.mc.ji.model.account.AccountDO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 账目的服务接口
@@ -33,4 +34,11 @@ public interface IAccountService extends IBaseService<AccountDO> {
      */
     List<BaseCountAccountVO> countAccountByActionType(AccountVO accountVO) throws Exception;
 
+    /**
+     * 查询出某用户账目上的最大日期和最小日期
+     * add by mc 2017-11-27
+     * @param accountVO
+     * @return
+     */
+    Map getCountDateMaxAndMin(AccountVO accountVO) throws Exception;
 }

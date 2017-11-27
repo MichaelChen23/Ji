@@ -7,6 +7,7 @@ import com.mc.ji.model.account.AccountDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 账目的数据访问层Mapper
@@ -37,4 +38,12 @@ public interface AccountMapper extends JiMapper<AccountDO> {
      * @return
      */
     List<BaseCountAccountVO> countAccountByActionType(AccountVO accountVO);
+
+    /**
+     * 查询出某用户账目上的最大日期和最小日期
+     * add by mc 2017-11-27
+     * @param createAccount
+     * @return
+     */
+    Map getCountDateMaxAndMin(@Param("createAccount")String createAccount);
 }

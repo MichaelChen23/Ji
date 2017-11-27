@@ -80,6 +80,16 @@ public class AccountController extends BaseController<IAccountService, AccountDO
                 totalAmount = totalAmount.subtract(totalPayAmount);
                 totalCountVO.setTotalAmount(totalAmount);
                 totalCountVO.setTotalCount(totalEarnCount+totalPayCount);
+
+                //查询账单上的统计开始日期和结束日期
+//                Map<String,Object> dateMap = new HashMap<>();
+//                dateMap = getServiceImpl().getCountDateMaxAndMin(accountVO);
+//                Date maxDate = (Date) dateMap.get("max_date");
+//                Date minDate = (Date) dateMap.get("min_date");
+//                String beginDateStr = DateUtil.getDateStr(maxDate);
+//                String endDateStr = DateUtil.getDateStr(minDate);
+//                totalCountVO.setCountBeginDate(beginDateStr);
+//                totalCountVO.setCountEndDate(endDateStr);
             }
             return totalCountVO;
         } catch (Exception e) {

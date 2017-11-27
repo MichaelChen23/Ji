@@ -8,9 +8,11 @@ import com.mc.ji.common.vo.BaseCountAccountVO;
 import com.mc.ji.dao.account.AccountMapper;
 import com.mc.ji.model.account.AccountDO;
 import com.mc.ji.service.account.IAccountService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 账目的服务接口实现
@@ -34,5 +36,15 @@ public class AccountServiceImpl extends BaseServiceImpl<AccountMapper, AccountDO
     public List<BaseCountAccountVO> countAccountByActionType(AccountVO accountVO) throws Exception {
         return getMapper().countAccountByActionType(accountVO);
     }
+
+    @Override
+    public Map getCountDateMaxAndMin(AccountVO accountVO) throws Exception {
+        if (accountVO != null & StringUtils.isNotBlank(accountVO.getCreateAccount())) {
+            return getMapper().getCountDateMaxAndMin(accountVO.getCreateAccount());
+        } else {
+            return null;
+        }
+    }
+
 
 }

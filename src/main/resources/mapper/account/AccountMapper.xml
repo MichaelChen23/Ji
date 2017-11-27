@@ -98,4 +98,14 @@
     ORDER BY a.action, t.name
   </select>
 
+  <select id="getCountDateMaxAndMin" resultType="java.util.Map">
+    SELECT MAX(create_time) AS max_date, MIN(create_time) AS min_date
+    FROM ji_account
+    <where>
+      <if test="createAccount != null and '' != createAccount">
+        AND create_account = #{createAccount}
+      </if>
+    </where>
+    ORDER BY create_time
+  </select>
 </mapper>
