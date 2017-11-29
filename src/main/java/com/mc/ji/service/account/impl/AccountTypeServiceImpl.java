@@ -39,6 +39,8 @@ public class AccountTypeServiceImpl extends BaseServiceImpl<AccountTypeMapper, A
         if (accountTypeDO != null && StringUtils.isNotBlank(accountTypeDO.getCreateAccount())) {
             criteria.orEqualTo("createAccount", accountTypeDO.getCreateAccount());
         }
+        //升序排序，从上到下，从小到大，可以把用户新增的类型排序到下面。
+        example.orderBy("createTime").asc();
         return getMapper().selectByExample(example);
     }
 
