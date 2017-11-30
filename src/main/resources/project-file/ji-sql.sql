@@ -160,3 +160,4 @@ INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('2',
 INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('3', '住房', 'sys', now());
 INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('4', '通信', 'sys', now());
 INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('5', '交通', 'sys', now());
+INSERT INTO ji_account_type (id, name, create_account, create_time) VALUES ('6', '工资', 'sys', now());
