@@ -3,6 +3,7 @@ package com.mc.ji.controller.user;
 import com.github.pagehelper.PageInfo;
 import com.mc.ji.common.Constant;
 import com.mc.ji.common.HttpUtil;
+import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseController;
 import com.mc.ji.common.base.BaseResponse;
 import com.mc.ji.model.user.UserDO;
@@ -70,4 +71,17 @@ public class UserController extends BaseController<IUserService, UserDO> {
         return new BaseResponse<UserDO>(userDO);
     }
 
+    /**
+     * 重写更新用户信息方法，因为nikeName需要对表情做处理
+     * modify by MC 2017-12-12
+     * @param userDO
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public BaseResponse<Boolean> update(@RequestBody UserDO userDO) {
+        if (userDO != null && StringUtils.isNotBlank(userDO.getNickName())) {
+            userDO.setNickName(StringUtil.encodingEmojiStr(userDO.getNickName()));
+        }
+        return super.update(userDO);
+    }
 }

@@ -1,5 +1,6 @@
 package com.mc.ji.common;
 
+import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
@@ -44,5 +45,19 @@ public class StringUtil {
 			result = tableName + "." + result;
 		}
 		return result;
+	}
+
+	/**
+	 * 把带有表情的字符串转化为uft-8能保存的string
+	 * add by MC 2017-12-12
+	 * @param emojiStr
+	 * @return
+	 */
+	public static String encodingEmojiStr(String emojiStr) {
+		String resultStr = "";
+		if (StringUtils.isNotBlank(emojiStr)) {
+			resultStr = EmojiParser.parseToAliases(emojiStr, EmojiParser.FitzpatrickAction.PARSE);
+		}
+		return resultStr;
 	}
 }
