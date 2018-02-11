@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.ji.dao.account.AccountTypeMapper">
+  <resultMap id="BaseResultMap" type="com.mc.ji.model.account.AccountTypeDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="selectAccountTypeDOALL">
+    SELECT id, name, status, create_account, create_time, update_account, update_time
+    FROM ji_account_type
+  </sql>
+
+  <select id="getAccountTypeDOList" resultMap="BaseResultMap">
+    <include refid="selectAccountTypeDOALL" />
+    <where>
+      <if test="name != null and '' != name">
+        AND name LIKE CONCAT(CONCAT('%', #{name}), '%')
+      </if>
+      <if test="createAccount != null and '' != createAccount">
+        AND create_account LIKE CONCAT(CONCAT('%', #{createAccount}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
+  </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.ji.dao.system.AdvertMapper">
+  <resultMap id="BaseResultMap" type="com.mc.ji.model.system.AdvertDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="sort_no" jdbcType="INTEGER" property="sortNo" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="selectAdvertDOALL">
+    SELECT id, title, image_url, content, url, status, start_time, end_time, sort_no, type, remark, create_account, create_time, update_account, update_time
+    FROM ji_advert
+  </sql>
+
+  <select id="getAdvertDOList" resultMap="BaseResultMap">
+    <include refid="selectAdvertDOALL" />
+    <where>
+      <if test="title != null and '' != title">
+        AND title LIKE CONCAT(CONCAT('%', #{title}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+            AND DATE_FORMAT(create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+          ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+            AND DATE_FORMAT(create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+          ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
+  </select>
+</mapper>

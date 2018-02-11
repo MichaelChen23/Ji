@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mc.ji.dao.account.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.mc.ji.model.account.AccountDO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="account_type_id" jdbcType="VARCHAR" property="accountTypeId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="AccountVOResultMap" type="com.mc.ji.common.vo.AccountVO">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="account_type_id" jdbcType="VARCHAR" property="accountTypeId" />
+    <result column="account_type_name" jdbcType="VARCHAR" property="accountTypeName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_account" jdbcType="VARCHAR" property="createAccount" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_account" jdbcType="VARCHAR" property="updateAccount" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="BaseCountAccountVOResultMap" type="com.mc.ji.common.vo.BaseCountAccountVO">
+    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="account_type_name" jdbcType="VARCHAR" property="accountTypeName" />
+    <result column="all_amount" jdbcType="DECIMAL" property="allAmount" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+
+  <sql id="selectAccountVOALL">
+    SELECT a.id, a.title, a.action, a.amount, a.account_type_id, t.name AS account_type_name, a.status, a.create_account, DATE_FORMAT(a.create_time, '%Y-%m-%d %T') AS create_time, a.update_account, DATE_FORMAT(a.update_time, '%Y-%m-%d %T') AS update_time
+    FROM ji_account a LEFT JOIN ji_account_type t ON a.account_type_id = t.id
+  </sql>
+
+  <select id="getAccountVOList" resultMap="AccountVOResultMap">
+    <include refid="selectAccountVOALL" />
+    <where>
+      <if test="title != null and '' != title">
+        AND a.title LIKE CONCAT(CONCAT('%', #{title}), '%')
+      </if>
+      <if test="action != null and '' != action">
+        AND a.action LIKE CONCAT(CONCAT('%', #{action}), '%')
+      </if>
+      <if test="accountTypeId != null and '' != accountTypeId">
+        AND a.account_type_id = #{accountTypeId}
+      </if>
+      <if test="createAccount != null and '' != createAccount">
+        AND a.create_account LIKE CONCAT(CONCAT('%', #{createAccount}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(a.create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(a.create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    ORDER BY ${sortName} ${sortOrder}
+  </select>
+
+  <!-- 根据支出收入和账目类型对账目做统计 add by mc 2017-11-25 -->
+  <select id="countAccountByActionType" resultMap="BaseCountAccountVOResultMap">
+    SELECT a.action, t.name AS account_type_name, SUM(a.amount) AS all_amount, COUNT(*) AS count
+    FROM ji_account a LEFT JOIN ji_account_type t ON a.account_type_id = t.id
+    <where>
+      <if test="title != null and '' != title">
+        AND a.title LIKE CONCAT(CONCAT('%', #{title}), '%')
+      </if>
+      <if test="createAccount != null and '' != createAccount">
+        AND a.create_account LIKE CONCAT(CONCAT('%', #{createAccount}), '%')
+      </if>
+      <if test="createTimeBegin != null and '' != createTimeBegin">
+        <![CDATA[
+          AND DATE_FORMAT(a.create_time, '%Y-%m-%d') >= DATE_FORMAT(#{createTimeBegin}, '%Y-%m-%d')
+        ]]>
+      </if>
+      <if test="createTimeEnd != null and '' != createTimeEnd">
+        <![CDATA[
+          AND DATE_FORMAT(a.create_time, '%Y-%m-%d') <= DATE_FORMAT(#{createTimeEnd}, '%Y-%m-%d')
+        ]]>
+      </if>
+    </where>
+    GROUP BY a.action, t.name
+    ORDER BY a.action, t.name
+  </select>
+
+  <select id="getCountDateMaxAndMin" resultType="java.util.Map">
+    SELECT MAX(create_time) AS max_date, MIN(create_time) AS min_date
+    FROM ji_account
+    <where>
+      <if test="createAccount != null and '' != createAccount">
+        AND create_account = #{createAccount}
+      </if>
+    </where>
+    ORDER BY create_time
+  </select>
+</mapper>
