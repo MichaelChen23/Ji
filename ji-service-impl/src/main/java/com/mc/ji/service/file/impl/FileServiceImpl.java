@@ -1,8 +1,8 @@
 package com.mc.ji.service.file.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.common.vo.FileVO;
 import com.mc.ji.dao.file.FileMapper;
 import com.mc.ji.model.file.FileDO;

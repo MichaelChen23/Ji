@@ -1,7 +1,7 @@
 package com.mc.ji.service.file.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.mc.ji.common.StringUtil;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.common.vo.FolderVO;
 import com.mc.ji.dao.file.FolderMapper;

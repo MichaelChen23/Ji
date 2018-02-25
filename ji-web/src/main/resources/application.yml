@@ -11,7 +11,7 @@
 spring:
     # 多环境配置
     profiles:
-        active: prod
+        active: dev
     # 编码
     http:
         encoding:

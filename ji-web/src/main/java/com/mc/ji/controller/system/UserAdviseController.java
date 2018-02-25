@@ -1,9 +1,9 @@
 package com.mc.ji.controller.system;
 
 import com.github.pagehelper.PageInfo;
-import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseController;
 import com.mc.ji.common.base.BaseResponse;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.model.system.UserAdviseDO;
 import com.mc.ji.service.system.IUserAdviseService;
 import org.apache.commons.lang3.StringUtils;

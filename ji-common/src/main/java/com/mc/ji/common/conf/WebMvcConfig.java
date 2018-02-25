@@ -71,7 +71,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public Connector httpConnector() {//设置http的80端口自动跳转到https的443端口，还需要在ECS上的安全组-安全规则上添加开放这两个端口
+    public Connector httpConnector() {
+        //设置http的80端口自动跳转到https的443端口，还需要在ECS上的安全组-安全规则上添加开放这两个端口
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
         connector.setPort(80);

@@ -1,4 +1,4 @@
-package com.mc.ji.common;
+package com.mc.ji.common.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

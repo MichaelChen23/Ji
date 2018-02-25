@@ -1,7 +1,7 @@
 package com.mc.ji.service.system.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.mc.ji.common.StringUtil;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
 import com.mc.ji.dao.system.SysUserMapper;
 import com.mc.ji.model.system.SysUserDO;

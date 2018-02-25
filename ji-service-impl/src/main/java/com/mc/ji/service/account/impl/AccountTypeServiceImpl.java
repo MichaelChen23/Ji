@@ -1,8 +1,8 @@
 package com.mc.ji.service.account.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.dao.account.AccountTypeMapper;
 import com.mc.ji.model.account.AccountTypeDO;
 import com.mc.ji.service.account.IAccountTypeService;

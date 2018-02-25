@@ -2,10 +2,10 @@ package com.mc.ji.controller.user;
 
 import com.github.pagehelper.PageInfo;
 import com.mc.ji.common.Constant;
-import com.mc.ji.common.HttpUtil;
-import com.mc.ji.common.StringUtil;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.common.base.BaseController;
 import com.mc.ji.common.base.BaseResponse;
+import com.mc.ji.common.utils.HttpUtil;
 import com.mc.ji.model.user.UserDO;
 import com.mc.ji.service.user.IUserService;
 import org.apache.commons.lang3.StringUtils;

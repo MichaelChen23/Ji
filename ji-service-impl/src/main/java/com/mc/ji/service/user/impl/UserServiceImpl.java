@@ -1,8 +1,8 @@
 package com.mc.ji.service.user.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.mc.ji.common.StringUtil;
 import com.mc.ji.common.base.BaseServiceImpl;
+import com.mc.ji.common.utils.StringUtil;
 import com.mc.ji.dao.user.UserMapper;
 import com.mc.ji.model.user.UserDO;
 import com.mc.ji.service.user.IUserService;

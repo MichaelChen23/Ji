@@ -1,4 +1,4 @@
-package com.mc.ji.common;
+package com.mc.ji.common.utils;
 
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
