@@ -11,7 +11,8 @@
 
     <artifactId>ji-web</artifactId>
 
-    <packaging>war</packaging>
+    <!-- add by 2018-2-26 springboot execute jar need change to jar from war-->
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- 引入service-impl模块 -->
@@ -33,6 +34,29 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.5.RELEASE</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                        <!--可以生成不含依赖包的不可执行Jar包-->
+                        <!--<configuration>
+                          <classifier>exec</classifier>
+                        </configuration>-->
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

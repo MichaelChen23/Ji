@@ -13,6 +13,18 @@
 
     <packaging>jar</packaging>
 
+    <dependencies>
+        <!-- add by mc 2018-2-26 HttpUtil depend on it -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
