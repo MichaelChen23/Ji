@@ -34,6 +34,33 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!--
+                在哪个模块生成dao层和model实体，就把mybatis-generator插件放到哪个模块的pom下面 ， 然后在那模块下执行 mybatis-generator:generate -e 命令，
+                例如，在dao模块执行，然后在当前dao模块生成相应的mapper.xml，dao接口类，do实体类，但是do实体类应该在model层模块下，所以，只能手动移动do实体到model层下。
+            -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.4</version>
+                <configuration>
+                    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>3.4.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 

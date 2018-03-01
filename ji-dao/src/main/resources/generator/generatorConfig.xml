@@ -5,6 +5,7 @@
 
 <generatorConfiguration>
     <!-- 自动化构建操作手册：
+        前提条件：需要在数据库上建立要自动化生成相应dao操作接口和实体的表，
         1.Run ->> edit-configurations ->> + 号添加 里选择maven项目的命令，随意给个名字，如generator；
         2.Working directory里面填写要构建的项目目录；
         3.Command line 里面填写mybatis-generator:generate -e 这句命令 然后 OK即可完成配置；
