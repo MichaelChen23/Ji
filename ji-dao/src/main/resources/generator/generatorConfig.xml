@@ -22,9 +22,9 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.30.26:3306/gd_dev?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=round&amp;allowMultiQueries=true&amp;autoReconnect=true"
-                        userId="iperp_m2"
-                        password="QbdxeI8MUyOsfcIv0xNNvGIC">
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ji_db?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=round&amp;allowMultiQueries=true&amp;autoReconnect=true"
+                        userId="root"
+                        password="123456">
         </jdbcConnection>
 
         <javaModelGenerator targetPackage="com.mc.ji.model.system" targetProject="src/main/java"/>
